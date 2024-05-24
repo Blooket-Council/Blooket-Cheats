@@ -140,6 +140,7 @@ The mobile GUI is the first GUI Minesraft2 ever made. Some people said it worked
 #### [Intervals](cheats/global/intervals)
 * [Auto Answer](cheats/global/intervals/autoAnswer.js)
 * [Highlight Answers](cheats/global/intervals/highlightAnswers.js)
+* [Percent Auto Answer](cheats/global/intervals/percentAutoAnswer.js)
 * [Subtle Highlight Answers](cheats/global/intervals/subtleHighlightAnswers.js)
 ### [Gold Quest](cheats/gold)
 * [Always Triple](cheats/gold/alwaysTriple.js)

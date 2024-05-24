@@ -448,10 +448,11 @@
         
             for (let i = 0; i < scripts.length; i++) {
                 let { name, description, type, inputs, enabled, run, element } = scripts[i];
+                let toggle = type == "toggle";
                 if (!element) {
                     const button = createElement("div", {
                         className: "scriptButton",
-                        style: { background: type == "toggle" ? enabled ? "var(--enabledButton)" : "var(--disabledButton)" : "var(--defaultButton)" }
+                        style: { background: toggle ? enabled ? "var(--enabledButton)" : "var(--disabledButton)" : "var(--defaultButton)" }
                     }, createElement("div", {
                         className: "cheatName",
                         innerHTML: name
@@ -461,8 +462,8 @@
                         if (target != button && !target.classList.contains("cheatName") && !(key == "Enter" && target.classList.contains("cheatInput"))) return;
                         let args = [...button.children].slice(1);
                         run.apply(this, args.map(c => c.type == "number" ? parseInt("0" + c.value) : c.nodeName == "SELECT" ? JSON.parse(c.value) : (c.data || c.value)));
-                        if (type == "toggle") button.style.background = this.enabled ? "var(--enabledButton)" : "var(--disabledButton)";
-                        Cheats.alerts?.[0].addLog(`${type == "toggle" ? (this.enabled ? "Enabled" : "Disabled") : "Ran"} <strong>${this.name}</strong>${inputs?.length ? ` with inputs: (${args.map(c => c.nodeName == "SELECT" ? c.selectedOptions[0].innerText : c.value).join(", ")})` : ""}`, type == "toggle" ? (this.enabled ? "var(--enabledButton)" : "var(--disabledButton)") : null);
+                        if (toggle) button.style.background = this.enabled ? "var(--enabledButton)" : "var(--disabledButton)";
+                        Cheats.alerts?.[0].addLog(`${toggle ? (this.enabled ? "Enabled" : "Disabled") : "Ran"} <strong>${this.name}</strong>${inputs?.length ? ` with inputs: (${args.map(c => c.nodeName == "SELECT" ? c.selectedOptions[0].innerText : c.value).join(", ")})` : ""}`, type == "toggle" ? (this.enabled ? "var(--enabledButton)" : "var(--disabledButton)") : null);
                     }).bind(scripts[i]);
                     if (inputs?.length) for (let i = 0; i < inputs.length; i++) {
                         const { name, type, options: opts, min, max, value } = inputs[i];
@@ -504,6 +505,7 @@
                             };
                             input.placeholder = name;
                             input.style.textAlign = "center";
+                            if (toggle) input.style.backgroundColor = "#0003";
                             input.onkeyup = button.onclick;
                             button.appendChild(input);
                         }
@@ -606,6 +608,50 @@
                     }
                 },
                 {
+                    name: "Percent Auto Answer",
+                    description: "Answers questions correctly or incorrectly depending on the goal grade given (Disable and re-enable to update goal)",
+                    inputs: [
+                        {
+                            name: "Target Grade",
+                            type: "number"
+                        }
+                    ],
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function (target) {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            this.data = setInterval(TARGET => {
+                                try {
+                                    const question = stateNode.state.question || stateNode.props.client.question;
+                                    if (stateNode.state.stage == "feedback" || stateNode.state.feedback) return document.querySelector('[class*="feedback"], [id*="feedback"]')?.firstChild?.click?.();
+                                    else if (document.querySelector("[class*='answerContainer']") || document.querySelector("[class*='typingAnswerWrapper']")) {
+                                        let correct = 0, total = 0;
+                                        for (let corrects in stateNode.corrects) correct += stateNode.corrects[corrects];
+                                        for (let incorrect in stateNode.incorrects) total += stateNode.incorrects[incorrect];
+                                        total += correct;
+                                        const yes = total == 0 || Math.abs(correct / (total + 1) - TARGET) >= Math.abs((correct + 1) / (total + 1) - TARGET);
+                                        if (stateNode.state.question.qType != "typing") {
+                                            const answerContainers = document.querySelectorAll("[class*='answerContainer']");
+                                            for (let i = 0; i < answerContainers.length; i++) {
+                                                const contains = question.correctAnswers.includes(question.answers[i]);
+                                                if (yes && contains || !yes && !contains) return answerContainers[i]?.click?.();
+                                            }
+                                            answerContainers[0].click();
+                                        } else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(yes ? question.answers[0] : Math.random().toString(36).substring(2));
+                                    }
+                                } catch { }
+                            }, 100, (target ?? 100) / 100);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
                     name: "Auto Answer",
                     description: "Click the correct answer for you",
                     run: function () {
@@ -615,6 +661,17 @@
                             else document.querySelector('[class*="feedback"]')?.firstChild?.click?.();
                             else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(question.answers[0])
                         } catch { }
+                    }
+                },
+                {
+                    name: "Highlight Answers",
+                    description: "Colors answers to be red or green highlighting the correct ones",
+                    run: function () {
+                        const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
+                            if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
+                            else answer.style.backgroundColor = "rgb(189, 15, 38)";
+                        });
                     }
                 },
                 {
@@ -843,17 +900,6 @@
                     run: function () {
                         const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                         stateNode.freeQuestions = stateNode.questions = stateNode.props.client.questions.map(x => ({ ...x, correctAnswers: x.answers }));
-                    }
-                },
-                {
-                    name: "Highlight Answers",
-                    description: "Colors answers to be red or green highlighting the correct ones",
-                    run: function () {
-                        const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                        [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
-                            if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
-                            else answer.style.backgroundColor = "rgb(189, 15, 38)";
-                        });
                     }
                 },
                 {
@@ -3892,7 +3938,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697936106829 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700443765714 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

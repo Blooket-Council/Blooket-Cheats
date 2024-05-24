@@ -237,6 +237,46 @@
                     }
                 },
                 {
+                    name: "Percent Auto Answer",
+                    description: "Answers questions correctly or incorrectly depending on the goal grade given (Disable and re-enable to update goal)",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            let target = parseFloat(prompt("What grade do you want to get from this set? (0-100)"));
+                            while (typeof target != "number" || isNaN(target)) target = parseFloat(prompt("What grade do you want to get from this set? (0-100)\nInvalid Number"));
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            this.data = setInterval(TARGET => {
+                                try {
+                                    const question = stateNode.state.question || stateNode.props.client.question;
+                                    if (stateNode.state.stage == "feedback" || stateNode.state.feedback) return document.querySelector('[class*="feedback"], [id*="feedback"]')?.firstChild?.click?.();
+                                    else if (document.querySelector("[class*='answerContainer']") || document.querySelector("[class*='typingAnswerWrapper']")) {
+                                        let correct = 0, total = 0;
+                                        for (let corrects in stateNode.corrects) correct += stateNode.corrects[corrects];
+                                        for (let incorrect in stateNode.incorrects) total += stateNode.incorrects[incorrect];
+                                        total += correct;
+                                        const yes = total == 0 || Math.abs(correct / (total + 1) - TARGET) >= Math.abs((correct + 1) / (total + 1) - TARGET);
+                                        if (stateNode.state.question.qType != "typing") {
+                                            const answerContainers = document.querySelectorAll("[class*='answerContainer']");
+                                            for (let i = 0; i < answerContainers.length; i++) {
+                                                const contains = question.correctAnswers.includes(question.answers[i]);
+                                                if (yes && contains || !yes && !contains) return answerContainers[i]?.click?.();
+                                            }
+                                            answerContainers[0].click();
+                                        } else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(yes ? question.answers[0] : Math.random().toString(36).substring(2));
+                                    }
+                                } catch { }
+                            }, 100, (target ?? 100) / 100);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    }
+                },
+                {
                     name: "Auto Answer",
                     description: "Click the correct answer for you",
                     run: function () {
@@ -2655,7 +2695,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697932037807 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700443765722 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

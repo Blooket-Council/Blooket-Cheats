@@ -7,6 +7,8 @@ Cheats that loop automatically
 Automatically answers questions for you
 ### [Highlight Answers](intervals/highlightAnswers.js)
 Automatically highlights the correct answers
+### [Percent Auto Answer](intervals/percentAutoAnswer.js)
+Answers questions correctly or incorrectly depending on the goal grade given
 ### [Subtle Highlight Answers](intervals/subtleHighlightAnswers.js)
 Automatically removes the shadow from correct answers
 
