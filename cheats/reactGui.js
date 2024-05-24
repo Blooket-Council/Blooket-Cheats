@@ -63,7 +63,7 @@
                 img: "https://media.blooket.com/image/upload/v1661496291/Media/uiTest/Games_Played_2.svg",
                 cheats: [
                     {
-                        name: "Auto Answer (Toggle)",
+                        name: "Auto Answer",
                         description: "Toggles auto answer on",
                         type: "toggle",
                         enabled: false,
@@ -88,7 +88,7 @@
                         }
                     },
                     {
-                        name: "Highlight Answers (Toggle)",
+                        name: "Highlight Answers",
                         description: "Toggles highlight answers on",
                         type: "toggle",
                         enabled: false,
@@ -111,7 +111,7 @@
                         }
                     },
                     {
-                        name: "Subtle Highlight Answers (Toggle)",
+                        name: "Subtle Highlight Answers",
                         description: "Toggles subtle highlight answers on",
                         type: "toggle",
                         enabled: false,
@@ -154,16 +154,30 @@
                                 type: "options",
                                 options: () => {
                                     return new Promise(r => {
-                                        r(Object.keys(Object.values(webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]).webpack.c).find(x => !isNaN(x?.exports?.a?.Space))?.exports?.a || {}));
+                                        r(Object.keys(Object.values(webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]).webpack.c).find(x => !isNaN(x?.exports?.a?.Space)).exports.a || {}));
                                     });
                                 }
                             },
                             {
                                 name: "Amount",
                                 type: "number"
+                            },
+                            {
+                                name: "Alert Blooks",
+                                type: "options",
+                                options: [
+                                    {
+                                        name: "Alert Blooks",
+                                        value: true
+                                    },
+                                    {
+                                        name: "Don't Alert Blooks",
+                                        value: false
+                                    }
+                                ]
                             }
                         ],
-                        run: function (box, amountToOpen) {
+                        run: function (box, amountToOpen, alertBlooks) {
                             let i = document.createElement('iframe');
                             document.body.append(i);
                             window.alert = i.contentWindow.alert.bind(window);
@@ -174,7 +188,7 @@
                                 axios = Object.values(webpack.c).find((x) => x.exports?.a?.get).exports.a,
                                 { purchaseBlookBox } = Object.values(webpack.c).find(x => x.exports.a?.purchaseBlookBox).exports.a;
                             box = box.split(' ').map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase()).join(' ');
-        
+            
                             axios.get("https://dashboard.blooket.com/api/users").then(async ({ data: { name, tokens } }) => {
                                 let prices = Object.values(webpack.c).find(x => !isNaN(x?.exports?.a?.Space)).exports.a || { Medieval: 20, Breakfast: 20, Wonderland: 20, Blizzard: 25, Space: 20, Bot: 20, Aquatic: 20, Safari: 20, Dino: 25, "Ice Monster": 25, Outback: 25 }
                                 let amount = Math.min(Math.floor(tokens / prices[box]), amountToOpen);
@@ -183,20 +197,19 @@
                                     return;
                                 };
         
-                                let alertBlooks = confirm("Would you like to alert blooks upon unlocking?");
                                 let blooks = {};
                                 let now = Date.now();
                                 let error = false;
-        
+            
                                 for (let i = 0; i < amount; i++) {
                                     await purchaseBlookBox({ boxName: box }).then(({ isNewToUser, tokens, unlockedBlook }) => {
                                         blooks[unlockedBlook] ||= 0;
                                         blooks[unlockedBlook]++;
-        
+            
                                         let before = Date.now();
-        
+            
                                         if (alertBlooks) alert(`${unlockedBlook} (${i + 1}/${amount}) ${isNewToUser ? "NEW! " : ''}${tokens} tokens left`);
-        
+            
                                         now += Date.now() - before;
                                     }).catch(e => error = true);
                                     if (error) break;
@@ -3385,7 +3398,7 @@
             let el;
             if (type == "options" && options?.length) el = React.createElement("select", {
                 onChange: e => (input.selected = e.target.children[e.target.selectedIndex].innerText, onValue(JSON.parse(e.target.value)))
-            }, options.map(opt => React.createElement("option", { value: JSON.stringify(opt?.value || opt) }, opt?.name || opt)));
+            }, options.map(opt => React.createElement("option", { value: JSON.stringify(opt?.value != null ? opt.value : opt) }, opt?.name || opt)));
             else if (type == "function") el = React.createElement("input", {
                 className: styles.keys.cheatInput,
                 placeholder: name,
@@ -3710,7 +3723,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697932037864 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697934287562 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

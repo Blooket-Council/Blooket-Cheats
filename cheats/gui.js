@@ -471,7 +471,7 @@
                             const select = document.createElement("select");
                             options.forEach(opt => {
                                 const option = document.createElement("option");
-                                option.value = JSON.stringify(opt?.value || opt);
+                                option.value = JSON.stringify(opt?.value != null ? opt.value : opt);
                                 option.innerHTML = opt?.name || opt;
                                 select.appendChild(option);
                             });
@@ -534,7 +534,7 @@
         const Cheats = {
             global: [
                 {
-                    name: "Auto Answer (Toggle)",
+                    name: "Auto Answer",
                     description: "Toggles auto answer on",
                     type: "toggle",
                     enabled: false,
@@ -559,7 +559,7 @@
                     }
                 },
                 {
-                    name: "Highlight Answers (Toggle)",
+                    name: "Highlight Answers",
                     description: "Toggles highlight answers on",
                     type: "toggle",
                     enabled: false,
@@ -582,7 +582,7 @@
                     }
                 },
                 {
-                    name: "Subtle Highlight Answers (Toggle)",
+                    name: "Subtle Highlight Answers",
                     description: "Toggles subtle highlight answers on",
                     type: "toggle",
                     enabled: false,
@@ -632,9 +632,23 @@
                         {
                             name: "Amount",
                             type: "number"
+                        },
+                        {
+                            name: "Alert Blooks",
+                            type: "options",
+                            options: [
+                                {
+                                    name: "Alert Blooks",
+                                    value: true
+                                },
+                                {
+                                    name: "Don't Alert Blooks",
+                                    value: false
+                                }
+                            ]
                         }
                     ],
-                    run: function (box, amountToOpen) {
+                    run: function (box, amountToOpen, alertBlooks) {
                         let i = document.createElement('iframe');
                         document.body.append(i);
                         window.alert = i.contentWindow.alert.bind(window);
@@ -654,7 +668,6 @@
                                 return;
                             };
         
-                            let alertBlooks = confirm("Would you like to alert blooks upon unlocking?");
                             let blooks = {};
                             let now = Date.now();
                             let error = false;
@@ -3878,7 +3891,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697932037802 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697934287463 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
