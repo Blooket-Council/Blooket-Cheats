@@ -304,11 +304,16 @@
                             }
                         ],
                         run: async function (id, name, amount, b, bg) {
+                            let i = document.createElement('iframe');
+                            document.body.append(i);
+                            window.alert = i.contentWindow.alert.bind(window);
+                            i.remove();
                             let cache = Object.values(webpackJsonp.push([[], { ['']: (_, a, b) => { a.cache = b.c }, }, [['']]]).cache);
                             const axios = cache.find((x) => x.exports?.a?.get).exports.a;
                             const firebase = cache.find(x => x.exports?.a?.initializeApp).exports.a;
-                            const blooks = Object.keys(Object.values(cache).find(x => x.exports.a?.Black).exports.a);
+                            const blooks = Object.keys(cache.find(x => x.exports.a?.Black).exports.a);
         
+                            if (await cache.find(x => x.exports?.a?.me).exports.a.me({}).then(x => x.name)) return alert("You are logged in, and using this script will suspend your account. Please log out if you wish to use this.");
                             for (let i = 1; i <= amount; i++) {
                                 (async () => {
                                     let ign = `${name}${String.fromCharCode(96 + i)}`;
@@ -3777,7 +3782,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1700445441882 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700494615679 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
