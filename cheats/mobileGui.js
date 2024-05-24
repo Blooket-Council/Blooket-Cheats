@@ -448,7 +448,7 @@
                             const id = prompt("Game ID:"), name = prompt("Name:"), amount = parseInt(prompt("Amount:"));
                             for (let i = 1; i <= amount; i++) {
                                 (async () => {
-                                    let ign = `${name}${String.fromCharCode(96 + i)}`;
+                                    let ign = `${name}${i.toString(36)}`;
                                     const { data: { success, fbToken, fbShardURL } } = await axios.put("https://fb.blooket.com/c/firebase/join", { id, name: ign });
                                     if (!success) return;
                                     const liveApp = firebase.initializeApp({
@@ -2696,7 +2696,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1700497845885 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700853615819 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
