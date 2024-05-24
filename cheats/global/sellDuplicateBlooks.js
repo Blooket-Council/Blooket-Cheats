@@ -19,17 +19,19 @@
         window.alert = i.contentWindow.alert.bind(window);
         window.confirm = i.contentWindow.confirm.bind(window);
         i.remove();
-        let { webpack } = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]),
-            axios = Object.values(webpack.c).find((x) => x.exports?.a?.get).exports.a,
-            { sellBlook } = Object.values(webpack.c).find(x => x.exports.a?.sellBlook).exports.a;
-        axios.get("https://dashboard.blooket.com/api/users").then(async ({ data: { unlocks } }) => {
-            let blooks = Object.entries(unlocks).filter(x => x[1] > 1);
-            if (confirm(`Are you sure you want to sell your dupes?`)) {
-                let now = Date.now();
-                for (const [blook, amount] of blooks) await sellBlook({ blook, numToSell: amount - 1 });
-                alert(`(${Date.now() - now}ms) Results:\n${blooks.map(([blook, amount]) => `    ${blook} ${amount - 1}`).join(`\n`)}`);
+        if (/dashboard.*\/blooks/.test(window.location.href)) {
+            if (confirm(`Are you sure you want to sell your dupes? (Legendaries and rarer will not be sold)`)) {
+                let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                let now = Date.now(), results = "";
+                for (const blook in stateNode.state.blookData) if (stateNode.state.blookData[blook] > 1) {
+                    stateNode.setState({ blook, numToSell: stateNode.state.blookData[blook] - 1 });
+                    if (["Legendary", "Chroma", "Mystical"].includes(document.querySelector("[class*='highlightedRarity']").innerText.trim())) continue;
+                    results += `    ${blook} ${stateNode.state.blookData[blook] - 1}\n`;
+                    await stateNode.sellBlook({ preventDefault: () => {} }, true);
+                }
+                alert(`(${Date.now() - now}ms) Results:\n${results.trim()}`);
             }
-        }).catch((e) => (alert('There was an error user data!'), console.info(e)));
+        } else alert("This can only be ran in the Blooks page.");
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/global/sellDuplicateBlooks.png?" + Date.now();
@@ -47,7 +49,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1708817191544 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1710637277938 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

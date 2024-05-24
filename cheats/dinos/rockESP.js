@@ -16,6 +16,42 @@
     const cheat = (async () => {
         let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         const rocks = [...document.querySelector('[class*="rockButton"]').parentElement.children];
+        const exps = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"];
+        const getExpAscii = (num) => {
+            let res = "";
+            while (num > 0) {
+                res = exps[num % 10] + res;;
+                num = ~~(num / 10);
+            }
+            return res;
+        };
+        
+        const shortNum = (value) => {
+            let newValue = value.toString();
+            if (value >= 1000) {
+                const suffixes = ["", "K", "M", "B", "T"];
+                const suffixNum = ~~((digits(value) - 1) / 3);
+                if (suffixNum < suffixes.length) {
+                    let shortValue = "";
+                    for (let precision = 3; precision >= 1; precision--) {
+                        shortValue = parseFloat((suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(precision)).toString();
+                        const dotLessShortValue = shortValue.replace(/[^a-zA-Z 0-9]+/g, "");
+                        if (dotLessShortValue.length <= 3) break;
+                    }
+                    if (Number(shortValue) % 1 !== 0) shortValue = Number(shortValue).toFixed(1);
+                    newValue = shortValue + suffixes[suffixNum];
+                } else {
+                    let num = value;
+                    let exp = 0;
+                    while (num >= 100) {
+                        num = Math.floor(num / 10);
+                        exp += 1;
+                    }
+                    newValue = `${num / 10} × 10${getExpAscii(exp + 1)}`;
+                }
+            }
+            return newValue;
+        };
         if (!rocks.every(element => element.querySelector('div'))) stateNode.setState({
             choices: [{ type: "fossil", val: 10, rate: .1, blook: "Amber" }, { type: "fossil", val: 25, rate: .1, blook: "Dino Egg" }, { type: "fossil", val: 50, rate: .175, blook: "Dino Fossil" }, { type: "fossil", val: 75, rate: .175, blook: "Stegosaurus" }, { type: "fossil", val: 100, rate: .15, blook: "Velociraptor" }, { type: "fossil", val: 125, rate: .125, blook: "Brontosaurus" }, { type: "fossil", val: 250, rate: .075, blook: "Triceratops" }, { type: "fossil", val: 500, rate: .025, blook: "Tyrannosaurus Rex" }, { type: "mult", val: 1.5, rate: .05 }, { type: "mult", val: 2, rate: .025 }].sort(() => 0.5 - Math.random()).slice(0, 3)
         }, () => {
@@ -29,7 +65,7 @@
                 choice.style.display = "flex";
                 choice.style.justifyContent = "center";
                 choice.style.transform = "translateY(25px)";
-                choice.innerText = rock.type === "fossil" ? `+${Math.round(rock.val * stateNode.state.fossilMult) > 99999999 ? Object.values(webpack('74sb')).find(x => x.toString().includes('\xd7'))(Math.round(rock.val * stateNode.state.fossilMult)) : Math.round(rock.val * stateNode.state.fossilMult)} Fossils` : `x${rock.val} Fossils Per Excavation`;;
+                choice.innerText = rock.type === "fossil" ? `+${Math.round(rock.val * stateNode.state.fossilMult) > 99999999 ? shortNum(Math.round(rock.val * stateNode.state.fossilMult)) : Math.round(rock.val * stateNode.state.fossilMult)} Fossils` : `x${rock.val} Fossils Per Excavation`;;
                 element.append(choice);
             });
         });
@@ -50,7 +86,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1708817191447 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1710637277946 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

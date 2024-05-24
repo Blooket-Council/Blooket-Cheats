@@ -20,38 +20,40 @@
         window.prompt = i.contentWindow.prompt.bind(window);
         window.confirm = i.contentWindow.confirm.bind(window);
         i.remove();
-        let { webpack } = webpackJsonp.push([[], { ['1234']: (_, a, b) => { a.webpack = b }, }, [['1234']]]),
-            axios = Object.values(webpack.c).find((x) => x.exports?.a?.get).exports.a,
-            { purchaseBlookBox } = Object.values(webpack.c).find(x => x.exports.a?.purchaseBlookBox).exports.a;
         
-        axios.get("https://dashboard.blooket.com/api/users").then(async ({ data: { tokens } }) => {
-            let prices = Object.values(webpack.c).find(x => !isNaN(x?.exports?.a?.Space)).exports.a || { Medieval: 20, Breakfast: 20, Wonderland: 20, Blizzard: 25, Space: 20, Bot: 20, Aquatic: 20, Safari: 20, Dino: 25, "Ice Monster": 25, Outback: 25 }
+        (async () => {
+            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+            let prices = Array.from(document.querySelectorAll("[class*='packsWrapper'] > div")).reduce((a, b) => {
+                b.querySelector("[class*='blookContainer'] > img") || (a[b.querySelector("[class*='packImgContainer'] > img").alt] = parseInt(b.querySelector("[class*='packBottom']").textContent));
+                return a;
+            }, {});
             let box = prompt("Which box do you want to open? (ex: \"Ice Monster\")").split(' ').map(str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()).join(' ');
-            if (!Object.keys(prices).map(x => x.toLowerCase()).includes(box.toLowerCase())) return alert("I couldn't find that box!");
+            const cost = prices[box];
+            if (!cost) return alert("I couldn't find that box!");
         
-            let amount = Math.min(Math.floor(tokens / Object.entries(prices).find(x => x[0].toLowerCase() == box.toLowerCase())[1]), parseInt(`0${prompt("How many boxes do you want to open?")}`));
+            let amount = Math.min(Math.floor(stateNode.state.tokens / cost), parseInt(`0${prompt("How many boxes do you want to open?")}`));
             if (amount == 0) return alert("You do not have enough tokens!");
         
-            let alertBlooks = confirm("Would you like to alert blooks upon unlocking?");
+            let alertBlooks = confirm("Would you like to show blooks as unlocking?");
             let blooks = {};
             let now = Date.now();
-            let error = false;
         
             for (let i = 0; i < amount; i++) {
-                await purchaseBlookBox({ boxName: box }).then(({ isNewToUser, tokens, unlockedBlook }) => {
-                    blooks[unlockedBlook] ||= 0;
-                    blooks[unlockedBlook]++;
+                await stateNode.buyPack(true, box);
         
-                    let before = Date.now();
+                blooks[stateNode.state.unlockedBlook] ||= 0;
+                blooks[stateNode.state.unlockedBlook]++;
         
-                    if (alertBlooks) alert(`${unlockedBlook} (${i + 1}/${amount}) ${isNewToUser ? "NEW! " : ''}${tokens} tokens left`);
+                let before = Date.now();
         
-                    now += Date.now() - before;
-                }).catch(e => error = true);
-                if (error) break;
+                now += Date.now() - before;
+        
+                stateNode.setState({ canOpen: true, currentPack: "", opening: alertBlooks, doneOpening: alertBlooks, openPack: alertBlooks });
+                clearTimeout(stateNode.canOpenTimeout);
             }
+            await new Promise(r => setTimeout(r));
             alert(`(${Date.now() - now}ms) Results:\n${Object.entries(blooks).map(([blook, amount]) => `    ${blook} ${amount}`).join(`\n`)}`);
-        }).catch(() => alert('There was an error user data!'));
+        })();
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/global/spamBuyBlooks.png?" + Date.now();
@@ -69,7 +71,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1708817191553 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1710637277941 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
