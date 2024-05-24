@@ -899,7 +899,9 @@
                     description: "Sets every answer to be correct",
                     run: function () {
                         const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                        stateNode.freeQuestions = stateNode.questions = stateNode.props.client.questions.map(x => ({ ...x, correctAnswers: x.answers }));
+                        stateNode.freeQuestions = stateNode.freeQuestions?.map?.(q => ({ ...q, correctAnswers: q.answers }));
+                        stateNode.questions = stateNode.questions?.map?.(q => ({ ...q, correctAnswers: q.answers }));
+                        stateNode.props.client.questions = stateNode.props.client.questions.map(q => ({ ...q, correctAnswers: q.answers }));
                     }
                 },
                 {
@@ -3938,7 +3940,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1700443765714 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1700445441869 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
