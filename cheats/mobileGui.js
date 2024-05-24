@@ -2400,19 +2400,43 @@
                     }
                 }
             ],
-            racing: [{
-                name: "Instant Win",
-                description: "Instantly Wins the race",
-                run: function () {
-                    const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                    stateNode.setState({ progress: stateNode.state.goalAmount }, () => {
-                        const { state: { question } } = stateNode;
-                        try {
-                            [...document.querySelectorAll(`[class*="answerContainer"]`)][question.answers.map((x, i) => question.correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
-                        } catch { }
-                    });
+            racing: [
+                {
+                    name: "Instant Win",
+                    description: "Instantly Wins the race",
+                    run: function () {
+                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ progress: stateNode.state.goalAmount }, () => {
+                            const { state: { question } } = stateNode;
+                            try {
+                                [...document.querySelectorAll(`[class*="answerContainer"]`)][question.answers.map((x, i) => question.correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
+                            } catch { }
+                        });
+                    }
+                },
+                {
+                    name: "Set Questions",
+                    description: "Sets the number of questions left",
+                    run: function (progress) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        let progress = stateNode.props.client.amount - parseInt(prompt("How many questions left do you want?"));
+                        if (!isNaN(progress)) {
+                            stateNode.setState({ progress });
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/".concat(stateNode.props.client.name),
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    pr: progress
+                                }
+                            });
+                        }
+                    }
                 }
-            }],
+            ],
             royale: [
                 {
                     name: "Auto Answer (Toggle)",
@@ -2696,7 +2720,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1700863170234 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1707788457584 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

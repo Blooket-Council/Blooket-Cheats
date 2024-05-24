@@ -2482,19 +2482,41 @@
             racing: {
                 name: "Racing",
                 img: "https://media.blooket.com/image/upload/v1661496295/Media/uiTest/Racing_Progress.svg",
-                cheats: [{
-                    name: "Instant Win",
-                    description: "Instantly Wins the race",
-                    run: function () {
-                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                        stateNode.setState({ progress: stateNode.state.goalAmount }, () => {
-                            const { state: { question } } = stateNode;
-                            try {
-                                [...document.querySelectorAll(`[class*="answerContainer"]`)][question.answers.map((x, i) => question.correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
-                            } catch { }
-                        });
+                cheats: [
+                    {
+                        name: "Instant Win",
+                        description: "Instantly Wins the race",
+                        run: function () {
+                            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            stateNode.setState({ progress: stateNode.state.goalAmount }, () => {
+                                const { state: { question } } = stateNode;
+                                try {
+                                    [...document.querySelectorAll(`[class*="answerContainer"]`)][question.answers.map((x, i) => question.correctAnswers.includes(x) ? i : null).filter(x => x != null)[0]]?.click?.();
+                                } catch { }
+                            });
+                        }
+                    },
+                    {
+                        name: "Set Questions",
+                        description: "Sets the number of questions left",
+                        inputs: [{
+                            name: "Questions",
+                            type: "number"
+                        }],
+                        run: function (progress) {
+                            let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                            progress = stateNode.props.client.amount - progress;
+                            stateNode.setState({ progress });
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/".concat(stateNode.props.client.name),
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    pr: progress
+                                }
+                            });
+                        }
                     }
-                }],
+                ],
             },
             royale: {
                 name: "Battle Royale",
@@ -3780,7 +3802,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1700863170244 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1707788457591 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
