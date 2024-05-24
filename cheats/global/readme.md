@@ -13,12 +13,8 @@ Answers questions correctly or incorrectly depending on the goal grade given
 Automatically removes the shadow from correct answers
 
 
-## [Anti Flood Game](antiFloodGame.js)
-Prevents bots from joining your Blooket game (HOST SCRIPT)
 ## [Auto Answer](autoAnswer.js)
 Clicks the first correct answer
-## [Auto Sell Dupes On Open](autoSellDupesOnOpen.js)
-Sells the blook you unlock when you open a pack if you already have one (Doesn't sell Legendaries or rarer)
 ## [Change Blook Ingame](changeBlookIngame.js)
 Changes your blook
 ## [Every Answer Correct](everyAnswerCorrect.js)
@@ -45,8 +41,6 @@ Simulate opening a pack
 Simulate unlocking most of the blooks
 ## [Spam Buy Blooks](spamBuyBlooks.js)
 Opens a box a specified amount of times
-## [Unlock Plus Gamemodes](unlockPlusGamemodes.js)
-Unlocks Plus Only gamemodes
 ## [Subtle Highlight Answers](subtleHighlightAnswers.js)
 Removes the shadow from correct answers
 ## [Use Any Blook](useAnyBlook.js)
