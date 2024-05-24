@@ -5,9 +5,10 @@ Cheats that loop automatically
 
 ### [Auto Answer](intervals/autoAnswer.js)
 Automatically answers questions for you
-
 ### [Highlight Answers](intervals/highlightAnswers.js)
 Automatically highlights the correct answers
+### [Subtle Highlight Answers](intervals/subtleHighlightAnswers.js)
+Automatically removes the shadow from correct answers
 
 
 ## [Anti Flood Game](antiFloodGame.js)
@@ -27,7 +28,7 @@ Gets max daily tokens and xp
 ## [Highlight Answers](highlightAnswers.js)
 Highlights the correct and incorrect answers
 ## [Host Any Gamemode](hostAnyGamemode.js)
-Highlights the correct and incorrect answers
+Lets you switch the current gamemode on the host settings page
 ## [Remove Name Limit](removeNameLimit.js)
 Sets the name limit to 120, which is the actual max name length limit
 ## [Remove Random Name](removeRandomName.js)
@@ -44,5 +45,7 @@ Simulate unlocking most of the blooks
 Opens a box a specified amount of times
 ## [Unlock Plus Gamemodes](unlockPlusGamemodes.js)
 Unlocks Plus Only gamemodes
+## [Subtle Highlight Answers](subtleHighlightAnswers.js)
+Removes the shadow from correct answers
 ## [Use Any Blook](useAnyBlook.js)
 Gives all blooks in game lobby

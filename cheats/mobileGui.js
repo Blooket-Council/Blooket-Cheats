@@ -214,6 +214,29 @@
                     }
                 },
                 {
+                    name: "Subtle Highlight Answers (Toggle)",
+                    description: "Toggles subtle highlight answers on",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                                [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
+                                    if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i]))
+                                        answer.style.boxShadow = "unset";
+                                });
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    }
+                },
+                {
                     name: "Auto Answer",
                     description: "Click the correct answer for you",
                     run: function () {
@@ -233,6 +256,17 @@
                         [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
                             if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i])) answer.style.backgroundColor = "rgb(0, 207, 119)";
                             else answer.style.backgroundColor = "rgb(189, 15, 38)";
+                        });
+                    }
+                },
+                {
+                    name: "Subtle Highlight Answers",
+                    description: "Removes the shadow from correct answers",
+                    run: function () {
+                        const { stateNode: { state, props } } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        [...document.querySelectorAll(`[class*="answerContainer"]`)].forEach((answer, i) => {
+                            if ((state.question || props.client.question).correctAnswers.includes((state.question || props.client.question).answers[i]))
+                                answer.style.boxShadow = "unset";
                         });
                     }
                 },
@@ -2621,7 +2655,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697757974870 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697932037807 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
