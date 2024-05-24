@@ -3638,7 +3638,13 @@
                 key: "x"
             })), React.createElement("div", {
                 id: styles.keys.credits
-            }, React.createElement(AntiBen, null, "GitHub - 05Konz")), React.createElement("div", {
+            }, React.createElement(AntiBen, {
+                onClick: () => window.open("https://github.com/05Konz/Blooket-Cheats", "_blank").focus(),
+                style: {
+                    cursor: "pointer"
+                },
+                href: "https://github.com/05Konz/Blooket-Cheats"
+            }, "GitHub - 05Konz")), React.createElement("div", {
                 id: styles.keys.cheatList
             }, React.createElement(AntiBen, {
                 type: "span",
@@ -3723,7 +3729,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697934287562 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697936106862 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

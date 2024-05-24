@@ -188,7 +188,8 @@
                         fontWeight: "700",
                         userSelect: "text"
                     },
-                    innerHTML: "GitHub - 05Konz"
+                    innerHTML: "GitHub - 05Konz",
+                    onclick: () => window.open("https://github.com/05Konz/Blooket-Cheats", "_blank").focus()
                 }),
                 (controlButtons = createElement("div", {
                     id: "controlButtons",
@@ -3891,7 +3892,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697934287463 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697936106829 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
