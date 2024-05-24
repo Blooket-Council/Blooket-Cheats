@@ -26,8 +26,8 @@ Floods a game with a number of fake accounts
 Gets max daily tokens and xp
 ## [Highlight Answers](highlightAnswers.js)
 Highlights the correct and incorrect answers
-## [Prevent Suspension](preventSuspension.js)
-Blocks the `suspend-me` api[^1]
+## [Host Any Gamemode](hostAnyGamemode.js)
+Highlights the correct and incorrect answers
 ## [Remove Name Limit](removeNameLimit.js)
 Sets the name limit to 120, which is the actual max name length limit
 ## [Remove Random Name](removeRandomName.js)
@@ -46,4 +46,3 @@ Opens a box a specified amount of times
 Unlocks Plus Only gamemodes
 ## [Use Any Blook](useAnyBlook.js)
 Gives all blooks in game lobby
-[^1]: Run everytime a new tab opens to make sure

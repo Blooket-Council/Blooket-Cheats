@@ -715,6 +715,27 @@
                     }
                 },
                 {
+                    name: "Host Any Gamemode",
+                    description: "Change the selected gamemode on the host settings page",
+                    inputs: [
+                        {
+                            name: "Gamemode",
+                            type: "options",
+                            options: ["Racing", "Classic", "Factory", "Cafe", "Defense2", "Defense", "Royale", "Gold", "Candy", "Brawl", "Hack", "Pirate", "Fish", "Dino", "Toy", "Rush"]
+                        }
+                    ],
+                    run: function (type) {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.alert = i.contentWindow.alert.bind(window);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        if (location.pathname != "/host/settings") return alert("Run this script on the host settings page");
+                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
+                        stateNode.setState({ settings: { type } });
+                    }
+                },
+                {
                     name: "Change Blook Ingame",
                     description: "Changes your blook",
                     inputs: [
@@ -3823,7 +3844,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1696542129455 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1697757974864 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
