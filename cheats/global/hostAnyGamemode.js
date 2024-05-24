@@ -43,8 +43,11 @@
             last = char;
         }
         let iframe = document.querySelector("iframe");
-        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1708817191525 || iframe.contentWindow.confirm(error)) cheat();
+        let _, time = 1710881112361, error = "There was an error checking for script updates. Run cheat anyway?";
+        try {
+            [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
+        } catch (e) {}
+        if (parseInt(time) <= 1710881112361 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
