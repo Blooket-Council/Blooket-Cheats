@@ -2417,7 +2417,7 @@
                 {
                     name: "Set Questions",
                     description: "Sets the number of questions left",
-                    run: function (progress) {
+                    run: function () {
                         let i = document.createElement('iframe');
                         document.body.append(i);
                         window.prompt = i.contentWindow.prompt.bind(window);
@@ -2720,7 +2720,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1707871479187 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1708107684559 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
