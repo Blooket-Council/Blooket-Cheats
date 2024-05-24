@@ -2990,7 +2990,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1710637277957 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1710638611927 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
