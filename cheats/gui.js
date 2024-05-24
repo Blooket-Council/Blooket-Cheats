@@ -1613,7 +1613,7 @@
                         let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         
                         stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
-                            const players = Object.entries(val || {}).reduce((a, [name, c]) => (name == stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
+                            const players = Object.entries(val || {}).reduce((a, [name, c]) => (name != stateNode.props.client.name && a.push({ name, blook: c.b, doubloons: c.d || 0 }), a), []);
                             if (players.length === 0) {
                                 stateNode.questionsToAnswer = 1;
                                 return void stateNode.randomQ();
@@ -3965,7 +3965,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1707788457574 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1707789020691 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
