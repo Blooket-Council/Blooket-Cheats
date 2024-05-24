@@ -43,8 +43,8 @@
             last = char;
         }
         let iframe = document.querySelector("iframe");
-        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1697757974856 || iframe.contentWindow.confirm(error)) cheat();
+        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
+        if (parseInt(time) <= 1707790074045 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

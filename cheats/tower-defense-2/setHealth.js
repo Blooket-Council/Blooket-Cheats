@@ -35,8 +35,8 @@
             last = char;
         }
         let iframe = document.querySelector("iframe");
-        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693429947630 || iframe.contentWindow.confirm(error)) cheat();
+        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
+        if (parseInt(time) <= 1707790074769 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

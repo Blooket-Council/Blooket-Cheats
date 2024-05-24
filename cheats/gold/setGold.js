@@ -20,12 +20,12 @@
         i.remove();
         let gold = Number(parseInt(prompt("How much gold would you like?")));
         let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-        stateNode.setState({ gold, gold2: gold });
+        stateNode.setState({ gold: doubloons, gold2: doubloons });
         stateNode.props.liveGameController.setVal({
             path: "c/".concat(stateNode.props.client.name),
             val: {
                 b: stateNode.props.client.blook,
-                g: gold
+                g: doubloons
             }
         });
     });
@@ -44,8 +44,8 @@
             last = char;
         }
         let iframe = document.querySelector("iframe");
-        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "(.+?)"/);
-        if (parseInt(time) <= 1693429947473 || iframe.contentWindow.confirm(error)) cheat();
+        const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
+        if (parseInt(time) <= 1707790074473 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
