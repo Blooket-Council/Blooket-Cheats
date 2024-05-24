@@ -7,7 +7,7 @@
 * You may not under any circumstance republish any code from this file as your own.
 * 
 * ALL TERMS STATED IN THE LINK BELOW APPLY ASWELL
-* https://github.com/05Konz/Blooket-Cheats/blob/main/LICENSE
+* https://github.com/05Konz2/Blooket-Cheats/blob/main/LICENSE
 */
 
 /* THE UPDATE CHECKER IS ADDED DURING COMMIT PREP, THERE MAY BE REDUNDANT CODE, DO NOT TOUCH */
@@ -162,7 +162,7 @@
         bodyDiv.appendChild(footer);
         footer.style.fontSize = '0.9rem';
         footer.style.paddingBottom = '5px';
-        footer.innerHTML = (`<span><a target="blank" href="https://discord.gg/jHjGrrdXP6">Discord</a><br/><a target="blank" href="https://github.com/05Konz/Blooket-Cheats">GitHub - 05Konz</a></span>`);
+        footer.innerHTML = (`<span><a target="blank" href="https://discord.gg/jHjGrrdXP6">Discord</a><br/><a target="blank" href="https://github.com/05Konz2/Blooket-Cheats">GitHub - 05Konz</a></span>`);
         
         let cheats = ({
             global: [
@@ -2705,7 +2705,7 @@
         addEventListener('keypress', toggleHidden);
     });
     let img = new Image;
-    img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/mobileGui.png?" + Date.now();
+    img.src = "https://raw.githubusercontent.com/05Konz2/Blooket-Cheats/main/autoupdate/timestamps/mobileGui.png?" + Date.now();
     img.crossOrigin = "Anonymous";
     img.onload = function() {
         const c = document.createElement("canvas");
@@ -2720,7 +2720,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1708107684559 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1708356622144 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

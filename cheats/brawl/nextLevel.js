@@ -7,7 +7,7 @@
 * You may not under any circumstance republish any code from this file as your own.
 * 
 * ALL TERMS STATED IN THE LINK BELOW APPLY ASWELL
-* https://github.com/05Konz/Blooket-Cheats/blob/main/LICENSE
+* https://github.com/05Konz2/Blooket-Cheats/blob/main/LICENSE
 */
 
 /* THE UPDATE CHECKER IS ADDED DURING COMMIT PREP, THERE MAY BE REDUNDANT CODE, DO NOT TOUCH */
@@ -19,7 +19,7 @@
         xp.get().spawn(player.x, player.y, ((e) => 1 === e ? 1 : e < 5 ? 5 : e < 10 ? 10 : e < 20 ? 20 : e < 30 ? 30 : e < 40 ? 40 : e < 50 ? 50 : 100)(stateNode.state.level) - stateNode.xp);
     });
     let img = new Image;
-    img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/brawl/nextLevel.png?" + Date.now();
+    img.src = "https://raw.githubusercontent.com/05Konz2/Blooket-Cheats/main/autoupdate/timestamps/brawl/nextLevel.png?" + Date.now();
     img.crossOrigin = "Anonymous";
     img.onload = function() {
         const c = document.createElement("canvas");
@@ -34,7 +34,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1707871478113 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1708356621723 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();

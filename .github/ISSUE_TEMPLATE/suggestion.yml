@@ -21,7 +21,7 @@ body:
     id: confirm
     attributes:
       label: FaQ
-      description: Please make sure to read [the FaQ](https://github.com/05Konz/Blooket-Cheats#information) before submitting any suggestions
+      description: Please make sure to read [the FaQ](https://github.com/05Konz2/Blooket-Cheats#information) before submitting any suggestions
       multiple: true
       options:
         - I have not read the FaQ

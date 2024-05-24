@@ -7,8 +7,8 @@
 <details><summary><h3>How to use</h3></summary>
 
 There are 3 good methods to using these scripts:
-1. Importing one of the Bookmarklets.html files using [these instructions](https://github.com/05Konz/Blooket-Cheats/blob/main/tutorial/readme.md)
-2. Going to the [GitHub pages site](https://05konz.github.io/Blooket-Cheats), choosing a gamemode, then dragging a cheat to your bookmarks bar or clicking one to copy the script
+1. Importing one of the Bookmarklets.html files using [these instructions](https://github.com/05Konz2/Blooket-Cheats/blob/main/tutorial/readme.md)
+2. Going to the [GitHub pages site](https://05konz2.github.io/Blooket-Cheats), choosing a gamemode, then dragging a cheat to your bookmarks bar or clicking one to copy the script
 3. Copying a script and running it in the inspect element console
 </details>
 
@@ -19,7 +19,7 @@ We don't actually know what to do about this or how to fix it, sorry.
 
 <details><summary><h3>(script) is not working?</h3></summary>
 
-Make sure you're running it properly (see [How to use](https://github.com/05Konz/Blooket-Cheats#how-to-use)), if it still doesn't work and other cheats do, then [make an issue](https://github.com/05Konz/Blooket-Cheats/issues)
+Make sure you're running it properly (see [How to use](https://github.com/05Konz2/Blooket-Cheats#how-to-use)), if it still doesn't work and other cheats do, then [make an issue](https://github.com/05Konz2/Blooket-Cheats/issues)
 </details>
 
 <details><summary><h3>Which script should I use to make a bookmarklet?</h3></summary>

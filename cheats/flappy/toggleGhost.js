@@ -7,7 +7,7 @@
 * You may not under any circumstance republish any code from this file as your own.
 * 
 * ALL TERMS STATED IN THE LINK BELOW APPLY ASWELL
-* https://github.com/05Konz/Blooket-Cheats/blob/main/LICENSE
+* https://github.com/05Konz2/Blooket-Cheats/blob/main/LICENSE
 */
 
 /* THE UPDATE CHECKER IS ADDED DURING COMMIT PREP, THERE MAY BE REDUNDANT CODE, DO NOT TOUCH */
@@ -17,7 +17,7 @@
         Object.values(document.querySelector("#phaser-bouncy"))[1].children[0]._owner.stateNode.state.game.scene.physics.world.bodies.entries.forEach(x => x.gameObject.frame.texture.key.startsWith("blook") && (x.checkCollision.none = x.gameObject.alpha == 1, x.gameObject.setAlpha(x.gameObject.alpha == 1 ? 0.5 : 1)));
     });
     let img = new Image;
-    img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/flappy/toggleGhost.png?" + Date.now();
+    img.src = "https://raw.githubusercontent.com/05Konz2/Blooket-Cheats/main/autoupdate/timestamps/flappy/toggleGhost.png?" + Date.now();
     img.crossOrigin = "Anonymous";
     img.onload = function() {
         const c = document.createElement("canvas");
@@ -32,7 +32,7 @@
         }
         let iframe = document.querySelector("iframe");
         const [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "([\s\S]+?)"/);
-        if (parseInt(time) <= 1707871478719 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1708356621947 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => (img.src = null, cheat());
 })();
