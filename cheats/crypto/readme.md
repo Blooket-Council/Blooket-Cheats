@@ -1,13 +1,13 @@
-# Crypto Hack Cheats
+# Crypto Hack
 
 ## [Always Triple](alwaysTriple.js)
 Always get triple crypto
 
 ## [Auto Guess](autoGuess.js)
-Automatically guess the correct password
+Selects the correct password when hacking
 
 ## [Choice ESP](choiceESP.js)
-Shows what each choice will give you
+Shows what's behind the choice boxes
 
 ## [Password ESP](passwordESP.js)
 Highlights the correct password
@@ -21,5 +21,5 @@ Sets crypto
 ## [Set Password](setPassword.js)
 Sets hacking password
 
-## [Steal Player's Crypto](stealPlayersCrypto.js)
+## [Steal Players Crypto](stealPlayersCrypto.js)
 Steals all of someone's crypto

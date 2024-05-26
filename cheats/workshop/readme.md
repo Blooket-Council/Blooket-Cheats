@@ -1,16 +1,16 @@
-# Santa's Workshop Cheats
+# Santa's Workshop
 
 ## [Remove Distractions](removeDistractions.js)
 Removes all enemy distractions
 
 ## [Send Distraction](sendDistraction.js)
-Sends a distraction to everyone else playing
+Sends a random distraction
 
 ## [Set Toys](setToys.js)
-Sets amount of toys
+Sets the amount of toys you have
 
-## [Set Toys Per Question](setToysPerQ.js)
-Sets amount of toys per question
+## [Set Toys Per Q](setToysPerQ.js)
+Sets the amount of toys you get per question
 
 ## [Swap Toys](swapToys.js)
 Swaps toys with someone

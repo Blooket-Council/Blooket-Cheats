@@ -1,25 +1,25 @@
-# Tower Defense Cheats
+# Tower Defense
 
 ## [Earthquake](earthquake.js)
-Shuffles around towers
+Triggers the earthquake event that shuffles around your towers
 
 ## [Max Towers](maxTowers.js)
-Makes all your towers op
+Makes all of your towers OP
 
 ## [Remove Ducks](removeDucks.js)
-Removes ducks
+Removes ducks from the map
 
 ## [Remove Enemies](removeEnemies.js)
-Removes all the enemies
+Removes all the enemies in the round
 
-## [Place Towers Anywhere](removeObsticles.js)
+## [Remove Obsticles](removeObsticles.js)
 Lets you place towers anywhere on the map
 
-## [Set Damage](setDmg.js)
-Sets amount of damage you have
+## [Set Dmg](setDmg.js)
+Sets the amount of damage you have
 
 ## [Set Round](setRound.js)
 Sets the current round
 
 ## [Set Tokens](setTokens.js)
-Sets amount of tokens you have
+Sets the amount of tokens you have

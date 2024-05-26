@@ -1,10 +1,16 @@
-# Fishing Frenzy Cheats
+# Fishing Frenzy
 
 ## [Frenzy](frenzy.js)
-Sets everyone to frenzy mode
+Causes a frenzy
+
+## [Remove Distraction](removeDistraction.js)
+Removes enemy distractions
+
+## [Send Distraction](sendDistraction.js)
+Sends a random distraction
 
 ## [Set Lure](setLure.js)
-Sets fishing lure (range 1 - 5)
+Sets fishing lure (from 1-5)
 
 ## [Set Weight](setWeight.js)
-Sets weight
+Sets fishing weight

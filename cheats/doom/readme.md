@@ -1,4 +1,4 @@
-# Tower of Doom Cheats
+# Tower of Doom
 
 ## [Fill Deck](fillDeck.js)
 Fills your deck with every maxed out card and artifact[^1]
@@ -7,16 +7,16 @@ Fills your deck with every maxed out card and artifact[^1]
 Maxes out all the cards in the deck[^2]
 
 ## [Max Health](maxHealth.js)
-Fills the player's health[^2]
+Sets health to 100[^2]
 
 ## [Max Stats](maxStats.js)
-Maxes out player's current card[^2]
+Sets all card stats to 20[^2]
 
 ## [Min Enemy](minEnemy.js)
-Makes the enemy card stats all 0[^2]
+Sets all enemy stats to 0[^2]
 
 ## [Set Coins](setCoins.js)
-Tries to set amount of tower coins you have[^2]
+Tries to set the amount of coins you have[^2]
 
-[^1]: Only runnable on towers page
-[^2]: Only runnable on the attribute selection page
+[^1] Only runnable on the map
+[^2] Only runnable in battle

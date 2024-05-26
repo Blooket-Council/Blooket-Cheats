@@ -1,11 +1,6 @@
-# Battle Royale Cheats
-
-## [Intervals](intervals/)
-Cheats that loop automatically
-
-### [Auto Answer](intervals/autoAnswer.js)
-Automatically answers questions for you
-
+# Battle Royale
 
 ## [Auto Answer](autoAnswer.js)
-Clicks the first correct answer
+Chooses the correct answer
+
+### [Intervals](intervals)

@@ -1,67 +1,71 @@
 /**
 * @license StewartPrivateLicense-2.0.1
-* Copyright (c) 05Konz 2023
+* Copyright (c) 005Konz 2023
 *
 * You may not reproduce or distribute any code inside this file without the licenser's permission.
 * You may not copy, modify, steal, skid, or recreate any of the code inside this file.
 * You may not under any circumstance republish any code from this file as your own.
 * 
 * ALL TERMS STATED IN THE LINK BELOW APPLY ASWELL
-* https://github.com/05Konz/Blooket-Cheats/blob/main/LICENSE
+* https://github.com/005Konz/Blooket-Cheats/blob/main/LICENSE
 */
 
 /* THE UPDATE CHECKER IS ADDED DURING COMMIT PREP, THERE MAY BE REDUNDANT CODE, DO NOT TOUCH */
 
 (() => {
+    let iframe = document.querySelector("iframe");
     const cheat = (async () => {
+        
+        let { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         let stats = ['materials', 'people', 'happiness', 'gold'];
-        let elements = Object.fromEntries([...document.querySelectorAll('[class^=styles__statContainer]')].map((container, i) => [stats[i], container]));
-        let { guest: data, phase } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.state;
-        if (phase == "choice") {
-            Array.from(document.getElementsByClassName('choiceESP')).forEach(x => x.remove());
-            Object.entries(data.yes || {}).forEach(x => {
-                if (x[0] == 'msg' || !stats.includes(x[0])) return;
+        let elements = Array.prototype.reduce.call(document.querySelectorAll('[class*=statContainer]'), (obj, container, i) => (obj[stats[i]] = container, obj), {});
+        if (stateNode.state.phase == "choice") {
+            Array.prototype.forEach.call(document.querySelectorAll('.choiceESP'), x => x.remove());
+            Object.keys(stateNode.state.guest.yes || {}).forEach(x => {
+                if (elements[x] == null) return;
                 let element = document.createElement('div');
                 element.className = 'choiceESP';
                 element.style = 'font-size: 24px; color: rgb(75, 194, 46); font-weight: bolder;';
-                element.innerText = String(x[1])
-                elements[x[0]].appendChild(element);
-            })
-            Object.entries(data.no || {}).forEach(x => {
-                if (x[0] == 'msg' || !stats.includes(x[0])) return;
+                element.innerText = String(stateNode.state.guest.yes[x]);
+                elements[x].appendChild(element);
+            });
+            Object.keys(stateNode.state.guest.no || {}).forEach(x => {
+                if (elements[x] == null) return;
                 let element = document.createElement('div');
                 element.className = 'choiceESP';
                 element.style = 'font-size: 24px; color: darkred; font-weight: bolder;';
-                element.innerText = String(x[1])
-                elements[x[0]].appendChild(element);
-            })
+                element.innerText = String(stateNode.state.guest.no[x]);
+                elements[x].appendChild(element);
+            });
+            Array.prototype.forEach.call(document.querySelectorAll("[class*=guestButton][role=button]"), x => (x.onclick = () => Array.prototype.forEach.call(document.querySelectorAll(".choiceESP"), x => x.remove())));
         }
+        
     });
     let img = new Image;
-    img.src = "https://raw.githubusercontent.com/05Konz/Blooket-Cheats/main/autoupdate/timestamps/kingdom/choiceESP.png?" + Date.now();
+    img.src = "https://raw.githubusercontent.com/005Konz/Blooket-Cheats/main/autoupdate/timestamps/kingdom/choiceESP.png?" + Date.now();
     img.crossOrigin = "Anonymous";
     img.onload = function() {
         const c = document.createElement("canvas");
         const ctx = c.getContext("2d");
         ctx.drawImage(img, 0, 0, this.width, this.height);
         let { data } = ctx.getImageData(0, 0, this.width, this.height), decode = "", last;
-        for (let i = 0; i < data.length; i += 4) {
-            let char = String.fromCharCode(data[i + 1] * 256 + data[i + 2]);
+        let i = 0;
+        while (i < data.length) {
+            let char = String.fromCharCode(data[i % 4 == 3 ? (i++, i++) : i++] + data[i % 4 == 3 ? (i++, i++) : i++] * 256);
             decode += char;
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let iframe = document.querySelector("iframe");
-        let _, time = 1710881112507, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716689127834, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1710881112507 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716689127834 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
         cheat();
         let iframe = document.querySelector("iframe");
-        iframe.contentWindow.alert("It seems the GitHub is either blocked or down.\n\nIf it's NOT blocked, join the Discord server for updates\nhttps://discord.gg/jHjGrrdXP6")
+        iframe.contentWindow.alert("It seems the GitHub is either blocked or down.\n\nIf it's NOT blocked, join the Discord server for updates\nhttps://discord.gg/jHjGrrdXP6\n(The cheat will still run after this alert)")
     }
 })();

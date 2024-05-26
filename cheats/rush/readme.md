@@ -1,7 +1,7 @@
-# Blook Rush Cheats
+# Blook Rush
 
 ## [Set Blooks](setBlooks.js)
-Sets amount of blooks you or your team has
+Sets the amount of blooks you or your team has
 
 ## [Set Defense](setDefense.js)
-Sets amount of defense you or your team has (Max 4)
+Sets the amount of defense you or your team has

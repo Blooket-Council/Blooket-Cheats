@@ -1,12 +1,13 @@
-# Factory Cheats
+# Factory
 
 ## [Choose Blook](chooseBlook.js)
 Gives you a blook
+
 ## [Free Upgrades](freeUpgrades.js)
 Sets upgrade prices to 0 for all current blooks
 
 ## [Max Blooks](maxBlooks.js)
-Maxes out all your blooks' levels
+Sets all your blooks' levels to 5
 
 ## [Remove Glitches](removeGlitches.js)
 Removes all enemy glitches
@@ -15,7 +16,7 @@ Removes all enemy glitches
 Sends a random glitch
 
 ## [Set All Mega Bot](setAllMegaBot.js)
-Sets all your blooks to maxed out Mega Bots
+Sets all your blooks to level 5 Mega Bots
 
 ## [Set Cash](setCash.js)
-Sets amount of cash you have
+Sets the amount of cash you have

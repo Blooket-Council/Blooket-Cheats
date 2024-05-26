@@ -1,16 +1,16 @@
-# Tower Defense 2 Cheats
+# Tower Defense 2
 
 ## [Max Towers](maxTowers.js)
-Makes all your towers op
+Makes all of your towers OP
 
-## [Kill Enemies](removeEnemies.js)
-Removes all the enemies
+## [Remove Enemies](removeEnemies.js)
+Kills all the enemies
 
 ## [Set Coins](setCoins.js)
-Sets amount of coins you have
+Sets the amount of coins you have
 
-## [Set Health](setDmg.js)
-Sets amount of health you have
+## [Set Health](setHealth.js)
+Sets the amount of health you have
 
 ## [Set Round](setRound.js)
 Sets the current round

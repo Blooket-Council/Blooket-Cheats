@@ -1,16 +1,19 @@
-# Pirate's Voyage Cheats
+# Pirate's Voyage
+
+## [Heist ESP](heistESP.js)
+Shows you what's under each chest during a heist
 
 ## [Max Levels](maxLevels.js)
 Maxes out all islands and your boat
 
 ## [Set Doubloons](setDoubloons.js)
-Sets Doubloons
+Sets the amount of doubloons you have
 
 ## [Start Heist](startHeist.js)
 Starts a heist on someone
 
 ## [Swap Doubloons](swapDoubloons.js)
-Swaps Doubloons with someone
+Swaps doubloons with someone
 
 ## [Take Doubloons](takeDoubloons.js)
-Takes Doubloons from someone
+Takes doubloons from someone

@@ -1,15 +1,16 @@
-# Crazy Kingdom Cheats
+# Crazy Kingdom
 
 ## [Choice ESP](choiceESP.js)
 Shows you what will happen if you say Yes or No
+
 ## [Choice ESP Loop](choiceESPLoop.js)
-Choice ESP but it infinitely loops
+Automatically shows you what will happen if you say Yes or No
 
 ## [Disable Toucan](disableToucan.js)
-Never pay taxes
+Never pay taxes (tax evasion)
 
 ## [Max Stats](maxStats.js)
-Sets all resources to the max
+Sets all resources to 100
 
 ## [Set Guests](setGuests.js)
 Sets the amount of guests you've seen

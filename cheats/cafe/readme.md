@@ -1,4 +1,4 @@
-# Cafe Cheats
+# Cafe
 
 ## [Max Items](maxItems.js)
 Maxes out items in the shop[^1]
@@ -15,5 +15,5 @@ Sets cafe cash
 ## [Stock Food](stockFood.js)
 Stocks all food to 99[^2]
 
-[^1]: Only usable in the shop
-[^2]: Not usable in the shop
+[^1] Only usable in the shop
+[^2] Not usable in the shop
