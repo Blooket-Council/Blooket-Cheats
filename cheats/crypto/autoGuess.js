@@ -14,6 +14,13 @@
 
 (() => {
     let iframe = document.querySelector("iframe");
+    /* By CryptoDude3 */
+    if (window.fetch.call.toString() == 'function call() { [native code] }') {
+        const call = window.fetch.call;
+        window.fetch.call = function () {
+            if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
+        }
+    }
     const cheat = (async () => {
         let { state } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode;
         if (state.stage == "hack") for (const button of document.querySelector('div[class*=buttonContainer]').children) button.innerText == state.correctPassword && button.click();
@@ -33,11 +40,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716689124050, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716690729613, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716689124050 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716690729613 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

@@ -14,6 +14,13 @@
 
 (() => {
     let iframe = document.querySelector("iframe");
+    /* By CryptoDude3 */
+    if (window.fetch.call.toString() == 'function call() { [native code] }') {
+        const call = window.fetch.call;
+        window.fetch.call = function () {
+            if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
+        }
+    }
     const cheat = (async () => {
         let i = document.createElement('iframe');
         document.body.append(i);
@@ -60,11 +67,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716689129155, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716690734950, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716689129155 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716690734950 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
