@@ -3,7 +3,7 @@ description: Report an issue or problem with a script
 title: "BUG: (script name)"
 labels: ["bug"]
 assignees:
-  - 05Konz
+  - 005Konz
 body:
   - type: input
     id: script
