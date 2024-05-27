@@ -2508,353 +2508,9 @@
                     }
                 ]
             },
-            alerts: {
-                name: "Alerts",
-                img: null,
-                alerts: [{ message: "[LOG] GUI opened" }],
-                diffObjects(obj1, obj2) {
-                    const changed = {};
         
-                    for (const key in obj1) {
-                        if (!(key in obj2)) continue;
-                        if (typeof obj1[key] === "object" && typeof obj2[key] === "object") {
-                            const recChanged = Cheats.alerts.diffObjects(obj1[key], obj2[key]);
-                            if (recChanged && Object.keys(recChanged).length !== 0) changed[key] = recChanged;
-                        } else if (JSON.stringify(obj1[key]) !== JSON.stringify(obj2[key])) changed[key] = obj2[key];
-                    }
         
-                    for (const key in obj2) if (!(key in obj1)) changed[key] = obj2[key];
         
-                    if (Object.keys(changed).length == 0) return null;
-                    return changed;
-                },
-                addLog(message, color) {
-                    if (!Cheats.alerts.visible) Cheats.alerts.alerts.push({ message, color });
-                    else Cheats.alerts.setAlerts(a => [...a, { message, color }]);
-                },
-                addAlert(name, blook, message) {
-                    let alert = {
-                        message: JSX.jsx(React.Fragment, {
-                            children: [
-                                JSX.jsx("img", {
-                                    src: blook || Cheats.alerts.blookData?.Black?.url,
-                                    alt: "Blook",
-                                    style: {
-                                        height: "22.5px",
-                                        margin: "0 10px -5px 0"
-                                    }
-                                }), JSX.jsx("strong", { children: name }), " ", message
-                            ]
-                        })
-                    }
-                    if (!Cheats.alerts.visible) Cheats.alerts.alerts.push(alert);
-                    else Cheats.alerts.setAlerts(a => [...a, alert]);
-                },
-                getGamemode() {
-                    switch (window.location.pathname) {
-                        case "/play/racing":
-                            return "racing";
-                        case "/play/factory":
-                            return "factory";
-                        case "/play/classic/get-ready":
-                        case "/play/classic/question":
-                        case "/play/classic/answer/sent":
-                        case "/play/classic/answer/result":
-                        case "/play/classic/standings":
-                            return "classic";
-                        case "/play/battle-royale/match/preview":
-                        case "/play/battle-royale/question":
-                        case "/play/battle-royale/answer/sent":
-                        case "/play/battle-royale/answer/result":
-                        case "/play/battle-royale/match/result":
-                            return "royale";
-                        case "/play/toy":
-                            return "workshop";
-                        case "/play/gold":
-                            return "gold";
-                        case "/play/brawl":
-                            return "brawl";
-                        case "/play/hack":
-                            return "hack";
-                        case "/play/fishing":
-                            return "fishing";
-                        case "/play/rush":
-                            return "rush";
-                        case "/play/dino":
-                            return "dino";
-                        case "/tower/map":
-                        case "/tower/battle":
-                        case "/tower/rest":
-                        case "/tower/risk":
-                        case "/tower/shop":
-                        case "/tower/victory":
-                            return "doom";
-                        case "/cafe":
-                        case "/cafe/shop":
-                            return "cafe";
-                        case "/defense":
-                            return "defense";
-                        case "/play/defense2":
-                            return "defense2";
-                        case "/kingdom":
-                            return "kingdom";
-                        default:
-                            return false;
-                    }
-                },
-                connection: null,
-                data: {},
-                async connect() {
-                    try {
-                        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-                        if (!stateNode?.props?.liveGameController?._liveGameCode) return false;
-                        Cheats.alerts.connection = await stateNode.props.liveGameController.getDatabaseRef("c");
-                        const blooks = Cheats.alerts.blookData;
-                        const gamemode = Cheats.alerts.getGamemode();
-                        const factoryGlitches = Object.values(webpack.c).find(x => x.exports.a?.["Lunch Break"]).exports.b;
-                        Cheats.alerts.connection.on("value", snapshot => {
-                            const players = snapshot.val() || {};
-                            if (!players || !Cheats.alerts.diffObjects(Cheats.alerts.data, players)) return;
-                            const added = Cheats.alerts.diffObjects(Cheats.alerts.data, players)
-                            Cheats.alerts.data = players;
-                            let standings;
-                            switch (gamemode) {
-                                case "racing":
-                                    standings = Object.entries(players).map(([name, { b, pr }]) => ({ name, blook: b, value: pr || 0 }));
-                                case "classic":
-                                    standings = Object.entries(players).map(([name, { b, p }]) => ({ name, blook: b, value: p || 0 }));
-                                case "royale":
-                                    standings = Object.entries(players).map(([name, { b, e }]) => ({ name, blook: b, value: e || 0 }));
-                                case "workshop":
-                                    standings = Object.entries(players).map(([name, { b, t }]) => ({ name, blook: b, value: t || 0 }));
-                                case "brawl":
-                                    standings = Object.entries(players).map(([name, { b, xp }]) => ({ name, blook: b, value: xp || 0 }));
-                                case "defense":
-                                case "defense2":
-                                    standings = Object.entries(players).map(([name, { b, d }]) => ({ name, blook: b, value: d || 0 }));
-                                case "gold":
-                                    for (const player in added) {
-                                        if (!added[player].tat) continue;
-                                        const [tat, amount] = added[player].tat.split(':');
-                                        if (amount == "swap") Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just swapped with ${tat}`);
-                                        else Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just took ${Cheats.alerts.formatNumber(parseInt(amount))} gold from ${tat}`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, g }]) => ({ name, blook: b, value: g || 0 }));
-                                    break;
-                                case "hack":
-                                    for (const player in added) {
-                                        if (!added[player].tat) continue;
-                                        const [tat, amount] = added[player].tat.split(':');
-                                        Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just took ${Cheats.alerts.formatNumber(parseInt(amount))} crypto from ${tat}`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, cr }]) => ({ name, blook: b, value: cr || 0 }));
-                                    break;
-                                case "fishing":
-                                    for (const player in added) {
-                                        if (added[player].f == "Frenzy") Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just started a frenzy`);
-                                        else if (added[player].s) Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just sent a ${added[player].f} distraction`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, w }]) => ({ name, blook: b, value: w || 0 }));
-                                    break;
-                                case "dino":
-                                    for (const player in added) {
-                                        if (!added[player].tat) continue;
-                                        const [tat, caught] = added[player].tat.split(':');
-                                        if (caught == "true") Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `just caught ${tat} CHEATING!`);
-                                        else Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `investigated ${tat}`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, f }]) => ({ name, blook: b, value: f || 0 }));
-                                    break;
-                                case "cafe":
-                                    for (const player in added) {
-                                        if (!added[player].up) continue;
-                                        const [upgrade, level] = added[player].up.split(":");
-                                        if (level) Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `upgraded ${upgrade} to level ${level}`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, ca }]) => ({ name, blook: b, value: ca || 0 }));
-                                    break;
-                                case "factory":
-                                    for (const player in added) {
-                                        const data = added[player];
-                                        if (data.g) Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `activated the ${factoryGlitches[data.g]} glitch!`);
-                                        else if (data.s) {
-                                            const [amount, synergy] = data.s.split('-');
-                                            Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `has a ${amount} ${synergy} synergy!`);
-                                        } else if (data.t) Cheats.alerts.addAlert(player, blooks[players[player].b]?.url, `now has 10 Blooks!`);
-                                    }
-                                    standings = Object.entries(players).map(([name, { b, ca }]) => ({ name, blook: b, value: ca || 0 }));
-                                    break;
-                            }
-                            Cheats.alerts.standings = standings.sort((a, b) => b.value - a.value)
-                            Cheats.alerts.setLeaderboard(Cheats.alerts.standings);
-                        });
-                        return true;
-                    } catch {
-                        return false;
-                    }
-                },
-                cheats: [
-                    {
-                        element: JSX.jsx(function Alerts() {
-                            const [alerts, setAlerts] = useState([]);
-                            const [leaderboard, setLeaderboard] = useState([]);
-                            Cheats.alerts.setAlerts = setAlerts;
-                            Cheats.alerts.setLeaderboard = setLeaderboard;
-                            useEffect(() => {
-                                Cheats.alerts.blookData = Object.values(webpack.c).find(x => x.exports.a?.Black).exports.a;
-                                Cheats.alerts.formatNumber = Object.values(webpack("74sb")).find(x => String(x).includes("×") || String(x).includes("toPrecision"));
-                                Cheats.alerts.standings && setLeaderboard(Cheats.alerts.standings);
-                                setAlerts(Cheats.alerts.alerts);
-                                Cheats.alerts.visible = true;
-                                window.Cheats = Cheats;
-                                return () => Cheats.alerts.visible = false;
-                            }, []);
-                            useEffect(() => {
-                                Cheats.alerts.alerts = alerts;
-                            }, [alerts])
-                            return JSX.jsx("div", {
-                                className: styles.keys.alertContainer,
-                                children: [
-                                    JSX.jsx("ul", {
-                                        className: styles.keys.alertList,
-                                        style: {
-                                            margin: "10px 10px 0 10px",
-                                            padding: "0",
-                                            listStyleType: "none",
-                                            display: "flex",
-                                            flexDirection: "column-reverse",
-                                            height: "355px",
-                                            overflowY: "scroll",
-                                            wordWrap: "break-word"
-                                        },
-                                        children: [
-                                            alerts.slice().reverse().map((alert, i) => JSX.jsx("li", {
-                                                style: {
-                                                    margin: "5px"
-                                                },
-                                                key: i,
-                                                children: [
-                                                    JSX.jsx("span", {
-                                                        style: {
-                                                            color: alert.color || "var(--textColor)"
-                                                        },
-                                                        children: alert.message
-                                                    })
-                                                ]
-                                            }))
-                                        ]
-                                    }), leaderboard.length > 0 && JSX.jsx("div", {
-                                        style: {
-                                            position: "absolute",
-                                            inset: "110% 0px"
-                                        },
-                                        children: [
-                                            JSX.jsx("div", {
-                                                style: {
-                                                    alignItems: "center",
-                                                    boxSizing: "border-box",
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                    flexWrap: "wrap",
-                                                    justifyContent: "space-evenly",
-                                                    padding: "20px 5px 20px",
-                                                    position: "relative",
-                                                    width: "100%",
-                                                    fontFamily: "Nunito, sans-serif",
-                                                    fontWeight: "400",
-                                                    color: "var(--textColor)",
-                                                    background: "var(--contentBackground)",
-                                                    boxShadow: "inset 0 -6px rgb(0 0 0 / 20%)",
-                                                    borderRadius: "7px"
-                                                },
-                                                children: [
-                                                    JSX.jsx("div", {
-                                                        className: styles.keys.headerText,
-                                                        children: [
-                                                            JSX.jsx("div", {
-                                                                style: {
-                                                                    alignItems: "center",
-                                                                    boxSizing: "border-box",
-                                                                    display: "flex",
-                                                                    height: "100%",
-                                                                    justifyContent: "center",
-                                                                    padding: "0 15px",
-                                                                    width: "100%",
-                                                                    fontFamily: "Titan One, sans-serif",
-                                                                    fontSize: "26px",
-                                                                    fontWeight: "400",
-                                                                    textShadow: "-1px -1px 0 #646464, 1px -1px 0 #646464, -1px 1px 0 #646464, 2px 2px 0 #646464",
-                                                                    color: "white",
-                                                                    background: "linear-gradient(#fcd843,#fcd843 50%,#feb31a 50.01%,#feb31a)",
-                                                                    borderRadius: "5px"
-                                                                },
-                                                                children: "Leaderboard"
-                                                            })
-                                                        ]
-                                                    }), JSX.jsx("div", {
-                                                        className: styles.keys.alertContainer,
-                                                        style: {
-                                                            margin: "15px 15px 5px 15px",
-                                                            backgroundColor: "rgb(0 0 0 / 50%)",
-                                                            width: "95%",
-                                                            height: "370px",
-                                                            borderRadius: "7px",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center"
-                                                        },
-                                                        children: [
-                                                            JSX.jsx("nl", {
-                                                                className: styles.keys.alertList,
-                                                                style: {
-                                                                    marginTop: "10px",
-                                                                    padding: "0",
-                                                                    listStyleType: "decimal",
-                                                                    width: "100%",
-                                                                    height: "355px",
-                                                                    overflowY: "scroll",
-                                                                    wordWrap: "break-word"
-                                                                },
-                                                                children: [
-                                                                    leaderboard.map(({ blook, name, value }) => JSX.jsx("li", {
-                                                                        style: {
-                                                                            fontSize: "2rem",
-                                                                            paddingInline: "72px 15px",
-                                                                            paddingBlock: "1.25px",
-                                                                            position: "relative"
-                                                                        },
-                                                                        key: name,
-                                                                        children: [
-                                                                            JSX.jsx("img", {
-                                                                                src: Cheats.alerts.blookData[blook]?.url || Cheats.alerts.blookData.Black.url,
-                                                                                alt: blook,
-                                                                                style: {
-                                                                                    height: "45px",
-                                                                                    position: "absolute",
-                                                                                    left: "15px"
-                                                                                }
-                                                                            }), name, JSX.jsx("span", {
-                                                                                style: {
-                                                                                    float: "right"
-                                                                                },
-                                                                                children: Cheats.alerts.formatNumber(parseInt(value))
-                                                                            },)
-                                                                        ]
-                                                                    }))
-                                                                ]
-                                                            })
-                                                        ]
-                                                    })
-                                                ]
-                                            })
-                                        ]
-                                    })
-                                ]
-                            });
-                        }, {})
-                    }
-                ]
-            }
         }
         const GUIContainer = document.createElement("div");
         function createKeybindListener(onpress, element = window) {
@@ -2985,7 +2641,6 @@
             const run = useCallback(() => {
                 script.run.apply(script, args.current);
                 setEnabled(script.enabled);
-                Cheats.alerts.addLog(makeElement(React.Fragment, null, script.type == "toggle" ? script.enabled ? "Enabled" : "Disabled" : "Ran", " ", makeElement("strong", null, script.name), args.current.length > 0 && ` with inputs: (${args.current.map((x, i) => JSON.stringify(script.inputs[i].selected || x)).join(", ")})`), script.type == "toggle" && (script.enabled ? "var(--enabledButton)" : "var(--disabledButton)"));
             }, []);
             return makeElement("div", {
                 style: {
@@ -3084,7 +2739,7 @@
             const alertInterval = useRef();
             settings = useSettings("JODGUISETTINGS");
             const variables = makeElement("style", null, `:root {--backgroundColor: ${settings.data?.theme?.backgroundColor || "rgb(11, 194, 207)"};--infoColor: ${settings.data?.theme?.infoColor || "#9a49aa"};--cheatList: ${settings.data?.theme?.cheatList || "#9a49aa"};--defaultButton: ${settings.data?.theme?.defaultButton || "#9a49aa"};--disabledButton: ${settings.data?.theme?.disabledButton || "#A02626"};--enabledButton: ${settings.data?.theme?.enabledButton || "#47A547"};--textColor: ${settings.data?.theme?.textColor || "white"};--inputColor: ${settings.data?.theme?.inputColor || "#7a039d"};--contentBackground: ${settings.data?.theme?.contentBackground || "rgb(64, 17, 95)"};}`);
-            const { current: gamemodes } = useRef(["alerts", "global", "voyage", "gold", "cafe", "crypto", "dinos", "defense", "defense2", "factory", "fishing", "flappy", "doom", "kingdom", "racing", "royale", "rush", "brawl", "workshop", "settings"]);
+            const { current: gamemodes } = useRef(["global", "voyage", "gold", "cafe", "crypto", "dinos", "defense", "defense2", "factory", "fishing", "flappy", "doom", "kingdom", "racing", "royale", "rush", "brawl", "workshop", "settings"]);
         
             const close = useCallback(() => {
                 ReactDOM.unmountComponentAtNode(GUIContainer);
@@ -3105,12 +2760,8 @@
                     }
                 };
                 window.addEventListener("keydown", keydown);
-                alertInterval.current = setInterval(async () => {
-                    if (await Cheats.alerts.connect()) clearInterval(alertInterval.current);
-                }, 5000);
                 return () => {
                     window.removeEventListener("keydown", keydown);
-                    clearInterval(alertInterval.current);
                     for (const gamemode of gamemodes) for (const cheat of Cheats[gamemode].cheats) if (cheat.enabled) cheat.run();
                 }
             }, []);
@@ -3273,11 +2924,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716830302485, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716839383820, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716830302485 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716839383820 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
