@@ -3,6 +3,9 @@
 ## [Gui](gui.js)
 A GUI containing every cheat in a menu
 
+## [Mobile Gui](mobileGui.js)
+The first GUI, basic UI reportedly good on mobile[^1]
+
 ### [Brawl](brawl)
 
 ### [Cafe](cafe)
@@ -38,3 +41,5 @@ A GUI containing every cheat in a menu
 ### [Voyage](voyage)
 
 ### [Workshop](workshop)
+
+[^1] Not actually designed for mobile
