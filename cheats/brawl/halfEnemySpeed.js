@@ -26,8 +26,8 @@
         for (let i = 0; i < colliders.length; i++) {
             const enemies = colliders[i].object2;
             let _start = enemies.classType.prototype.start;
-            enemies.classType.prototype.start = function () { _start.apply(this, arguments); this.speed *= 2; };
-            enemies.children.entries.forEach(e => e.speed *= 2);
+            enemies.classType.prototype.start = function () { _start.apply(this, arguments); this.speed *= 0.5; };
+            enemies.children.entries.forEach(e => e.speed *= 0.5);
         }
     });
     let img = new Image;
@@ -45,11 +45,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690728133, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994260, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690728133 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994260 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

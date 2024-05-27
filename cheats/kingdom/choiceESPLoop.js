@@ -45,7 +45,7 @@
                 });
                 Array.prototype.forEach.call(document.querySelectorAll("[class*=guestButton][role=button]"), x => (x.onclick = () => Array.prototype.forEach.call(document.querySelectorAll(".choiceESP"), x => x.remove())));
             }
-        }, ['materials', 'people', 'happiness', 'gold']);
+        }, 50, ['materials', 'people', 'happiness', 'gold']);
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/005Konz/Blooket-Cheats/main/autoupdate/timestamps/kingdom/choiceESPLoop.png?" + Date.now();
@@ -62,11 +62,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690733729, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994989, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690733729 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994989 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

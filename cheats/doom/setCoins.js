@@ -27,7 +27,7 @@
         window.alert = i.contentWindow.prompt.bind(window);
         i.remove();
         if (window.location.pathname == "/tower/battle") try {
-            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.props.setTowerCoins(parseInt("0" + prompt("How many coins would you like?")));
+            Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.props.setTowerCoins(parseInt(prompt("How many coins would you like?")) || 0);
         } catch { }
         else alert("You need to be in battle to run this cheat!");
     });
@@ -46,11 +46,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690731052, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994525, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690731052 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994525 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

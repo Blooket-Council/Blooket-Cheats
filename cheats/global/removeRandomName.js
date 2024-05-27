@@ -23,7 +23,7 @@
     }
     const cheat = (async () => {
         Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({ isRandom: false, client: { name: "" } });
-        document.querySelector('[class*="nameInput"]').focus();
+        document.querySelector('[class*="nameInput"]')?.focus();
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/005Konz/Blooket-Cheats/main/autoupdate/timestamps/global/removeRandomName.png?" + Date.now();
@@ -40,11 +40,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690732560, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994746, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690732560 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994746 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

@@ -36,9 +36,9 @@
                         }
                     if (found) break;
                 }
-                document.querySelectorAll("[class*='answerContainer']")[ind].click();
-            } else document.querySelector("[class*='feedback'], [id*='feedback']").firstChild.click();
-        } else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer(Question.answers[0]);
+                document.querySelectorAll("[class*='answerContainer']")[ind]?.click();
+            } else document.querySelector("[class*='feedback'], [id*='feedback']")?.firstChild?.click();
+        } else Object.values(document.querySelector("[class*='typingAnswerWrapper']"))[1].children._owner.stateNode.sendAnswer?.(Question.answers[0]);
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/005Konz/Blooket-Cheats/main/autoupdate/timestamps/global/autoAnswer.png?" + Date.now();
@@ -55,11 +55,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690732091, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994646, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690732091 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994646 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

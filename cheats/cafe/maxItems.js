@@ -29,7 +29,7 @@
         if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
         else {
             const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-            stateNode.setState({ items: Object.fromEntries(Object.entries(stateNode.state.items).map(x => [x[0], 5])) });
+            stateNode.setState({ items: Object.keys(stateNode.state.items).reduce((obj, item) => (obj[item] = 5, obj), {}) });
         }
     });
     let img = new Image;
@@ -47,11 +47,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690729160, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994359, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690729160 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994359 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;

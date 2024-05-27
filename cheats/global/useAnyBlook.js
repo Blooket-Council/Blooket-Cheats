@@ -28,25 +28,20 @@
         i.remove();
         let blooks;
         const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-        if (window.location.pathname.startsWith("/play/lobby")) {
-            const old = Object.keys;
-            Object.keys = function (obj) {
+        const lobby = window.location.pathname.startsWith("/play/lobby"),
+            dashboard = !lobby && window.location.pathname.startsWith("/blooks");
+        if (dashboard || lobby) {
+            let blooks, key = lobby ? "keys" : "entries";
+            const old = Object[key];
+            Object[key] = function (obj) {
                 if (!obj.Chick) return old.call(this, obj);
                 blooks = obj;
-                return (Object.keys = old).call(this, obj);
+                return (Object[key] = old).call(this, obj);
             };
             stateNode.render();
-            stateNode.setState({ unlocks: Object.keys(blooks) });
-        } else if (window.location.pathname.startsWith("/blooks")) {
-            const old = Object.entries;
-            Object.entries = function (obj) {
-                if (!obj.Chick) return old.call(this, obj);
-                blooks = obj;
-                return (Object.entries = old).call(this, obj);
-            };
-            stateNode.render();
-            stateNode.setState({ blookData: Object.keys(blooks).reduce((a, b) => (a[b] = (stateNode.state.blookData[b] || 1), a), {}), allSets: Object.values(blooks).reduce((a, b) => (b.set && a.includes(b.set) ? a : a.concat(b.set)), []) });
-        } else alert("This only works in lobbys or the dashboard blooks page.");
+            if (lobby) stateNode.setState({ unlocks: Object.keys(blooks) });
+            else stateNode.setState({ blookData: Object.keys(blooks).reduce((a, b) => (a[b] = (stateNode.state.blookData[b] || 1), a), {}), allSets: Object.values(blooks).reduce((a, b) => (b.set && a.includes(b.set) ? a : a.concat(b.set)), []) });
+        } else alert("This only works in lobbies or the dashboard blooks page.");
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/005Konz/Blooket-Cheats/main/autoupdate/timestamps/global/useAnyBlook.png?" + Date.now();
@@ -63,11 +58,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716690732817, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716769994892, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716690732817 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716769994892 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
