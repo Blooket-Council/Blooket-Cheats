@@ -38,11 +38,11 @@ body:
     id: type
     attributes:
       label: Type
-      description: Unobfuscated or obfuscated
+      description: Normal or minified
       multiple: true
       options:
-        - Unobfuscated
-        - Obfuscated
+        - Normal
+        - Minified
     validations:
       required: true
   - type: textarea
