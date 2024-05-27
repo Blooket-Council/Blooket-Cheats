@@ -767,7 +767,7 @@
         
                             const canOpen = Math.floor(stateNode.state.tokens / cost);
                             if (canOpen <= 0) return alert("You do not have enough tokens!");
-                            amount = Math.min(canOpen, amountToOpen || 0);
+                            const amount = Math.min(canOpen, amountToOpen || 0);
         
                             const blooks = {},
                                 now = Date.now();
@@ -837,7 +837,7 @@
                             await fetch("https://play.blooket.com/api/playersessions/questions?t=" + t, { credentials: "include" });
                             await fetch("https://play.blooket.com/api/gamequestionsets?gameId=" + gameId, { credentials: "include" });
                             await fetch("https://play.blooket.com/api/users/factorystats", {
-                                body: JSON.stringify({ t, place: 1, cash: rand(10000000, 100000000), playersDefeated: 0, correctAnswers: rand(500, 2000), upgrades: rand(250, 750), blookUsed: stateNode.props.user.data.blook.name, nameUsed: "You", mode: "Time-Solo" }),
+                                body: JSON.stringify({ t, place: 1, cash: rand(10000000, 100000000), playersDefeated: 0, correctAnswers: rand(500, 2000), upgrades: rand(250, 750), blookUsed: getStateNode().props.user.data.blook.name, nameUsed: "You", mode: "Time-Solo" }),
                                 method: "PUT",
                                 credentials: "include"
                             }).catch(() => alert('There was an error when spoofing stats.'));
@@ -855,7 +855,7 @@
                     name: "Use Any Blook",
                     description: "Allows you to play as any blook",
                     data: null,
-                    getBlooks(isLobby) {
+                    getBlooks(isLobby, stateNode) {
                         if (this.data?.Black) return;
                         isLobby = isLobby ? "keys" : "entries";
                         const old = Object[isLobby];
@@ -872,7 +872,7 @@
                         const lobby = window.location.pathname.startsWith("/play/lobby"),
                             blooks = !lobby && window.location.pathname.startsWith("/blooks");
                         if (!blooks && !lobby) return alert("This only works in lobbies or the dashboard blooks page.");
-                        this.getBlooks(lobby);
+                        this.getBlooks(lobby, stateNode);
                         if (lobby) return stateNode.setState({ unlocks: Object.keys(this.data) });
                         stateNode.setState({ blookData: Object.keys(this.data).reduce((a, b) => (a[b] = (stateNode.state.blookData[b] || 1), a), {}), allSets: Object.values(this.data).reduce((a, b) => (b.set && a.includes(b.set) ? a : a.concat(b.set)), []) });
                     }
@@ -960,6 +960,7 @@
                         if (!this.enabled) {
                             this.enabled = true;
                             this.data = setInterval(() => {
+                                const stateNode = getStateNode();
                                 if (stateNode.state.stage != "heist") return;
                                 if (this.imgs == null) this.imgs = Array.prototype.map.call(Array.prototype.slice.call(document.querySelector("[class*=prizesList]").children, 1, 4), (x) => x.querySelector("img").src);
                                 const esp = Object.values(document.querySelector("[class*=modal]"))[0].return.memoizedState.memoizedState;
@@ -1657,19 +1658,19 @@
                             return res;
                         };
         
-                        const shortNum = (value) => {
+                        function shortNum(value) {
                             let newValue = value.toString();
                             if (value >= 1000) {
                                 const suffixes = ["", "K", "M", "B", "T"];
-                                const suffixNum = ~~((digits(value) - 1) / 3);
+                                const suffixNum = Math.floor(Math.floor((Math.log(value) / Math.log(10)).toPrecision(14)) / 3);
                                 if (suffixNum < suffixes.length) {
                                     let shortValue = "";
                                     for (let precision = 3; precision >= 1; precision--) {
-                                        shortValue = parseFloat((suffixNum !== 0 ? value / 1000 ** suffixNum : value).toPrecision(precision)).toString();
+                                        shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(precision)).toString();
                                         const dotLessShortValue = shortValue.replace(/[^a-zA-Z 0-9]+/g, "");
                                         if (dotLessShortValue.length <= 3) break;
                                     }
-                                    if (Number(shortValue) % 1 !== 0) shortValue = Number(shortValue).toFixed(1);
+                                    if (Number(shortValue) % 1 != 0) shortValue = Number(shortValue).toFixed(1);
                                     newValue = shortValue + suffixes[suffixNum];
                                 } else {
                                     let num = value;
@@ -1678,7 +1679,7 @@
                                         num = Math.floor(num / 10);
                                         exp += 1;
                                     }
-                                    newValue = `${num / 10} × 10${getExpAscii(exp + 1)}`;
+                                    newValue = num / 10 + " × 10" + getExpAscii(exp + 1);
                                 }
                             }
                             return newValue;
@@ -1779,7 +1780,8 @@
                     description: "Maxes out all the cards in your deck",
                     run: function () {
                         if (window.location.pathname == "/tower/map") {
-                            getStateNode().props.tower.cards.forEach(card => {
+                            const stateNode = getStateNode();
+                            stateNode.props.tower.cards.forEach(card => {
                                 card.strength = 20;
                                 card.charisma = 20;
                                 card.wisdom = 20;
@@ -2986,11 +2988,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716769991640, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1716818721249, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716769991640 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1716818721249 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
