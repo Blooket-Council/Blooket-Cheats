@@ -2057,6 +2057,8 @@
                     return capitalize ? "Tower Defense 2" : "defense2";
                 case "/kingdom":
                     return capitalize ? "Crazy Kingdom" : "kingdom";
+                case "/play/lobby":
+                    return capitalize ? "Lobby" : "flappy";
                 default:
                     return false;
             }
@@ -2081,11 +2083,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1717087062374, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1717087152044, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1717087062374 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1717087152044 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
