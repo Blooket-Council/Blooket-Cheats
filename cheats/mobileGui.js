@@ -90,7 +90,7 @@
             fontSize: '1.5rem',
             textAlign: 'center'
         });
-        header.innerHTML = `Blooket Cheats <span style="font-size: 0.75rem">v3.16.24</span>`;
+        header.innerHTML = `Blooket Cheats <span style="font-size: 0.75rem">v5.26.24</span>`;
         
         let close = document.createElement('button');
         header.appendChild(close);
@@ -2081,11 +2081,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1716818726381, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1717087062374, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1716818726381 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1717087062374 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
