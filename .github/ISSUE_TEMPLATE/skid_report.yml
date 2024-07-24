@@ -3,7 +3,7 @@ description: Report someone stealing our scripts or violating the license
 title: "SKID: <skid github account name here>"
 labels: ["skid"]
 assignees:
-  - 005Konz
+  - 05Konzz
 body:
   - type: input
     id: skid
