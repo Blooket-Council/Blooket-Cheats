@@ -417,7 +417,7 @@
                                 await fetch("https://play.blooket.com/api/playersessions/questions?t=" + t, { credentials: "include" });
                                 await fetch("https://play.blooket.com/api/gamequestionsets?gameId=" + gameId, { credentials: "include" });
                                 await fetch("https://play.blooket.com/api/users/factorystats", {
-                                    body: JSON.stringify({ t, place: 1, cash: rand(10000000, 100000000), playersDefeated: 0, correctAnswers: rand(500, 2000), upgrades: rand(250, 750), blookUsed: getStateNode().props.user.data.blook.name, nameUsed: "You", mode: "Time-Solo" }),
+                                    body: JSON.stringify({ t, place: 1, cash: rand(10000000, 100000000), playersDefeated: 0, correctAnswers: rand(500, 2000), upgrades: rand(250, 750), blookUsed: "Chick", nameUsed: "You", mode: "Time-Solo" }),
                                     method: "PUT",
                                     credentials: "include"
                                 }).catch(() => alert('There was an error when spoofing stats.'));
@@ -2924,11 +2924,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1721843502484, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1729214010670, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1721843502484 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1729214010670 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
