@@ -14,6 +14,11 @@
 
 (() => {
     let iframe = document.querySelector("iframe");
+    if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        document.body.append(iframe);
+    }
     /* By CryptoDude3 */
     if (window.fetch.call.toString() == 'function call() { [native code] }') {
         const call = window.fetch.call;
@@ -49,11 +54,11 @@
             if (char == "/" && last == "*") break;
             last = char;
         }
-        let _, time = 1721843510098, error = "There was an error checking for script updates. Run cheat anyway?";
+        let _, time = 1730670519277, error = "There was an error checking for script updates. Run cheat anyway?";
         try {
             [_, time, error] = decode.match(/LastUpdated: (.+?); ErrorMessage: "((.|\n)+?)"/);
         } catch (e) {}
-        if (parseInt(time) <= 1721843510098 || iframe.contentWindow.confirm(error)) cheat();
+        if (parseInt(time) <= 1730670519277 || iframe.contentWindow.confirm(error)) cheat();
     }
     img.onerror = img.onabort = () => {
         img.onerror = img.onabort = null;
