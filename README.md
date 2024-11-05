@@ -2,11 +2,36 @@
 <h3 align="center"><a href="https://discord.gg/jHjGrrdXP6">Support Server</a></h2>
 <h3 align="center"><a href="tutorial/readme.md">Instructions for importing bookmarklets</a></h2>
 
+# Licensing
+This repository is licensed under the AGPL 3.0 License. 
+#### What does this mean? / What can I do with this?
+
+##### As long as you:
+\+ Include the original copyright
+
+\+ Include the [full license](LICENSE)
+
+\+ State all changes if any
+
+\+ Provide a clear and visible reference to the original repository
+
+##### You CAN:
+\+ Modify the contents of this repository
+
+\+ Distribute contents of this repository (modified or not)
+
+##### However, you CANNOT:
+\- Sublicense (put another license onto) the contents of this repository
+
+\- Try to hide or make author credits hard to find
+
+We as the original creators of this repository can not be charged or held liable for any damages made by modified content.
+
 ## Information
 
 <details><summary><h3>How to use</h3></summary>
 
-There are 3 good methods to using these scripts:
+There are 2 good methods to using these scripts:
 1. Importing one of the Bookmarklets.html files using [these instructions](https://github.com/Blooket-Council/Blooket-Cheats/blob/main/tutorial/readme.md)
 <!-- 2. Going to the [GitHub pages site](https://blooket-council.github.io/Blooket-Cheats), choosing a gamemode, then dragging a cheat to your bookmarks bar or clicking one to copy the script -->
 2. Copying a script and running it in the inspect element console
