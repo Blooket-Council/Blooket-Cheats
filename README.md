@@ -152,7 +152,6 @@ The mobile GUI is the first GUI Minesraft2 ever made. Some people said it worked
 * [Get Daily Rewards](cheats/global/getDailyRewards.js)
 * [Highlight Answers](cheats/global/highlightAnswers.js)
 * [Host Any Gamemode](cheats/global/hostAnyGamemode.js)
-* [Remove Name Limit](cheats/global/removeNameLimit.js)
 * [Remove Random Name](cheats/global/removeRandomName.js)
 * [Sell Cheap Duplicates](cheats/global/sellCheapDuplicates.js)
 * [Sell Duplicate Blooks](cheats/global/sellDuplicateBlooks.js)

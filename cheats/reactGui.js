@@ -508,14 +508,6 @@
                         }
                     },
                     {
-                        name: "Remove Name Limit",
-                        description: "Sets the name limit to 120, which is the actual max name length limit",
-                        run: function () {
-                            document.querySelector('input[class*="nameInput"]').maxLength = 120; /* 120 is the actual limit */
-                            alert("Removed name length limit");
-                        }
-                    },
-                    {
                         name: "Remove Random Name",
                         description: "Allows you to put a custom name",
                         run: function () {
