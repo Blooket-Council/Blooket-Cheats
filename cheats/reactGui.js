@@ -1711,10 +1711,11 @@
                         data: { type: "multiply", val: 3, text: "Triple Gold!", blook: "Unicorn" },
                         run: function () {
                             let stateNode = getStateNode();
+                            stateNode.state.gold == 0 && stateNode.setState({ gold: 100, gold2: 100 });
                             stateNode._choosePrize ||= stateNode.choosePrize;
                             if (!this.enabled) {
                                 this.enabled = true;
-                                stateNode.choosePrize = function (i) {
+                                stateNode.choosePrize = (i) => {
                                     stateNode.state.choices[i] = this.data;
                                     stateNode._choosePrize(i);
                                 }
