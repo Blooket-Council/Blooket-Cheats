@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1730769888665;
+    const timeProcessed = 1730940397807;
     let latestProcess = -1;
     const cheat = (async () => {
         /* Anti-Suspend By CryptoDude3 */
@@ -925,14 +925,6 @@
                             ind++;
                             if (found) document.querySelector("[class*='answersHolder'] :nth-child(" + ind + ") > div").style.boxShadow = "unset";
                         }
-                    }
-                },
-                {
-                    name: "Remove Name Limit",
-                    description: "Sets the name limit to 120, which is the actual max name length limit",
-                    run: function () {
-                        document.querySelector('input[class*="nameInput"]').maxLength = 120; /* 120 is the actual limit */
-                        alert("Removed name length limit");
                     }
                 },
                 {
@@ -2083,7 +2075,7 @@
                         stateNode._choosePrize ||= stateNode.choosePrize;
                         if (!this.enabled) {
                             this.enabled = true;
-                            stateNode.choosePrize = function (i) {
+                            stateNode.choosePrize = (i) => {
                                 stateNode.state.choices[i] = this.data;
                                 stateNode._choosePrize(i);
                             }
