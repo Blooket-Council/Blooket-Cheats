@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1730940397807;
+    const timeProcessed = 1731028686357;
     let latestProcess = -1;
     const cheat = (async () => {
         /* Anti-Suspend By CryptoDude3 */
@@ -795,6 +795,7 @@
         
                                 stateNode.setState({ canOpen: true, currentPack: "", opening: alertBlooks, doneOpening: alertBlooks, openPack: alertBlooks });
                                 clearTimeout(stateNode.canOpenTimeout);
+                                if (stateNode.state.purchasedBlookRarity == "Chroma") break;
                             }
                             await new Promise(r => setTimeout(r));
                             alert(`(${Date.now() - now}ms) Results:\n${Object.entries(blooks).map(([blook, amount]) => `    ${blook} ${amount}`).join(`\n`)}`);

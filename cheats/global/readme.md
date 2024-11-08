@@ -21,9 +21,6 @@ Lets you switch the current gamemode on the host settings page
 ## [Prevent Suspension](preventSuspension.js)
 Stops the API request that suspends accounts
 
-## [Remove Name Limit](removeNameLimit.js)
-Changes the name limit from 15 to 120 (the limit before you can no longer join)
-
 ## [Remove Random Name](removeRandomName.js)
 Lets you choose your own name in random name lobbys
 
