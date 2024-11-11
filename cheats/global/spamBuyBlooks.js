@@ -34,48 +34,69 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1731028693294;
+    const timeProcessed = 1731294333862;
     let latestProcess = -1;
     const cheat = (async () => {
-        let i = document.createElement('iframe');
+        let i = document.createElement("iframe");
         document.body.append(i);
         window.alert = i.contentWindow.alert.bind(window);
         window.prompt = i.contentWindow.prompt.bind(window);
         window.confirm = i.contentWindow.confirm.bind(window);
         i.remove();
         
-        if (window.location.pathname.startsWith("/market")) (async () => {
-            const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
-            const prices = Array.prototype.reduce.call(document.querySelectorAll("[class*='packsWrapper'] > div"), (a, b) => {
-                b.querySelector("[class*='blookContainer'] > img") || (a[b.querySelector("[class*='packImgContainer'] > img").alt] = parseInt(b.querySelector("[class*='packBottom']").textContent));
-                return a;
-            }, {});
-            const box = prompt("Which box do you want to open? (ex: \"Ice Monster\")").split(' ').map(str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()).join(' ');
-            const cost = prices[box];
-            if (!cost) return alert("I couldn't find that box!");
+        if (window.location.pathname.startsWith("/market"))
+            (async () => {
+                const { stateNode } = Object.values(
+                    (function react(r = document.querySelector("body>div")) {
+                        return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div"));
+                    })()
+                )[1].children[0]._owner;
+                const prices = Array.prototype.reduce.call(
+                    document.querySelectorAll("[class*='packsWrapper'] > div"),
+                    (a, b) => {
+                        b.querySelector("[class*='blookContainer'] > img") || (a[b.querySelector("[class*='packImgContainer'] > img").alt] = parseInt(b.querySelector("[class*='packBottom']").textContent));
+                        return a;
+                    },
+                    {}
+                );
+                const box = prompt('Which box do you want to open? (ex: "Ice Monster")')
+                    .split(" ")
+                    .map((str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase())
+                    .join(" ");
+                const cost = prices[box];
+                if (!cost) return alert("I couldn't find that box!");
         
-            const canOpen = Math.floor(stateNode.state.tokens / cost);
-            if (canOpen <= 0) return alert("You do not have enough tokens!");
-            const amount = Math.min(canOpen, parseInt(prompt("How many boxes do you want to open?")) || 0);
+                const canOpen = Math.floor(stateNode.state.tokens / cost);
+                if (canOpen <= 0) return alert("You do not have enough tokens!");
+                const amount = Math.min(canOpen, parseInt(prompt("How many boxes do you want to open?")) || 0);
         
-            const alertBlooks = confirm("Would you like to show blooks as unlocking?"),
-                blooks = {},
-                now = Date.now();
+                const alertBlooks = confirm("Would you like to show blooks as unlocking?"),
+                    blooks = {},
+                    now = Date.now();
         
-            for (let i = 0; i < amount; i++) {
-                await stateNode.buyPack(true, box);
+                for (let i = 0; i < amount; i++) {
+                    await stateNode.buyPack(true, box);
         
-                blooks[stateNode.state.unlockedBlook] ||= 0;
-                blooks[stateNode.state.unlockedBlook]++;
+                    blooks[stateNode.state.unlockedBlook] ||= 0;
+                    blooks[stateNode.state.unlockedBlook]++;
         
-                stateNode.setState({ canOpen: true, currentPack: "", opening: alertBlooks, doneOpening: alertBlooks, openPack: alertBlooks });
-                clearTimeout(stateNode.canOpenTimeout);
-                if (stateNode.state.purchasedBlookRarity == "Chroma") break;
-            }
-            await new Promise(r => setTimeout(r));
-            alert(`(${Date.now() - now}ms) Results:\n${Object.entries(blooks).map(([blook, amount]) => `    ${blook} ${amount}`).join(`\n`)}`);
-        })();
+                    stateNode.startOpening();
+                    clearTimeout(stateNode.openTimeout);
+                    const rarity = stateNode.state.purchasedBlookRarity;
+        
+                    stateNode.setState({ canOpen: true, currentPack: "", opening: alertBlooks, doneOpening: alertBlooks, openPack: alertBlooks });
+                    clearTimeout(stateNode.canOpenTimeout);
+                    if (rarity == "Chroma") break;
+                }
+                await new Promise((r) => setTimeout(r));
+                alert(
+                    `(${Date.now() - now}ms) Results:\n${Object.entries(blooks)
+                        .map(([blook, amount]) => `    ${blook} ${amount}`)
+                        .join(`\n`)}`
+                );
+            })();
         else alert("This can only be ran in the Market page.");
+        
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/Blooket-Council/Blooket-Cheats/main/autoupdate/timestamps/global/spamBuyBlooks.png?" + Date.now();
