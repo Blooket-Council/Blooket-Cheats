@@ -9,6 +9,9 @@ The first GUI, basic UI reportedly good on mobile[^1]
 ## [React Gui](reactGui.js)
 A GUI written in React made to get around Blooket's anti-cheat
 
+## [K Gui](KGui.js)
+A new GUI with several new features and design changes
+
 ### [Brawl](brawl)
 
 ### [Cafe](cafe)
