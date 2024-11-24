@@ -34,10 +34,10 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732411538682;
+    const timeProcessed = 1732427537789;
     let latestProcess = -1;
     const cheat = (async () => {
-        const versionName = "24.11.23v0";
+        const versionName = "24.11.24v0";
         const gui = document.createElement("div");
         Object.assign(gui.style, {
             top: window.innerHeight / 2 - 250 + "px",
@@ -134,7 +134,9 @@
         const minimizeControl = document.createElement("div");
         
         minimizeControl.innerHTML = '<i class="fas fa-compress" style="line-height: 1"></i>';
+        let hideAnimation = false;
         minimizeControl.onclick = () => {
+            if (hideAnimation == (hideAnimation = true)) return;
             const hidden = minimizeControl.minimized;
             if (hidden) {
                 minimizeControl.innerHTML = '<i class="fas fa-compress" style="line-height: 1"></i>';
@@ -185,6 +187,7 @@
                             child.style.display = "none";
                         }
                     }
+                    hideAnimation = false;
                 },
                 hidden ? 200 : 0
             );
