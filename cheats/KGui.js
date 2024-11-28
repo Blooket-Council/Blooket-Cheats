@@ -34,10 +34,10 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732768187324;
+    const timeProcessed = 1732768330279;
     let latestProcess = -1;
     const cheat = (async () => {
-        const versionName = "24.11.24v0";
+        const versionName = "24.11.27v2";
         const gui = document.createElement("div");
         Object.assign(gui.style, {
             top: window.innerHeight / 2 - 250 + "px",
