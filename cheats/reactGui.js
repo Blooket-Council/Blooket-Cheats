@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732767856120;
+    const timeProcessed = 1732772256339;
     let latestProcess = -1;
     const cheat = (async () => {
         if (window.fetch.call.toString() == "function call() { [native code] }") {
@@ -701,6 +701,23 @@
                         },
                     },
                     {
+                        name: "Remove Bad Choices",
+                        description: "Removes the chance of getting Lose 25%, Lose 50%, and Nothing",
+                        run: function () {
+                            let iterator = Array.prototype[Symbol.iterator];
+                            Array.prototype[Symbol.iterator] = function* values() {
+                                if (this[0]?.type == "gold") {
+                                    Array.prototype[Symbol.iterator] = iterator;
+                                    console.log(this);
+                                    for (let i = 0; i < this.length; i++) if (this[i].type == "divide" || this[i].type == "nothing") this.splice(i--, 1);
+                                }
+                                yield* iterator.apply(this);
+                            };
+        
+                            getStateNode().constructor.prototype.answerNext.call({ nextReady: true, here: true, state: { correct: true }, setState() {} });
+                        },
+                    },
+                    {
                         name: "Reset Players Gold",
                         description: "Sets a player's gold to 0",
                         inputs: [
@@ -738,6 +755,31 @@
                                 val: gold,
                             });
                         },
+                    },
+                    {
+                        name: "Set Player's Gold",
+                        description: "Sets another player's gold",
+                        inputs: [
+                            {
+                                name: "Player",
+                                type: "options",
+                                options: () => {
+                                    let stateNode = getStateNode();
+                                    return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                                },
+                            },
+                            {
+                                name: "Gold",
+                                type: "number",
+                            },
+                        ],
+                        run: function (player, gold) {
+                            let stateNode = getStateNode();
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/" + stateNode.props.client.name + "/tat",
+                                val: player + ":swap:" + gold
+                            });
+                        }
                     },
                     {
                         name: "Swap Gold",
@@ -3142,7 +3184,6 @@
                 };
                 window.addEventListener("keydown", keydown);
         
-                
                 if (guiRef.current.querySelector("i")?.clientHeight == 0) {
                     const link = document.createElement("link");
                     link.rel = "stylesheet";

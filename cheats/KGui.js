@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732768330279;
+    const timeProcessed = 1732772258234;
     let latestProcess = -1;
     const cheat = (async () => {
         const versionName = "24.11.27v2";
@@ -947,7 +947,6 @@
                             } else alert("This can only be ran in the Market page.");
                         },
                     },
-        
                     {
                         name: "Host Any Gamemode",
                         description: "Change the selected gamemode on the host settings page",
@@ -1237,6 +1236,23 @@
                         },
                     },
                     {
+                        name: "Remove Bad Choices",
+                        description: "Removes the chance of getting Lose 25%, Lose 50%, and Nothing",
+                        run: function () {
+                            let iterator = Array.prototype[Symbol.iterator];
+                            Array.prototype[Symbol.iterator] = function* values() {
+                                if (this[0]?.type == "gold") {
+                                    Array.prototype[Symbol.iterator] = iterator;
+                                    console.log(this);
+                                    for (let i = 0; i < this.length; i++) if (this[i].type == "divide" || this[i].type == "nothing") this.splice(i--, 1);
+                                }
+                                yield* iterator.apply(this);
+                            };
+        
+                            getStateNode().constructor.prototype.answerNext.call({ nextReady: true, here: true, state: { correct: true }, setState() {} });
+                        },
+                    },
+                    {
                         name: "Reset Players Gold",
                         description: "Sets a player's gold to 0",
                         inputs: [
@@ -1274,6 +1290,31 @@
                                 val: gold,
                             });
                         },
+                    },
+                    {
+                        name: "Set Player's Gold",
+                        description: "Sets another player's gold",
+                        inputs: [
+                            {
+                                name: "Player",
+                                type: "options",
+                                options: () => {
+                                    let stateNode = getStateNode();
+                                    return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                                },
+                            },
+                            {
+                                name: "Gold",
+                                type: "number",
+                            },
+                        ],
+                        run: function (player, gold) {
+                            let stateNode = getStateNode();
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/" + stateNode.props.client.name + "/tat",
+                                val: player + ":swap:" + gold
+                            });
+                        }
                     },
                     {
                         name: "Swap Gold",
@@ -2035,7 +2076,7 @@
                                 }
                                 return res;
                             };
-            
+        
                             function shortNum(value) {
                                 let newValue = value.toString();
                                 if (value >= 1000) {
@@ -2068,7 +2109,7 @@
                                     this.data = setInterval(() => {
                                         let stateNode = getStateNode();
                                         const rocks = document.querySelector('[class*="rockButton"]').parentElement.children;
-            
+        
                                         if (!Array.prototype.every.call(rocks, (element) => element.querySelector("div")))
                                             stateNode.setState(
                                                 {
@@ -2850,7 +2891,10 @@
                             {
                                 name: "Distraction",
                                 type: "options",
-                                options: Object.entries({ c: "Oh Canada", b: "Blizzard", f: "Fog Spell", d: "Dark & Dusk", w: "Howling Wind", g: "Gift Time!", t: "TREES", s: "Snow Plow", fr: "Use The Force" }).map(([value, name]) => ({ name, value })),
+                                options: Object.entries({ c: "Oh Canada", b: "Blizzard", f: "Fog Spell", d: "Dark & Dusk", w: "Howling Wind", g: "Gift Time!", t: "TREES", s: "Snow Plow", fr: "Use The Force" }).map(([value, name]) => ({
+                                    name,
+                                    value,
+                                })),
                             },
                         ],
                         run: function (val) {
@@ -2949,8 +2993,8 @@
                             Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[1](score || 0);
                         },
                     },
-                ]
-            }
+                ],
+            },
         };
         
         const searchPage = document.createElement("div");

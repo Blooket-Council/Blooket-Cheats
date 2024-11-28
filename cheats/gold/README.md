@@ -18,5 +18,11 @@ Sets a player's gold to 0
 ## [Set Gold](setGold.js)
 Sets current gold
 
+## [Set Players Gold](setPlayersGold.js)
+Sets another player's gold
+
 ## [Swap Gold](swapGold.js)
 Swaps gold with another player
+
+## [Remove Bad Choices](removeBadChoices.js)
+Removes the chance of getting Lose 25%, Lose 50%, and Nothing

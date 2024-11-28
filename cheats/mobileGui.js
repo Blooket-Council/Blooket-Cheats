@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732767854558;
+    const timeProcessed = 1732772254231;
     let latestProcess = -1;
     const cheat = (async () => {
         /* Anti-Suspend By CryptoDude3 */
@@ -692,6 +692,23 @@
                     },
                 },
                 {
+                    name: "Remove Bad Choices",
+                    description: "Removes the chance of getting Lose 25%, Lose 50%, and Nothing",
+                    run: function () {
+                        let iterator = Array.prototype[Symbol.iterator];
+                        Array.prototype[Symbol.iterator] = function* values() {
+                            if (this[0]?.type == "gold") {
+                                Array.prototype[Symbol.iterator] = iterator;
+                                console.log(this);
+                                for (let i = 0; i < this.length; i++) if (this[i].type == "divide" || this[i].type == "nothing") this.splice(i--, 1);
+                            }
+                            yield* iterator.apply(this);
+                        };
+        
+                        getStateNode().constructor.prototype.answerNext.call({ nextReady: true, here: true, state: { correct: true }, setState() {} });
+                    },
+                },
+                {
                     name: "Reset Players Gold",
                     description: "Sets a player's gold to 0",
                     run: function () {
@@ -714,6 +731,24 @@
                             val: gold,
                         });
                     },
+                },
+                {
+                    name: "Set Player's Gold",
+                    description: "Sets another player's gold",
+                    run: function () {
+                        let i = document.createElement('iframe');
+                        document.body.append(i);
+                        window.prompt = i.contentWindow.prompt.bind(window);
+                        i.remove();
+                        let player = prompt("Who's gold would you like to set?");
+                        let gold = parseInt(prompt("How much gold would you like to set?")) || 0;
+                        let stateNode = getStateNode();
+        
+                        stateNode.props.liveGameController.setVal({
+                            path: "c/" + stateNode.props.client.name + "/tat",
+                            val: player + ":swap:" + gold
+                        });
+                    }
                 },
                 {
                     name: "Swap Gold",
