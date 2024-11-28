@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1731294326065;
+    const timeProcessed = 1732767851943;
     let latestProcess = -1;
     const cheat = (async () => {
         /* Anti-Suspend By CryptoDude3 */
@@ -114,7 +114,7 @@
                 };--inputColor: ${Settings.data?.theme?.inputColor || "#7a039d"};--contentBackground: ${Settings.data?.theme?.contentBackground || "rgb(64, 17, 95)"};}`,
             })),
             createElement("style", {
-                innerHTML: `.alertList::-webkit-scrollbar{display:none;}.alertList{-ms-overflow-style: none;scrollbar-width: none;}.contentWrapper::-webkit-scrollbar{display:none;}.contentWrapper{-ms-overflow-style: none;scrollbar-width: none;}.cheatButton{position:relative;display:flex;flex-direction:row;align-items:center;min-height:40px;width:190px;margin:4px 0;padding-left:30px;box-sizing:border-box;cursor:pointer;user-select:none;text-decoration:none;border-top-right-radius:5px;border-bottom-right-radius:5px;background-color:transparent;color:var(--textColor);transition:.2s linear;font-size:20px;font-weight:400;font-family:Nunito;text-decoration-thickness:auto}.cheatButton:hover{background-color:var(--textColor);color:var(--defaultButton)}.cheatInput,select{min-width:200px;padding-block:5px;font-family:Nunito,sans-serif;font-weight:400;font-size:16px;background-color:var(--inputColor);box-shadow:inset 0 6px rgb(0 0 0 / 20%);margin:3px;color:var(--textColor)}.bigButton:hover{filter:brightness(110%);transform:translateY(-2px)}.bigButton:active{transform:translateY(2px)}.cheatList::-webkit-scrollbar{width:10px}.cheatList::-webkit-scrollbar-track{background:var(--cheatList)}.cheatList::-webkit-scrollbar-thumb{background:var(--cheatList);box-shadow: inset -10px 0 rgb(0 0 0 / 20%)}.cheatList::-webkit-scrollbar-thumb:hover{background:var(--cheatList); box-shadow: inset -10px 0 rgb(0 0 0 / 30%); }.scriptButton:hover{filter:brightness(120%)}.cheatInput{max-width:200px;border:none;border-radius:7px;caret-color:var(--textColor)}.cheatInput::placeholder{color:var(--textColor)}.cheatInput:focus,select:focus{outline:0}.cheatInput::-webkit-inner-spin-button,.cheatInput::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.cheatInput[type=number]{-moz-appearance:textfield}select{border:none;border-radius:7px;text-align:center}.scriptButton{align-items: center; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; margin: 10px; padding: 5px 5px 11px; position: relative; width: 250px; font-family: Nunito, sans-serif; font-weight: 400; color: var(--textColor); box-shadow: inset 0 -6px rgb(0 0 0 / 20%); border-radius: 7px; cursor: pointer; transition: filter .25s;}.tooltip::after {content: "";position: absolute;width: 10px;height: 10px;background-color: inherit;top: -5px;left: 50%;margin-left: -6px;transform: rotate(135deg)}`,
+                innerHTML: `@import url('https://fonts.googleapis.com/css?family=Titan+One');@import url('https://fonts.googleapis.com/css?family=Nunito');.alertList::-webkit-scrollbar{display:none;}.alertList{-ms-overflow-style: none;scrollbar-width: none;}.contentWrapper::-webkit-scrollbar{display:none;}.contentWrapper{-ms-overflow-style: none;scrollbar-width: none;}.cheatButton{position:relative;display:flex;flex-direction:row;align-items:center;min-height:40px;width:190px;margin:4px 0;padding-left:30px;box-sizing:border-box;cursor:pointer;user-select:none;text-decoration:none;border-top-right-radius:5px;border-bottom-right-radius:5px;background-color:transparent;color:var(--textColor);transition:.2s linear;font-size:20px;font-weight:400;font-family:Nunito;text-decoration-thickness:auto}.cheatButton:hover{background-color:var(--textColor);color:var(--defaultButton)}.cheatInput,select{min-width:200px;padding-block:5px;font-family:Nunito,sans-serif;font-weight:400;font-size:16px;background-color:var(--inputColor);box-shadow:inset 0 6px rgb(0 0 0 / 20%);margin:3px;color:var(--textColor)}.bigButton:hover{filter:brightness(110%);transform:translateY(-2px)}.bigButton:active{transform:translateY(2px)}.cheatList::-webkit-scrollbar{width:10px}.cheatList::-webkit-scrollbar-track{background:var(--cheatList)}.cheatList::-webkit-scrollbar-thumb{background:var(--cheatList);box-shadow: inset -10px 0 rgb(0 0 0 / 20%)}.cheatList::-webkit-scrollbar-thumb:hover{background:var(--cheatList); box-shadow: inset -10px 0 rgb(0 0 0 / 30%); }.scriptButton:hover{filter:brightness(120%)}.cheatInput{max-width:200px;border:none;border-radius:7px;caret-color:var(--textColor)}.cheatInput::placeholder{color:var(--textColor)}.cheatInput:focus,select:focus{outline:0}.cheatInput::-webkit-inner-spin-button,.cheatInput::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.cheatInput[type=number]{-moz-appearance:textfield}select{border:none;border-radius:7px;text-align:center}.scriptButton{align-items: center; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; margin: 10px; padding: 5px 5px 11px; position: relative; width: 250px; font-family: Nunito, sans-serif; font-weight: 400; color: var(--textColor); box-shadow: inset 0 -6px rgb(0 0 0 / 20%); border-radius: 7px; cursor: pointer; transition: filter .25s;}.tooltip::after {content: "";position: absolute;width: 10px;height: 10px;background-color: inherit;top: -5px;left: 50%;margin-left: -6px;transform: rotate(135deg)}`,
             }),
             (gui = createElement(
                 "div",
@@ -485,6 +485,13 @@
         );
         
         document.body.appendChild(guiWrapper);
+        
+        if (guiWrapper.querySelector("i")?.clientHeight == 0) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://ka-f.fontawesome.com/releases/v6.5.1/css/pro.min.css";
+            guiWrapper.prepend(link);
+        }
         
         function addMode(mode, img, cheats, nameOnly) {
             const button = createElement("div", {
@@ -888,7 +895,6 @@
                         } else alert("This can only be ran in the Market page.");
                     },
                 },
-        
                 {
                     name: "Host Any Gamemode",
                     description: "Change the selected gamemode on the host settings page",
@@ -1077,41 +1083,93 @@
                     },
                 },
             ],
-            voyage: [
+            gold: [
                 {
-                    name: "Heist ESP",
-                    description: "Shows you what's under each chest during a heist",
+                    name: "Always Triple",
+                    description: "Always get triple gold",
+                    type: "toggle",
+                    enabled: false,
+                    data: { type: "multiply", val: 3, text: "Triple Gold!", blook: "Unicorn" },
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode._choosePrize ||= stateNode.choosePrize;
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            stateNode.choosePrize = (i) => {
+                                stateNode.state.choices[i] = this.data;
+                                stateNode._choosePrize(i);
+                            };
+                        } else {
+                            this.enabled = false;
+                            if (stateNode._choosePrize) stateNode.choosePrize = stateNode._choosePrize;
+                        }
+                    },
+                },
+                {
+                    name: "Auto Choose",
+                    description: "Automatically picks the option that would give you the most gold",
                     type: "toggle",
                     enabled: false,
                     data: null,
-                    imgs: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(async () => {
+                                let stateNode = getStateNode();
+                                if (stateNode.state.stage == "prize") {
+                                    stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+                                        try {
+                                            if (players == null) return;
+                                            players = Object.entries(players);
+                                            let most = 0,
+                                                max = 0,
+                                                index = -1;
+                                            for (let i = 0; i < players.length; i++) if (players[i][0] != stateNode.props.client.name && players[i][1] > most) most = players[i][1];
+                                            for (let i = 0; i < stateNode.state.choices.length; i++) {
+                                                const choice = stateNode.state.choices[i];
+                                                let value = stateNode.state.gold;
+                                                if (choice.type == "gold") value = stateNode.state.gold + choice.val || stateNode.state.gold;
+                                                else if (choice.type == "multiply" || choice.type == "divide") value = Math.round(stateNode.state.gold * choice.val) || stateNode.state.gold;
+                                                else if (choice.type == "swap") value = most || stateNode.state.gold;
+                                                else if (choice.type == "take") value = stateNode.state.gold + most * choice.val || stateNode.state.gold;
+                                                if ((value || 0) <= max) continue;
+                                                max = value;
+                                                index = i + 1;
+                                            }
+                                            document.querySelector("div[class*='choice" + index + "']")?.click();
+                                        } catch {}
+                                    });
+                                }
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Chest ESP",
+                    description: "Shows what each chest will give you",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
                     run: function () {
                         if (!this.enabled) {
                             this.enabled = true;
                             this.data = setInterval(() => {
-                                const stateNode = getStateNode();
-                                if (stateNode.state.stage != "heist") return;
-                                if (this.imgs == null) this.imgs = Array.prototype.map.call(Array.prototype.slice.call(document.querySelector("[class*=prizesList]").children, 1, 4), (x) => x.querySelector("img").src);
-                                const esp = Object.values(document.querySelector("[class*=modal]"))[0].return.memoizedState.memoizedState;
-                                for (const e of document.querySelectorAll("[class*=boxContent] > div")) e.remove();
-                                const open = Object.values(document.querySelector("[class*=modal]"))[0].return.memoizedState.next.next.memoizedState;
-                                Array.prototype.forEach.call(document.querySelector("[class*=chestsWrapper]").children, (container, i) => {
-                                    const box = container.firstChild.firstChild;
-                                    if (open.includes(i)) return (box.style.opacity = "");
-                                    box.style.opacity = "0.5";
-                                    let d = document.createElement("div");
-                                    d.innerHTML = "<img src='" + this.imgs[2 - esp[i]] + "' style='max-width: 75%; max-height: 75%'></img>";
-                                    d.className = "chestESP";
-                                    d.style.position = "absolute";
-                                    d.style.inset = "0";
-                                    d.style.display = "grid";
-                                    d.style.placeItems = "center";
-                                    d.style.pointerEvents = "none";
-                                    container.onclick = () => {
-                                        d.remove();
-                                        box.style.opacity = "";
-                                    };
-                                    container.firstChild.prepend(d);
+                                getStateNode().state.choices.forEach(({ text }, index) => {
+                                    let chest = document.querySelector(`div[class*='choice${index + 1}']`);
+                                    if (!chest || chest.querySelector("div")) return;
+                                    let choice = document.createElement("div");
+                                    choice.style.color = "white";
+                                    choice.style.fontFamily = "Eczar";
+                                    choice.style.fontSize = "2em";
+                                    choice.style.display = "flex";
+                                    choice.style.justifyContent = "center";
+                                    choice.style.transform = "translateY(200px)";
+                                    choice.innerText = text;
+                                    chest.append(choice);
                                 });
                             }, 50);
                         } else {
@@ -1122,34 +1180,8 @@
                     },
                 },
                 {
-                    name: "Max Levels",
-                    description: "Maxes out all islands and your boat",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
-                    },
-                },
-                {
-                    name: "Set Doubloons",
-                    description: "Sets Doubloons",
-                    inputs: [
-                        {
-                            name: "Amount",
-                            type: "number",
-                        },
-                    ],
-                    run: function (doubloons) {
-                        let stateNode = getStateNode();
-                        stateNode.setState({ doubloons });
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}/d`,
-                            val: doubloons,
-                        });
-                    },
-                },
-                {
-                    name: "Start Heist",
-                    description: "Starts a heist on someone",
+                    name: "Reset Players Gold",
+                    description: "Sets a player's gold to 0",
                     inputs: [
                         {
                             name: "Player",
@@ -1162,252 +1194,62 @@
                     ],
                     run: function (target) {
                         let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
-                            if (val?.[target])
-                                stateNode.setState({
-                                    stage: "heist",
-                                    heistInfo: { name: target, blook: val[target].b },
-                                    prizeAmount: Math.max(1000, val[target].d || 0),
-                                });
+                        stateNode.props.liveGameController.setVal({
+                            path: "c/" + stateNode.props.client.name + "/tat",
+                            val: target + ":swap:0",
                         });
                     },
                 },
                 {
-                    name: "Swap Doubloons",
-                    description: "Swaps Doubloons with someone",
+                    name: "Set Gold",
+                    description: "Sets amount of gold",
                     inputs: [
                         {
-                            name: "Player",
-                            type: "options",
-                            options: () => {
-                                let stateNode = getStateNode();
-                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
-                            },
-                        },
-                    ],
-                    run: async function (target) {
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
-                            if (!val?.[target]) return;
-                            stateNode.props.liveGameController.setVal({
-                                path: `c/${stateNode.props.client.name}`,
-                                val: {
-                                    b: stateNode.props.client.blook,
-                                    d: val[target].d,
-                                    tat: `${target}:${val[target].d - stateNode.state.doubloons}`,
-                                },
-                            });
-                            stateNode.setState({ doubloons: val[target].d });
-                        });
-                    },
-                },
-                {
-                    name: "Take Doubloons",
-                    description: "Takes Doubloons from someone",
-                    inputs: [
-                        {
-                            name: "Player",
-                            type: "options",
-                            options: () => {
-                                let stateNode = getStateNode();
-                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
-                            },
-                        },
-                    ],
-                    run: async function (target) {
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
-                            if (!val?.[target]) return;
-                            stateNode.props.liveGameController.setVal({
-                                path: `c/${stateNode.props.client.name}`,
-                                val: {
-                                    b: stateNode.props.client.blook,
-                                    d: stateNode.state.doubloons + val[target].d,
-                                    tat: `${target}:${val[target].d}`,
-                                },
-                            });
-                            stateNode.setState({ doubloons: stateNode.state.doubloons + val[target].d });
-                        });
-                    },
-                },
-            ],
-            brawl: [
-                {
-                    name: "Double Enemy XP",
-                    description: "Doubles enemy XP drop value",
-                    run: function () {
-                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
-                        for (let i = 0; i < colliders.length; i++) {
-                            const enemies = colliders[i].object2;
-                            let _start = enemies.classType.prototype.start;
-                            enemies.classType.prototype.start = function () {
-                                _start.apply(this, arguments);
-                                this.val *= 2;
-                            };
-                            enemies.children.entries.forEach((e) => (e.val *= 2));
-                        }
-                    },
-                },
-                {
-                    name: "Half Enemy Speed",
-                    description: "Makes enemies move 2x slower",
-                    run: function () {
-                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
-                        for (let i = 0; i < colliders.length; i++) {
-                            const enemies = colliders[i].object2;
-                            let _start = enemies.classType.prototype.start;
-                            enemies.classType.prototype.start = function () {
-                                _start.apply(this, arguments);
-                                this.speed *= 0.5;
-                            };
-                            enemies.children.entries.forEach((e) => (e.speed *= 0.5));
-                        }
-                    },
-                },
-                {
-                    name: "Instant Kill",
-                    description: "Sets all enemies health to 1",
-                    run: function () {
-                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
-                        for (let i = 0; i < colliders.length; i++) {
-                            const enemies = colliders[i].object2;
-                            let _start = enemies.classType.prototype.start;
-                            enemies.classType.prototype.start = function () {
-                                _start.apply(this, arguments);
-                                this.hp = 1;
-                            };
-                            enemies.children.entries.forEach((e) => (e.hp = 1));
-                        }
-                    },
-                },
-                {
-                    name: "Invincibility",
-                    description: "Makes you invincible",
-                    run: function () {
-                        for (const collider of getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter(
-                            (x) => x.callbackContext?.toString().includes("invulnerableTime") || x.callbackContext?.toString().includes("dmgCd")
-                        ))
-                            collider.collideCallback = () => {};
-                    },
-                },
-                {
-                    name: "Kill Enemies",
-                    description: "Kills all current enemies",
-                    run: function () {
-                        getStateNode().game.current.config.sceneConfig.physics.world.bodies.entries.forEach((x) => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
-                    },
-                },
-                {
-                    name: "Magnet",
-                    description: "Pulls all xp towards you",
-                    run: function () {
-                        getStateNode()
-                            .game.current.config.sceneConfig.physics.world.colliders._active.find((x) => x.collideCallback?.toString().includes("magnetTime"))
-                            .collideCallback({ active: true }, { active: true, setActive() {}, setVisible() {} });
-                    },
-                },
-                {
-                    name: "Max Current Abilities",
-                    description: "Maxes out all your current abilities",
-                    run: function () {
-                        const stateNode = getStateNode();
-                        for (const [ability, level] of Object.entries(stateNode.state.abilities))
-                            for (let i = 0; i < 10 - level; i++) stateNode.game.current.config.sceneConfig.game.events.emit("level up", ability, stateNode.state.abilities[ability]++);
-                        stateNode.setState({
-                            level: (stateNode.game.current.config.sceneConfig.level = [1, 3, 5, 10, 15, 25, 35].sort((a, b) => Math.abs(a - stateNode.state.level) - Math.abs(b - stateNode.state.level))[0] - 1),
-                        });
-                    },
-                },
-                {
-                    name: "Next Level",
-                    description: "Skips to the next level",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        let { object1: player, object2: xp } = stateNode.game.current.config.sceneConfig.physics.world.colliders._active.find((x) => x.collideCallback?.toString().includes('emit("xp'));
-                        xp.get().spawn(player.x, player.y, ((e) => (1 === e ? 1 : e < 5 ? 5 : e < 10 ? 10 : e < 20 ? 20 : e < 30 ? 30 : e < 40 ? 40 : e < 50 ? 50 : 100))(stateNode.state.level) - stateNode.xp);
-                    },
-                },
-                {
-                    name: "Remove Obstacles",
-                    description: "Removes all rocks and obstacles",
-                    run: function () {
-                        getStateNode().game.current.config.sceneConfig.physics.world.bodies.entries.forEach((body) => {
-                            try {
-                                if (body.gameObject.frame.texture.key.includes("obstacle")) body.gameObject.destroy();
-                            } catch {}
-                        });
-                    },
-                },
-                {
-                    name: "Reset Health",
-                    description: "Resets health and gives invincibility for 3 seconds",
-                    run: function () {
-                        getStateNode().game.current.events._events.respawn.fn();
-                    },
-                },
-            ],
-            cafe: [
-                {
-                    name: "Max Items",
-                    description: "Maxes out items in the shop (Only usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ items: Object.keys(stateNode.state.items).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
-                        }
-                    },
-                },
-                {
-                    name: "Remove Customers",
-                    description: "Skips the current customers (Not usable in the shop)",
-                    run: function () {
-                        const stateNode = getStateNode();
-                        stateNode.state.customers.forEach((customer, i) => window.setTimeout(() => customer.blook && stateNode.removeCustomer(i, true), i * 250));
-                    },
-                },
-                {
-                    name: "Reset Abilities",
-                    description: "Resets used abilities in shop (Only usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ abilities: Object.keys(stateNode.state.abilities).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
-                        }
-                    },
-                },
-                {
-                    name: "Set Cash",
-                    description: "Sets cafe cash",
-                    inputs: [
-                        {
-                            name: "Amount",
+                            name: "Gold",
                             type: "number",
                         },
                     ],
-                    run: function (cafeCash) {
+                    run: function (gold) {
                         let stateNode = getStateNode();
-                        stateNode.setState({ cafeCash });
+                        stateNode.setState({ gold, gold2: gold });
                         stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}/ca`,
-                            val: cafeCash,
+                            path: "c/" + stateNode.props.client.name + "/g",
+                            val: gold,
                         });
                     },
                 },
                 {
-                    name: "Stock Food",
-                    description: "Stocks all food to 99 (Not usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ foods: stateNode.state.foods.map((e) => ({ ...e, stock: 99, level: 5 })) });
-                        }
+                    name: "Swap Gold",
+                    description: "Swaps gold with someone",
+                    inputs: [
+                        {
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let stateNode = getStateNode();
+                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                            },
+                        },
+                    ],
+                    run: function (player) {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+                            if (!players || players[player] == null) return;
+                            const gold = players[player].g || 0;
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/" + stateNode.props.client.name,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    tat: player + ":swap:" + (stateNode.state.gold || 0),
+                                    g: gold,
+                                },
+                            });
+                            stateNode.setState({ gold, gold2: gold });
+                        });
                     },
                 },
             ],
-            crypto: [
+            hack: [
                 {
                     name: "Choice ESP",
                     description: "Shows what each choice will give you",
@@ -1581,111 +1423,255 @@
                     },
                 },
             ],
-            defense: [
+            fish: [
                 {
-                    name: "Earthquake",
-                    description: "Shuffles around towers",
+                    name: "Remove Distractions",
+                    description: "Removes distractions",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                getStateNode().setState({ party: "" });
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Frenzy",
+                    description: "Sets everyone to frenzy mode",
                     run: function () {
                         let stateNode = getStateNode();
-                        stateNode.setState(
-                            {
-                                eventName: "Earthquake",
-                                event: {
-                                    short: "e",
-                                    color: "#805500",
-                                    icon: "fas fa-mountain",
-                                    desc: "All of your towers get mixed up",
-                                    rate: 0.02,
-                                },
-                                buyTowerName: "",
-                                buyTower: {},
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: stateNode.state.weight,
+                                f: "Frenzy",
+                                s: true,
                             },
-                            () => (stateNode.eventTimeout = setTimeout(() => stateNode.setState({ event: {}, eventName: "" }), 6e3))
-                        );
-                        stateNode.tiles.forEach((row) => row.forEach((col, i) => col == 3 && (row[i] = 0)));
-                        let tiles = [];
-                        for (let y = 0; y < stateNode.tiles.length; y++) for (let x = 0; x < stateNode.tiles[y].length; x++) if (stateNode.tiles[y][x] == 0) tiles.push({ x, y });
-                        tiles.sort(() => Math.random() - Math.random());
-                        stateNode.towers.forEach((tower) => {
-                            let { x, y } = tiles.pop();
-                            tower.move(x, y, stateNode.tileSize);
-                            stateNode.tiles[y][x] = 3;
                         });
                     },
                 },
                 {
-                    name: "Max Tower Stats",
-                    description: "Makes all placed towers overpowered",
-                    run: function () {
-                        getStateNode().towers.forEach((tower) => {
-                            tower.range = 100;
-                            tower.fullCd = tower.cd = 0;
-                            tower.damage = 1e6;
+                    name: "Send Distraction",
+                    description: "Sends a distraction to everyone",
+                    inputs: [
+                        {
+                            name: "Distraction",
+                            type: "options",
+                            options: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"],
+                        },
+                    ],
+                    run: function (f) {
+                        let stateNode = getStateNode();
+                        stateNode.safe = true;
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: stateNode.state.weight,
+                                f,
+                                s: true,
+                            },
                         });
                     },
                 },
                 {
-                    name: "Remove Ducks",
-                    description: "Removes ducks",
-                    run: function () {
-                        let { ducks, tiles } = getStateNode();
-                        ducks.forEach((x) => (tiles[x.y][x.x] = 0));
-                        ducks.length = 0;
+                    name: "Set Lure",
+                    description: "Sets fishing lure (range 1 - 5)",
+                    inputs: [
+                        {
+                            name: "Lure (1 - 5)",
+                            type: "number",
+                            min: 1,
+                            max: 5,
+                        },
+                    ],
+                    run: function (lure) {
+                        getStateNode().setState({ lure: Math.max(Math.min(lure - 1, 4), 0) });
                     },
                 },
                 {
-                    name: "Remove Enemies",
-                    description: "Removes all the enemies",
+                    name: "Set Weight",
+                    description: "Sets weight",
+                    inputs: [
+                        {
+                            name: "Weight",
+                            type: "number",
+                        },
+                    ],
+                    run: function (weight) {
+                        let stateNode = getStateNode();
+                        stateNode.setState({ weight, weight2: weight });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: weight,
+                                f: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"][Math.floor(Math.random() * 9)],
+                            },
+                        });
+                    },
+                },
+            ],
+            pirate: [
+                {
+                    name: "Heist ESP",
+                    description: "Shows you what's under each chest during a heist",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    imgs: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                const stateNode = getStateNode();
+                                if (stateNode.state.stage != "heist") return;
+                                if (this.imgs == null) this.imgs = Array.prototype.map.call(Array.prototype.slice.call(document.querySelector("[class*=prizesList]").children, 1, 4), (x) => x.querySelector("img").src);
+                                const esp = Object.values(document.querySelector("[class*=modal]"))[0].return.memoizedState.memoizedState;
+                                for (const e of document.querySelectorAll("[class*=boxContent] > div")) e.remove();
+                                const open = Object.values(document.querySelector("[class*=modal]"))[0].return.memoizedState.next.next.memoizedState;
+                                Array.prototype.forEach.call(document.querySelector("[class*=chestsWrapper]").children, (container, i) => {
+                                    const box = container.firstChild.firstChild;
+                                    if (open.includes(i)) return (box.style.opacity = "");
+                                    box.style.opacity = "0.5";
+                                    let d = document.createElement("div");
+                                    d.innerHTML = "<img src='" + this.imgs[2 - esp[i]] + "' style='max-width: 75%; max-height: 75%'></img>";
+                                    d.className = "chestESP";
+                                    d.style.position = "absolute";
+                                    d.style.inset = "0";
+                                    d.style.display = "grid";
+                                    d.style.placeItems = "center";
+                                    d.style.pointerEvents = "none";
+                                    container.onclick = () => {
+                                        d.remove();
+                                        box.style.opacity = "";
+                                    };
+                                    container.firstChild.prepend(d);
+                                });
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Max Levels",
+                    description: "Maxes out all islands and your boat",
                     run: function () {
                         let stateNode = getStateNode();
-                        stateNode.enemies = stateNode.futureEnemies = [];
+                        stateNode.setState({ islandLevels: new Array(stateNode.state.islandLevels.length).fill(5) }, stateNode.updateBoatLevel);
                     },
                 },
                 {
-                    name: "Remove Obstacles",
-                    description: "Lets you place towers anywhere",
-                    run: function () {
+                    name: "Set Doubloons",
+                    description: "Sets Doubloons",
+                    inputs: [
+                        {
+                            name: "Amount",
+                            type: "number",
+                        },
+                    ],
+                    run: function (doubloons) {
                         let stateNode = getStateNode();
-                        stateNode.tiles = stateNode.tiles.map((row) => row.fill(0));
+                        stateNode.setState({ doubloons });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/d`,
+                            val: doubloons,
+                        });
                     },
                 },
                 {
-                    name: "Set Damage",
-                    description: "Sets damage",
+                    name: "Start Heist",
+                    description: "Starts a heist on someone",
                     inputs: [
                         {
-                            name: "Damage",
-                            type: "number",
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let stateNode = getStateNode();
+                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                            },
                         },
                     ],
-                    run: function (dmg) {
-                        getStateNode().dmg = dmg;
+                    run: function (target) {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            if (val?.[target])
+                                stateNode.setState({
+                                    stage: "heist",
+                                    heistInfo: { name: target, blook: val[target].b },
+                                    prizeAmount: Math.max(1000, val[target].d || 0),
+                                });
+                        });
                     },
                 },
                 {
-                    name: "Set Round",
-                    description: "Sets the current round",
+                    name: "Swap Doubloons",
+                    description: "Swaps Doubloons with someone",
                     inputs: [
                         {
-                            name: "Round",
-                            type: "number",
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let stateNode = getStateNode();
+                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                            },
                         },
                     ],
-                    run: function (round) {
-                        getStateNode().setState({ round });
+                    run: async function (target) {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            if (!val?.[target]) return;
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}`,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    d: val[target].d,
+                                    tat: `${target}:${val[target].d - stateNode.state.doubloons}`,
+                                },
+                            });
+                            stateNode.setState({ doubloons: val[target].d });
+                        });
                     },
                 },
                 {
-                    name: "Set Tokens",
-                    description: "Sets the amount of tokens you have",
+                    name: "Take Doubloons",
+                    description: "Takes Doubloons from someone",
                     inputs: [
                         {
-                            name: "Tokens",
-                            type: "number",
+                            name: "Player",
+                            type: "options",
+                            options: () => {
+                                let stateNode = getStateNode();
+                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
+                            },
                         },
                     ],
-                    run: function (tokens) {
-                        getStateNode().setState({ tokens });
+                    run: async function (target) {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", function (val) {
+                            if (!val?.[target]) return;
+                            stateNode.props.liveGameController.setVal({
+                                path: `c/${stateNode.props.client.name}`,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    d: stateNode.state.doubloons + val[target].d,
+                                    tat: `${target}:${val[target].d}`,
+                                },
+                            });
+                            stateNode.setState({ doubloons: stateNode.state.doubloons + val[target].d });
+                        });
                     },
                 },
             ],
@@ -1754,7 +1740,122 @@
                     },
                 },
             ],
-            dinos: [
+            brawl: [
+                {
+                    name: "Double Enemy XP",
+                    description: "Doubles enemy XP drop value",
+                    run: function () {
+                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
+                        for (let i = 0; i < colliders.length; i++) {
+                            const enemies = colliders[i].object2;
+                            let _start = enemies.classType.prototype.start;
+                            enemies.classType.prototype.start = function () {
+                                _start.apply(this, arguments);
+                                this.val *= 2;
+                            };
+                            enemies.children.entries.forEach((e) => (e.val *= 2));
+                        }
+                    },
+                },
+                {
+                    name: "Half Enemy Speed",
+                    description: "Makes enemies move 2x slower",
+                    run: function () {
+                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
+                        for (let i = 0; i < colliders.length; i++) {
+                            const enemies = colliders[i].object2;
+                            let _start = enemies.classType.prototype.start;
+                            enemies.classType.prototype.start = function () {
+                                _start.apply(this, arguments);
+                                this.speed *= 0.5;
+                            };
+                            enemies.children.entries.forEach((e) => (e.speed *= 0.5));
+                        }
+                    },
+                },
+                {
+                    name: "Instant Kill",
+                    description: "Sets all enemies health to 1",
+                    run: function () {
+                        const colliders = getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter((x) => x.callbackContext?.toString?.()?.includes?.("dmgCd"));
+                        for (let i = 0; i < colliders.length; i++) {
+                            const enemies = colliders[i].object2;
+                            let _start = enemies.classType.prototype.start;
+                            enemies.classType.prototype.start = function () {
+                                _start.apply(this, arguments);
+                                this.hp = 1;
+                            };
+                            enemies.children.entries.forEach((e) => (e.hp = 1));
+                        }
+                    },
+                },
+                {
+                    name: "Invincibility",
+                    description: "Makes you invincible",
+                    run: function () {
+                        for (const collider of getStateNode().game.current.config.sceneConfig.physics.world.colliders._active.filter(
+                            (x) => x.callbackContext?.toString().includes("invulnerableTime") || x.callbackContext?.toString().includes("dmgCd")
+                        ))
+                            collider.collideCallback = () => {};
+                    },
+                },
+                {
+                    name: "Kill Enemies",
+                    description: "Kills all current enemies",
+                    run: function () {
+                        getStateNode().game.current.config.sceneConfig.physics.world.bodies.entries.forEach((x) => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
+                    },
+                },
+                {
+                    name: "Magnet",
+                    description: "Pulls all xp towards you",
+                    run: function () {
+                        getStateNode()
+                            .game.current.config.sceneConfig.physics.world.colliders._active.find((x) => x.collideCallback?.toString().includes("magnetTime"))
+                            .collideCallback({ active: true }, { active: true, setActive() {}, setVisible() {} });
+                    },
+                },
+                {
+                    name: "Max Current Abilities",
+                    description: "Maxes out all your current abilities",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        for (const [ability, level] of Object.entries(stateNode.state.abilities))
+                            for (let i = 0; i < 10 - level; i++) stateNode.game.current.config.sceneConfig.game.events.emit("level up", ability, stateNode.state.abilities[ability]++);
+                        stateNode.setState({
+                            level: (stateNode.game.current.config.sceneConfig.level = [1, 3, 5, 10, 15, 25, 35].sort((a, b) => Math.abs(a - stateNode.state.level) - Math.abs(b - stateNode.state.level))[0] - 1),
+                        });
+                    },
+                },
+                {
+                    name: "Next Level",
+                    description: "Skips to the next level",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        let { object1: player, object2: xp } = stateNode.game.current.config.sceneConfig.physics.world.colliders._active.find((x) => x.collideCallback?.toString().includes('emit("xp'));
+                        xp.get().spawn(player.x, player.y, ((e) => (1 === e ? 1 : e < 5 ? 5 : e < 10 ? 10 : e < 20 ? 20 : e < 30 ? 30 : e < 40 ? 40 : e < 50 ? 50 : 100))(stateNode.state.level) - stateNode.xp);
+                    },
+                },
+                {
+                    name: "Remove Obstacles",
+                    description: "Removes all rocks and obstacles",
+                    run: function () {
+                        getStateNode().game.current.config.sceneConfig.physics.world.bodies.entries.forEach((body) => {
+                            try {
+                                if (body.gameObject.frame.texture.key.includes("obstacle")) body.gameObject.destroy();
+                            } catch {}
+                        });
+                    },
+                },
+                {
+                    name: "Reset Health",
+                    description: "Resets health and gives invincibility for 3 seconds",
+                    run: function () {
+                        getStateNode().game.current.events._events.respawn.fn();
+                    },
+                },
+            ],
+            dino: [
                 {
                     name: "Auto Choose",
                     description: "Automatically choose the best fossil when excavating",
@@ -1981,89 +2082,202 @@
                     },
                 },
             ],
-            doom: [
+            royale: [
                 {
-                    name: "Fill Deck",
-                    description: "Fills your deck with every maxed out card and artifact (Only works on towers page)",
+                    name: "Auto Answer (Toggle)",
+                    description: "Toggles auto answer on",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
                     run: function () {
-                        if (window.location.pathname == "/tower/map") {
-                            const stateNode = getStateNode();
-                            stateNode.props.tower.artifacts =
-                                "Medical Kit|Fury Relic|Survival Guide|Steel Socks|Piggy Bank|Lucky Feather|Coupon|Cheese|Tasty Egg|Training Weights|Mighty Shield|Toxic Waste|Lifeline Totem|Cursed Hourglass|Band-Aid|Elder Coins|Captain's Anchor|Chess Pieces|Pink Hippo|Anorak's Wizard Cap|Dave's Doggo|Anubis' Obelisk|Farm Tractor|Magic Seedling|Just A Bone|Cozy Igloo|King's Crown|Sacred Scroll".split(
-                                    "|"
-                                );
-                            stateNode.props.tower.cards =
-                                "Chick,🌽|Chicken,🌽|Cow,🌽|Goat,🌽|Horse,🌽|Pig,🌽|Sheep,🌽|Duck,🌽|Dog,🌽|Cat,🐾|Rabbit,🐾|Goldfish,🐾|Hamster,🐾|Turtle,🐾|Kitten,🐾|Puppy,🐾|Bear,🌲|Moose,🌲|Fox,🌲|Raccoon,🌲|Squirrel,🌲|Owl,🌲|Hedgehog,🌲|Baby Penguin,❄️|Penguin,❄️|Arctic Fox,❄️|Snowy Owl,❄️|Polar Bear,❄️|Arctic Hare,❄️|Seal,❄️|Walrus,❄️|Tiger,🌴|Panther,🌴|Cockatoo,🌴|Orangutan,🌴|Anaconda,🌴|Macaw,🌴|Jaguar,🌴|Capuchin,🌴|Toucan,🌴|Parrot,🌴|Elf,⚔️|Witch,⚔️|Wizard,⚔️|Fairy,⚔️|Slime Monster,⚔️|Jester,⚔️|Dragon,⚔️|Unicorn,⚔️|Queen,⚔️|King,⚔️|Snow Globe,☃️|Holiday Gift,☃️|Hot Chocolate,☃️|Gingerbread Man,☃️|Gingerbread House,☃️|Holiday Wreath,☃️|Snowman,☃️|Santa Claus,☃️|Two of Spades,🏰|Eat Me,🏰|Drink Me,🏰|Alice,🏰|Queen of Hearts,🏰|Dormouse,🏰|White Rabbit,🏰|Cheshire Cat,🏰|Caterpillar,🏰|Mad Hatter,🏰|King of Hearts,🏰"
-                                    .split("|")
-                                    .map((x) => {
-                                        const [blook, c] = x.split(",");
-                                        return { strength: 20, charisma: 20, wisdom: 20, class: c, blook };
-                                    });
-                            try {
-                                stateNode.props.addTowerNode();
-                            } catch {}
-                            stateNode.setState({ showDeck: false });
-                        } else alert("You need to be on the map to run this cheat!");
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                let stateNode = getStateNode();
+                                stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
                     },
                 },
                 {
-                    name: "Max Cards",
-                    description: "Maxes out all the cards in your deck",
+                    name: "Auto Answer",
+                    description: "Chooses the correct answer for you",
                     run: function () {
-                        if (window.location.pathname == "/tower/map") {
-                            const stateNode = getStateNode();
-                            stateNode.props.tower.cards.forEach((card) => {
-                                card.strength = 20;
-                                card.charisma = 20;
-                                card.wisdom = 20;
-                            });
-                            try {
-                                stateNode.forceUpdate();
-                            } catch {}
-                        } else alert("You need to be on the map to run this cheat!");
+                        let stateNode = getStateNode();
+                        stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
+                    },
+                },
+            ],
+            defense: [
+                {
+                    name: "Earthquake",
+                    description: "Shuffles around towers",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.setState(
+                            {
+                                eventName: "Earthquake",
+                                event: {
+                                    short: "e",
+                                    color: "#805500",
+                                    icon: "fas fa-mountain",
+                                    desc: "All of your towers get mixed up",
+                                    rate: 0.02,
+                                },
+                                buyTowerName: "",
+                                buyTower: {},
+                            },
+                            () => (stateNode.eventTimeout = setTimeout(() => stateNode.setState({ event: {}, eventName: "" }), 6e3))
+                        );
+                        stateNode.tiles.forEach((row) => row.forEach((col, i) => col == 3 && (row[i] = 0)));
+                        let tiles = [];
+                        for (let y = 0; y < stateNode.tiles.length; y++) for (let x = 0; x < stateNode.tiles[y].length; x++) if (stateNode.tiles[y][x] == 0) tiles.push({ x, y });
+                        tiles.sort(() => Math.random() - Math.random());
+                        stateNode.towers.forEach((tower) => {
+                            let { x, y } = tiles.pop();
+                            tower.move(x, y, stateNode.tileSize);
+                            stateNode.tiles[y][x] = 3;
+                        });
                     },
                 },
                 {
-                    name: "Max Health",
-                    description: "Fills the player's health",
+                    name: "Max Tower Stats",
+                    description: "Makes all placed towers overpowered",
                     run: function () {
-                        if (window.location.pathname == "/tower/battle") getStateNode().setState({ myHealth: 100, myLife: 100 });
-                        else alert("You need to be in battle to run this cheat!");
+                        getStateNode().towers.forEach((tower) => {
+                            tower.range = 100;
+                            tower.fullCd = tower.cd = 0;
+                            tower.damage = 1e6;
+                        });
                     },
                 },
                 {
-                    name: "Max Card Stats",
-                    description: "Maxes out player's current card (Only works on attribute select page)",
+                    name: "Remove Ducks",
+                    description: "Removes ducks",
                     run: function () {
-                        const stateNode = getStateNode();
-                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
-                        else stateNode.setState({ myCard: { ...stateNode.state.myCard, strength: 20, charisma: 20, wisdom: 20 } });
+                        let { ducks, tiles } = getStateNode();
+                        ducks.forEach((x) => (tiles[x.y][x.x] = 0));
+                        ducks.length = 0;
                     },
                 },
                 {
-                    name: "Min Enemy Stats",
-                    description: "Makes the enemy card stats all 0 (Only works on attribute select page)",
+                    name: "Remove Enemies",
+                    description: "Removes all the enemies",
                     run: function () {
-                        const stateNode = getStateNode();
-                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
-                        else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
+                        let stateNode = getStateNode();
+                        stateNode.enemies = stateNode.futureEnemies = [];
                     },
                 },
                 {
-                    name: "Set Coins",
-                    description: "Try's to set amount of tower coins you have",
+                    name: "Remove Obstacles",
+                    description: "Lets you place towers anywhere",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.tiles = stateNode.tiles.map((row) => row.fill(0));
+                    },
+                },
+                {
+                    name: "Set Damage",
+                    description: "Sets damage",
                     inputs: [
                         {
-                            name: "Coins",
+                            name: "Damage",
                             type: "number",
                         },
                     ],
-                    run: function (coins) {
-                        if (window.location.pathname == "/tower/battle")
-                            try {
-                                getStateNode().props.setTowerCoins(coins);
-                            } catch {}
-                        else alert("You need to be in battle to run this cheat!");
+                    run: function (dmg) {
+                        getStateNode().dmg = dmg;
+                    },
+                },
+                {
+                    name: "Set Round",
+                    description: "Sets the current round",
+                    inputs: [
+                        {
+                            name: "Round",
+                            type: "number",
+                        },
+                    ],
+                    run: function (round) {
+                        getStateNode().setState({ round });
+                    },
+                },
+                {
+                    name: "Set Tokens",
+                    description: "Sets the amount of tokens you have",
+                    inputs: [
+                        {
+                            name: "Tokens",
+                            type: "number",
+                        },
+                    ],
+                    run: function (tokens) {
+                        getStateNode().setState({ tokens });
+                    },
+                },
+            ],
+            cafe: [
+                {
+                    name: "Max Items",
+                    description: "Maxes out items in the shop (Only usable in the shop)",
+                    run: function () {
+                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
+                        else {
+                            const stateNode = getStateNode();
+                            stateNode.setState({ items: Object.keys(stateNode.state.items).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
+                        }
+                    },
+                },
+                {
+                    name: "Remove Customers",
+                    description: "Skips the current customers (Not usable in the shop)",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        stateNode.state.customers.forEach((customer, i) => window.setTimeout(() => customer.blook && stateNode.removeCustomer(i, true), i * 250));
+                    },
+                },
+                {
+                    name: "Reset Abilities",
+                    description: "Resets used abilities in shop (Only usable in the shop)",
+                    run: function () {
+                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
+                        else {
+                            const stateNode = getStateNode();
+                            stateNode.setState({ abilities: Object.keys(stateNode.state.abilities).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
+                        }
+                    },
+                },
+                {
+                    name: "Set Cash",
+                    description: "Sets cafe cash",
+                    inputs: [
+                        {
+                            name: "Amount",
+                            type: "number",
+                        },
+                    ],
+                    run: function (cafeCash) {
+                        let stateNode = getStateNode();
+                        stateNode.setState({ cafeCash });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/ca`,
+                            val: cafeCash,
+                        });
+                    },
+                },
+                {
+                    name: "Stock Food",
+                    description: "Stocks all food to 99 (Not usable in the shop)",
+                    run: function () {
+                        if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
+                        else {
+                            const stateNode = getStateNode();
+                            stateNode.setState({ foods: stateNode.state.foods.map((e) => ({ ...e, stock: 99, level: 5 })) });
+                        }
                     },
                 },
             ],
@@ -2261,297 +2475,162 @@
                     },
                 },
             ],
-            fishing: [
+            racing: [
                 {
-                    name: "Remove Distractions",
-                    description: "Removes distractions",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
+                    name: "Instant Win",
+                    description: "Instantly Wins the race",
                     run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                getStateNode().setState({ party: "" });
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Frenzy",
-                    description: "Sets everyone to frenzy mode",
-                    run: function () {
-                        let stateNode = getStateNode();
+                        const stateNode = getStateNode();
+                        stateNode.setState({ progress: stateNode.state.goalAmount });
                         stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: stateNode.state.weight,
-                                f: "Frenzy",
-                                s: true,
-                            },
+                            path: "c/" + stateNode.props.client.name + "/pr",
+                            val: stateNode.state.goalAmount,
                         });
                     },
                 },
                 {
-                    name: "Send Distraction",
-                    description: "Sends a distraction to everyone",
+                    name: "Set Questions",
+                    description: "Sets the number of questions left",
                     inputs: [
                         {
-                            name: "Distraction",
-                            type: "options",
-                            options: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"],
-                        },
-                    ],
-                    run: function (f) {
-                        let stateNode = getStateNode();
-                        stateNode.safe = true;
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: stateNode.state.weight,
-                                f,
-                                s: true,
-                            },
-                        });
-                    },
-                },
-                {
-                    name: "Set Lure",
-                    description: "Sets fishing lure (range 1 - 5)",
-                    inputs: [
-                        {
-                            name: "Lure (1 - 5)",
-                            type: "number",
-                            min: 1,
-                            max: 5,
-                        },
-                    ],
-                    run: function (lure) {
-                        getStateNode().setState({ lure: Math.max(Math.min(lure - 1, 4), 0) });
-                    },
-                },
-                {
-                    name: "Set Weight",
-                    description: "Sets weight",
-                    inputs: [
-                        {
-                            name: "Weight",
+                            name: "Questions",
                             type: "number",
                         },
                     ],
-                    run: function (weight) {
+                    run: function (progress) {
                         let stateNode = getStateNode();
-                        stateNode.setState({ weight, weight2: weight });
+                        progress = stateNode.props.client.amount - progress;
+                        stateNode.setState({ progress });
                         stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: weight,
-                                f: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"][Math.floor(Math.random() * 9)],
-                            },
+                            path: "c/" + stateNode.props.client.name + "/pr",
+                            val: progress,
                         });
                     },
                 },
             ],
-            flappy: [
+            rush: [
                 {
-                    name: "Toggle Ghost",
-                    description: "Lets you go through the pipes",
-                    type: "toggle",
-                    enabled: false,
-                    run: function () {
-                        this.enabled = !this.enabled;
-                        for (const body of Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[0].current.config.sceneConfig.physics.world.bodies.entries) {
-                            if (!body.gameObject.frame.texture.key.startsWith("blook")) continue;
-                            body.checkCollision.none = this.enabled;
-                            body.gameObject.setAlpha(this.enabled ? 0.5 : 1);
-                            break;
-                        }
-                    },
-                },
-                {
-                    name: "Set Score",
-                    description: "Sets flappy blook score",
+                    name: "Set Blooks",
+                    description: "Sets amount of blooks you or your team has",
                     inputs: [
                         {
-                            name: "Score",
+                            name: "Blooks",
                             type: "number",
                         },
                     ],
-                    run: function (score) {
-                        Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[1](score || 0);
+                    run: function (numBlooks) {
+                        let stateNode = getStateNode();
+                        stateNode.setState({ numBlooks });
+                        stateNode.props.liveGameController.setVal({
+                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/bs",
+                            val: numBlooks,
+                        });
+                    },
+                },
+                {
+                    name: "Set Defense",
+                    description: "Sets amount of defense you or your team has (Max 4)",
+                    inputs: [
+                        {
+                            name: "Defense (max 4)",
+                            type: "number",
+                            max: 4,
+                        },
+                    ],
+                    run: function (defense) {
+                        let numDefense = Math.min(defense, 4);
+                        let stateNode = getStateNode();
+                        stateNode.setState({ numDefense });
+                        stateNode.props.liveGameController.setVal({
+                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/d",
+                            val: numDefense,
+                        });
                     },
                 },
             ],
-            gold: [
+            tower: [
                 {
-                    name: "Always Triple",
-                    description: "Always get triple gold",
-                    type: "toggle",
-                    enabled: false,
-                    data: { type: "multiply", val: 3, text: "Triple Gold!", blook: "Unicorn" },
+                    name: "Fill Deck",
+                    description: "Fills your deck with every maxed out card and artifact (Only works on towers page)",
                     run: function () {
-                        let stateNode = getStateNode();
-                        stateNode._choosePrize ||= stateNode.choosePrize;
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            stateNode.choosePrize = (i) => {
-                                stateNode.state.choices[i] = this.data;
-                                stateNode._choosePrize(i);
-                            };
-                        } else {
-                            this.enabled = false;
-                            if (stateNode._choosePrize) stateNode.choosePrize = stateNode._choosePrize;
-                        }
-                    },
-                },
-                {
-                    name: "Auto Choose",
-                    description: "Automatically picks the option that would give you the most gold",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(async () => {
-                                let stateNode = getStateNode();
-                                if (stateNode.state.stage == "prize") {
-                                    stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
-                                        try {
-                                            if (players == null) return;
-                                            players = Object.entries(players);
-                                            let most = 0,
-                                                max = 0,
-                                                index = -1;
-                                            for (let i = 0; i < players.length; i++) if (players[i][0] != stateNode.props.client.name && players[i][1] > most) most = players[i][1];
-                                            for (let i = 0; i < stateNode.state.choices.length; i++) {
-                                                const choice = stateNode.state.choices[i];
-                                                let value = stateNode.state.gold;
-                                                if (choice.type == "gold") value = stateNode.state.gold + choice.val || stateNode.state.gold;
-                                                else if (choice.type == "multiply" || choice.type == "divide") value = Math.round(stateNode.state.gold * choice.val) || stateNode.state.gold;
-                                                else if (choice.type == "swap") value = most || stateNode.state.gold;
-                                                else if (choice.type == "take") value = stateNode.state.gold + most * choice.val || stateNode.state.gold;
-                                                if ((value || 0) <= max) continue;
-                                                max = value;
-                                                index = i + 1;
-                                            }
-                                            document.querySelector("div[class*='choice" + index + "']")?.click();
-                                        } catch {}
+                        if (window.location.pathname == "/tower/map") {
+                            const stateNode = getStateNode();
+                            stateNode.props.tower.artifacts =
+                                "Medical Kit|Fury Relic|Survival Guide|Steel Socks|Piggy Bank|Lucky Feather|Coupon|Cheese|Tasty Egg|Training Weights|Mighty Shield|Toxic Waste|Lifeline Totem|Cursed Hourglass|Band-Aid|Elder Coins|Captain's Anchor|Chess Pieces|Pink Hippo|Anorak's Wizard Cap|Dave's Doggo|Anubis' Obelisk|Farm Tractor|Magic Seedling|Just A Bone|Cozy Igloo|King's Crown|Sacred Scroll".split(
+                                    "|"
+                                );
+                            stateNode.props.tower.cards =
+                                "Chick,🌽|Chicken,🌽|Cow,🌽|Goat,🌽|Horse,🌽|Pig,🌽|Sheep,🌽|Duck,🌽|Dog,🌽|Cat,🐾|Rabbit,🐾|Goldfish,🐾|Hamster,🐾|Turtle,🐾|Kitten,🐾|Puppy,🐾|Bear,🌲|Moose,🌲|Fox,🌲|Raccoon,🌲|Squirrel,🌲|Owl,🌲|Hedgehog,🌲|Baby Penguin,❄️|Penguin,❄️|Arctic Fox,❄️|Snowy Owl,❄️|Polar Bear,❄️|Arctic Hare,❄️|Seal,❄️|Walrus,❄️|Tiger,🌴|Panther,🌴|Cockatoo,🌴|Orangutan,🌴|Anaconda,🌴|Macaw,🌴|Jaguar,🌴|Capuchin,🌴|Toucan,🌴|Parrot,🌴|Elf,⚔️|Witch,⚔️|Wizard,⚔️|Fairy,⚔️|Slime Monster,⚔️|Jester,⚔️|Dragon,⚔️|Unicorn,⚔️|Queen,⚔️|King,⚔️|Snow Globe,☃️|Holiday Gift,☃️|Hot Chocolate,☃️|Gingerbread Man,☃️|Gingerbread House,☃️|Holiday Wreath,☃️|Snowman,☃️|Santa Claus,☃️|Two of Spades,🏰|Eat Me,🏰|Drink Me,🏰|Alice,🏰|Queen of Hearts,🏰|Dormouse,🏰|White Rabbit,🏰|Cheshire Cat,🏰|Caterpillar,🏰|Mad Hatter,🏰|King of Hearts,🏰"
+                                    .split("|")
+                                    .map((x) => {
+                                        const [blook, c] = x.split(",");
+                                        return { strength: 20, charisma: 20, wisdom: 20, class: c, blook };
                                     });
-                                }
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
+                            try {
+                                stateNode.props.addTowerNode();
+                            } catch {}
+                            stateNode.setState({ showDeck: false });
+                        } else alert("You need to be on the map to run this cheat!");
                     },
                 },
                 {
-                    name: "Chest ESP",
-                    description: "Shows what each chest will give you",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
+                    name: "Max Cards",
+                    description: "Maxes out all the cards in your deck",
                     run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                getStateNode().state.choices.forEach(({ text }, index) => {
-                                    let chest = document.querySelector(`div[class*='choice${index + 1}']`);
-                                    if (!chest || chest.querySelector("div")) return;
-                                    let choice = document.createElement("div");
-                                    choice.style.color = "white";
-                                    choice.style.fontFamily = "Eczar";
-                                    choice.style.fontSize = "2em";
-                                    choice.style.display = "flex";
-                                    choice.style.justifyContent = "center";
-                                    choice.style.transform = "translateY(200px)";
-                                    choice.innerText = text;
-                                    chest.append(choice);
-                                });
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
+                        if (window.location.pathname == "/tower/map") {
+                            const stateNode = getStateNode();
+                            stateNode.props.tower.cards.forEach((card) => {
+                                card.strength = 20;
+                                card.charisma = 20;
+                                card.wisdom = 20;
+                            });
+                            try {
+                                stateNode.forceUpdate();
+                            } catch {}
+                        } else alert("You need to be on the map to run this cheat!");
                     },
                 },
                 {
-                    name: "Reset Players Gold",
-                    description: "Sets a player's gold to 0",
-                    inputs: [
-                        {
-                            name: "Player",
-                            type: "options",
-                            options: () => {
-                                let stateNode = getStateNode();
-                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
-                            },
-                        },
-                    ],
-                    run: function (target) {
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/tat",
-                            val: target + ":swap:0",
-                        });
+                    name: "Max Health",
+                    description: "Fills the player's health",
+                    run: function () {
+                        if (window.location.pathname == "/tower/battle") getStateNode().setState({ myHealth: 100, myLife: 100 });
+                        else alert("You need to be in battle to run this cheat!");
                     },
                 },
                 {
-                    name: "Set Gold",
-                    description: "Sets amount of gold",
+                    name: "Max Card Stats",
+                    description: "Maxes out player's current card (Only works on attribute select page)",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
+                        else stateNode.setState({ myCard: { ...stateNode.state.myCard, strength: 20, charisma: 20, wisdom: 20 } });
+                    },
+                },
+                {
+                    name: "Min Enemy Stats",
+                    description: "Makes the enemy card stats all 0 (Only works on attribute select page)",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
+                        else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
+                    },
+                },
+                {
+                    name: "Set Coins",
+                    description: "Try's to set amount of tower coins you have",
                     inputs: [
                         {
-                            name: "Gold",
+                            name: "Coins",
                             type: "number",
                         },
                     ],
-                    run: function (gold) {
-                        let stateNode = getStateNode();
-                        stateNode.setState({ gold, gold2: gold });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/g",
-                            val: gold,
-                        });
-                    },
-                },
-                {
-                    name: "Swap Gold",
-                    description: "Swaps gold with someone",
-                    inputs: [
-                        {
-                            name: "Player",
-                            type: "options",
-                            options: () => {
-                                let stateNode = getStateNode();
-                                return stateNode.props.liveGameController._liveApp ? new Promise((res) => stateNode.props.liveGameController.getDatabaseVal("c", (players) => players && res(Object.keys(players)))) : [];
-                            },
-                        },
-                    ],
-                    run: function (player) {
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
-                            if (!players || players[player] == null) return;
-                            const gold = players[player].g || 0;
-                            stateNode.props.liveGameController.setVal({
-                                path: "c/" + stateNode.props.client.name,
-                                val: {
-                                    b: stateNode.props.client.blook,
-                                    tat: player + ":swap:" + (stateNode.state.gold || 0),
-                                    g: gold,
-                                },
-                            });
-                            stateNode.setState({ gold, gold2: gold });
-                        });
+                    run: function (coins) {
+                        if (window.location.pathname == "/tower/battle")
+                            try {
+                                getStateNode().props.setTowerCoins(coins);
+                            } catch {}
+                        else alert("You need to be in battle to run this cheat!");
                     },
                 },
             ],
@@ -2639,110 +2718,7 @@
                     },
                 },
             ],
-            racing: [
-                {
-                    name: "Instant Win",
-                    description: "Instantly Wins the race",
-                    run: function () {
-                        const stateNode = getStateNode();
-                        stateNode.setState({ progress: stateNode.state.goalAmount });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/pr",
-                            val: stateNode.state.goalAmount,
-                        });
-                    },
-                },
-                {
-                    name: "Set Questions",
-                    description: "Sets the number of questions left",
-                    inputs: [
-                        {
-                            name: "Questions",
-                            type: "number",
-                        },
-                    ],
-                    run: function (progress) {
-                        let stateNode = getStateNode();
-                        progress = stateNode.props.client.amount - progress;
-                        stateNode.setState({ progress });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/pr",
-                            val: progress,
-                        });
-                    },
-                },
-            ],
-            royale: [
-                {
-                    name: "Auto Answer (Toggle)",
-                    description: "Toggles auto answer on",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                let stateNode = getStateNode();
-                                stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Auto Answer",
-                    description: "Chooses the correct answer for you",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
-                    },
-                },
-            ],
-            rush: [
-                {
-                    name: "Set Blooks",
-                    description: "Sets amount of blooks you or your team has",
-                    inputs: [
-                        {
-                            name: "Blooks",
-                            type: "number",
-                        },
-                    ],
-                    run: function (numBlooks) {
-                        let stateNode = getStateNode();
-                        stateNode.setState({ numBlooks });
-                        stateNode.props.liveGameController.setVal({
-                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/bs",
-                            val: numBlooks,
-                        });
-                    },
-                },
-                {
-                    name: "Set Defense",
-                    description: "Sets amount of defense you or your team has (Max 4)",
-                    inputs: [
-                        {
-                            name: "Defense (max 4)",
-                            type: "number",
-                            max: 4,
-                        },
-                    ],
-                    run: function (defense) {
-                        let numDefense = Math.min(defense, 4);
-                        let stateNode = getStateNode();
-                        stateNode.setState({ numDefense });
-                        stateNode.props.liveGameController.setVal({
-                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/d",
-                            val: numDefense,
-                        });
-                    },
-                },
-            ],
-            workshop: [
+            toy: [
                 {
                     name: "Remove Distractions",
                     description: "Removes all enemy distractions",
@@ -2820,6 +2796,36 @@
                             });
                             stateNode.setState({ toys: players[target].t });
                         });
+                    },
+                },
+            ],
+            flappy: [
+                {
+                    name: "Toggle Ghost",
+                    description: "Lets you go through the pipes",
+                    type: "toggle",
+                    enabled: false,
+                    run: function () {
+                        this.enabled = !this.enabled;
+                        for (const body of Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[0].current.config.sceneConfig.physics.world.bodies.entries) {
+                            if (!body.gameObject.frame.texture.key.startsWith("blook")) continue;
+                            body.checkCollision.none = this.enabled;
+                            body.gameObject.setAlpha(this.enabled ? 0.5 : 1);
+                            break;
+                        }
+                    },
+                },
+                {
+                    name: "Set Score",
+                    description: "Sets flappy blook score",
+                    inputs: [
+                        {
+                            name: "Score",
+                            type: "number",
+                        },
+                    ],
+                    run: function (score) {
+                        Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[1](score || 0);
                     },
                 },
             ],
@@ -3254,37 +3260,29 @@
         };
         
         addMode("Global", "https://media.blooket.com/image/upload/v1661496291/Media/uiTest/Games_Played_2.svg", Cheats.global)();
-        addMode(
-            '<span style="font-size: 18px">Pirate\'s Voyage</span>',
-            "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPjxnIGlkPSJCb2F0Ij48cGF0aCBkPSJNMTcwLjQsNTYuMDU0Yy02OC43ODgsMTAuMTc0IC0xMTUuOTcxLDU2LjkzOCAtMTQ1LjQxMSwxMzMuNzVsMTUuNDY5LDcuNzM0YzMwLjk2MiwtMjguMTc1IDc0LjcwNSwtMzcuNzg3IDEzMi4zMjIsLTI3LjI1bDAsLTE3LjYxMWMtMjUuNjI5LC0yNy45NTIgLTI2Ljk2NiwtNTYuNzcyIDAuNzE0LC04Ni42MjhsLTMuMDk0LC05Ljk5NVoiIHN0eWxlPSJmaWxsOiNmNmUwYmQ7Ii8+PHBhdGggZD0iTTE5OS42NzMsNjAuODEzYzMyLjc4NCw0Mi45ODIgNjUuODIyLDkwLjg4NyA5Ny4zMzcsMTM5LjU4MWwtNi42NjMsMGMtMTIuMDg1LC0zMS4xMTEgLTU3Ljg4MiwtMzkuNjk0IC05MS42MjYsLTI3LjI1YzIyLjUxNCwtMzQuNTc5IDE3Ljc5NiwtNzIuNjczIDAuOTUyLC0xMTIuMzMxWiIgc3R5bGU9ImZpbGw6I2Y2ZTBiZDsiLz48cGF0aCBkPSJNNjkuNDQ4LDE5Ny41MzhjMCwwIC01OS43MDcsLTE1LjI0MyAtNjguMzk4LC0xNy40NjJjLTAuMDc2LC0wLjAxOSAtMC4xNTQsMC4wMiAtMC4xODQsMC4wOTJjLTAuMDMsMC4wNzIgLTAuMDAyLDAuMTU1IDAuMDY1LDAuMTk1YzkuNjgyLDUuNzc1IDkxLjY0Nyw1NC42NTggOTEuNjQ3LDU0LjY1OGwtMjMuMTMsLTM3LjQ4M1oiIHN0eWxlPSJmaWxsOiM4ZDZlNDE7Ii8+PHBhdGggZD0iTTE2NC40NSw0Ny45MDNjMCwtNS4zNTMgNC4zNDYsLTkuNjk4IDkuNjk4LC05LjY5OGwxOS4zOTcsLTBjNS4zNTIsLTAgOS42OTgsNC4zNDUgOS42OTgsOS42OThsLTAsMTU2Ljk1M2MtMCw1LjM1MyAtNC4zNDYsOS42OTggLTkuNjk4LDkuNjk4bC0xOS4zOTcsMGMtNS4zNTIsMCAtOS42OTgsLTQuMzQ1IC05LjY5OCwtOS42OThsMCwtMTU2Ljk1M1oiIHN0eWxlPSJmaWxsOiM3ZjY4NDU7Ii8+PHBhdGggZD0iTTI2My45OTMsMjU2LjEwM2MyMi4xNzEsLTE0LjcxIDM2LjAwNywtMzUuNTE1IDM2LjAwNywtNTguNTY1bC0yMzAuNTUyLDBjMCwyMy43MTMgMTQuNjQzLDQ1LjA1IDM3Ljk0LDU5LjgxOWM5Ljg3NSwtMy43MjkgMjAuMDQxLC0xMS4zMzQgMzAuNDYzLC0yMi4zMzZjMzIuODExLDM1LjQ1NSA2NC4wNjksMzUuOTQzIDkzLjcwOCwwYzYuODM4LDkuNjc3IDE3LjczNiwxNi42NDYgMzIuNDM0LDIxLjA4MloiIHN0eWxlPSJmaWxsOiNiNjkyNWY7Ii8+PC9nPjwvc3ZnPg==",
-            Cheats.voyage
-        );
         addMode("Gold Quest", "https://media.blooket.com/image/upload/v1661496292/Media/uiTest/Gold.svg", Cheats.gold);
-        addMode("Cafe", "https://media.blooket.com/image/upload/v1655161189/Media/survivor/Pizza_lvl1.svg", Cheats.cafe);
-        addMode("Crypto Hack", "https://media.blooket.com/image/upload/v1661496293/Media/uiTest/CryptoIcon.svg", Cheats.crypto);
-        addMode('<span style="font-size: 17px">Deceptive Dinos</span>', [`<img style="height: 30px; margin-left: 8px; margin-right: 12px" src="https://media.blooket.com/image/upload/v1655161325/Media/survivor/Dog.svg">`], Cheats.dinos);
-        addMode('<span style="font-size: 18px">Tower Defense</span>', [`<img style="width: 30px; margin-right: 5px" src="https://media.blooket.com/image/upload/v1657235025/Media/survivor/Laser_Lvl1.svg">`], Cheats.defense);
+        addMode("Crypto Hack", "https://media.blooket.com/image/upload/v1661496293/Media/uiTest/CryptoIcon.svg", Cheats.hack);
+        addMode('<span style="font-size: 19px">Fishing Frenzy</span>', "https://media.blooket.com/image/upload/v1661496295/Media/uiTest/Fish_Weight.svg", Cheats.fish);
+        addMode('<span style="font-size: 18px">Pirate\'s Voyage</span>', "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj48c3ZnIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzMDAgMzAwIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zOnNlcmlmPSJodHRwOi8vd3d3LnNlcmlmLmNvbS8iIHN0eWxlPSJmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtzdHJva2UtbGluZWpvaW46cm91bmQ7c3Ryb2tlLW1pdGVybGltaXQ6MjsiPjxnIGlkPSJCb2F0Ij48cGF0aCBkPSJNMTcwLjQsNTYuMDU0Yy02OC43ODgsMTAuMTc0IC0xMTUuOTcxLDU2LjkzOCAtMTQ1LjQxMSwxMzMuNzVsMTUuNDY5LDcuNzM0YzMwLjk2MiwtMjguMTc1IDc0LjcwNSwtMzcuNzg3IDEzMi4zMjIsLTI3LjI1bDAsLTE3LjYxMWMtMjUuNjI5LC0yNy45NTIgLTI2Ljk2NiwtNTYuNzcyIDAuNzE0LC04Ni42MjhsLTMuMDk0LC05Ljk5NVoiIHN0eWxlPSJmaWxsOiNmNmUwYmQ7Ii8+PHBhdGggZD0iTTE5OS42NzMsNjAuODEzYzMyLjc4NCw0Mi45ODIgNjUuODIyLDkwLjg4NyA5Ny4zMzcsMTM5LjU4MWwtNi42NjMsMGMtMTIuMDg1LC0zMS4xMTEgLTU3Ljg4MiwtMzkuNjk0IC05MS42MjYsLTI3LjI1YzIyLjUxNCwtMzQuNTc5IDE3Ljc5NiwtNzIuNjczIDAuOTUyLC0xMTIuMzMxWiIgc3R5bGU9ImZpbGw6I2Y2ZTBiZDsiLz48cGF0aCBkPSJNNjkuNDQ4LDE5Ny41MzhjMCwwIC01OS43MDcsLTE1LjI0MyAtNjguMzk4LC0xNy40NjJjLTAuMDc2LC0wLjAxOSAtMC4xNTQsMC4wMiAtMC4xODQsMC4wOTJjLTAuMDMsMC4wNzIgLTAuMDAyLDAuMTU1IDAuMDY1LDAuMTk1YzkuNjgyLDUuNzc1IDkxLjY0Nyw1NC42NTggOTEuNjQ3LDU0LjY1OGwtMjMuMTMsLTM3LjQ4M1oiIHN0eWxlPSJmaWxsOiM4ZDZlNDE7Ii8+PHBhdGggZD0iTTE2NC40NSw0Ny45MDNjMCwtNS4zNTMgNC4zNDYsLTkuNjk4IDkuNjk4LC05LjY5OGwxOS4zOTcsLTBjNS4zNTIsLTAgOS42OTgsNC4zNDUgOS42OTgsOS42OThsLTAsMTU2Ljk1M2MtMCw1LjM1MyAtNC4zNDYsOS42OTggLTkuNjk4LDkuNjk4bC0xOS4zOTcsMGMtNS4zNTIsMCAtOS42OTgsLTQuMzQ1IC05LjY5OCwtOS42OThsMCwtMTU2Ljk1M1oiIHN0eWxlPSJmaWxsOiM3ZjY4NDU7Ii8+PHBhdGggZD0iTTI2My45OTMsMjU2LjEwM2MyMi4xNzEsLTE0LjcxIDM2LjAwNywtMzUuNTE1IDM2LjAwNywtNTguNTY1bC0yMzAuNTUyLDBjMCwyMy43MTMgMTQuNjQzLDQ1LjA1IDM3Ljk0LDU5LjgxOWM5Ljg3NSwtMy43MjkgMjAuMDQxLC0xMS4zMzQgMzAuNDYzLC0yMi4zMzZjMzIuODExLDM1LjQ1NSA2NC4wNjksMzUuOTQzIDkzLjcwOCwwYzYuODM4LDkuNjc3IDE3LjczNiwxNi42NDYgMzIuNDM0LDIxLjA4MloiIHN0eWxlPSJmaWxsOiNiNjkyNWY7Ii8+PC9nPjwvc3ZnPg==", Cheats.pirate);
         addMode('<span style="font-size: 16px">Tower Defense 2</span>', [`<img style="width: 30px; margin-right: 5px; rotate: 45deg" src="https://media.blooket.com/image/upload/v1593095354/Media/defense/missile.svg">`], Cheats.defense2);
-        addMode("Factory", "https://media.blooket.com/image/upload/v1661496293/Media/uiTest/Factory_Upgrades.svg", Cheats.factory);
-        addMode('<span style="font-size: 19px">Fishing Frenzy</span>', "https://media.blooket.com/image/upload/v1661496295/Media/uiTest/Fish_Weight.svg", Cheats.fishing);
-        addMode("Flappy Blook", "https://media.blooket.com/image/upload/v1645222006/Blooks/yellowBird.svg", Cheats.flappy);
-        addMode('<span style="font-size: 17px">Tower of Doom</span>', [`<img style="height: 30px; margin-left: 5px; margin-right: 10px" src="https://media.blooket.com/image/upload/v1657235023/Media/survivor/cards-05.svg">`], Cheats.doom);
-        addMode('<span style="font-size: 18px">Crazy Kingdom</span>', "https://media.blooket.com/image/upload/v1655161323/Media/survivor/Jester_lvl1.svg", Cheats.kingdom);
-        addMode("Racing", "https://media.blooket.com/image/upload/v1661496295/Media/uiTest/Racing_Progress.svg", Cheats.racing);
-        addMode("Battle Royale", "https://media.blooket.com/image/upload/v1655936179/Media/br/VS_Lightning_Bolt_Bottom.svg", Cheats.royale);
-        addMode(
-            "Blook Rush",
-            "data:image/png;base64,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",
-            Cheats.rush
-        );
         addMode('<span style="font-size: 18px">Monster Brawl</span>', [`<img style="height: 28px; margin-left: 5px; margin-right: 8px" src="https://media.blooket.com/image/upload/v1655233787/Media/survivor/xp/Blue_xp_2.svg">`], Cheats.brawl);
+        addMode('<span style="font-size: 17px">Deceptive Dinos</span>', [`<img style="height: 30px; margin-left: 8px; margin-right: 12px" src="https://media.blooket.com/image/upload/v1655161325/Media/survivor/Dog.svg">`], Cheats.dino);
+        addMode("Battle Royale", "https://media.blooket.com/image/upload/v1655936179/Media/br/VS_Lightning_Bolt_Bottom.svg", Cheats.royale);
+        addMode('<span style="font-size: 18px">Tower Defense</span>', [`<img style="width: 30px; margin-right: 5px" src="https://media.blooket.com/image/upload/v1657235025/Media/survivor/Laser_Lvl1.svg">`], Cheats.defense);
+        addMode("Cafe", "https://media.blooket.com/image/upload/v1655161189/Media/survivor/Pizza_lvl1.svg", Cheats.cafe);
+        addMode("Factory", "https://media.blooket.com/image/upload/v1661496293/Media/uiTest/Factory_Upgrades.svg", Cheats.factory);
+        addMode("Racing", "https://media.blooket.com/image/upload/v1661496295/Media/uiTest/Racing_Progress.svg", Cheats.racing);
+        addMode("Blook Rush", "data:image/png;base64,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", Cheats.rush);
+        addMode('<span style="font-size: 17px">Tower of Doom</span>', [`<img style="height: 30px; margin-left: 5px; margin-right: 10px" src="https://media.blooket.com/image/upload/v1657235023/Media/survivor/cards-05.svg">`], Cheats.tower);
+        addMode('<span style="font-size: 18px">Crazy Kingdom</span>', "https://media.blooket.com/image/upload/v1655161323/Media/survivor/Jester_lvl1.svg", Cheats.kingdom);
         addMode(
             '<span style="font-size: 15px">Santa\'s Workshop</span>',
             [
                 '<img style="height: 28px; margin-left: 3px; margin-right: 6px" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPgo8cGF0aCBzdHlsZT0iZmlsbDojRkZERTc2OyIgZD0iTTQzMy42NjEsMjM3LjgzN2MtNC40OTctNi4yMTQtNC44OC0xNC40NC0xLjIyNS0yMS4xODRjMTEuMzY1LTIwLjk2NywxNy43NzMtNDUuMDE0LDE3LjY1MS03MC41NjYKCUM0NDkuNzAxLDY0Ljg2OSwzODIuNTY0LTEuMDM3LDMwMS4zNTIsMC4wMTJjLTgwLjE4MywxLjAzNi0xNDQuODY0LDY2LjM1OS0xNDQuODY0LDE0Ni43ODhjMCwzMi41NTMsMTAuNTk1LDYyLjYzLDI4LjUyNiw4Ni45NzIKCWM3Ljc1MywxMC41MjYsNy4yMTMsMjUuMS0xLjU0MywzNC44MDhjLTEzLjI5NywxNC43NDEtNDEuOTM1LDI0LjMwNi0xMDIuNTk1LTE2LjI3N2MtNi42NTItNC40NS0xNC40NjItNi44NjQtMjIuNDY1LTYuODY0bDAsMAoJYy0xOS45NDcsMC0zNi44MzMsMTQuNjI4LTM5Ljc3NiwzNC4zNTdDNy44ODksMzUxLjgxNiw2LjUyLDUxMiwyMDYuOTY2LDUxMmg3MS4wODNDNDY2LjA1LDUxMiw1MTYuMTI3LDM1MS44MDEsNDMzLjY2MSwyMzcuODM3eiIvPgo8Zz4KCTxwYXRoIHN0eWxlPSJmaWxsOiNGRkI2NDE7IiBkPSJNMTgzLjQ3LDI2OC41ODJjLTMuOTMsNC4zNTctOS4yMDIsOC4yNjEtMTYuMjQ0LDEwLjU1MmMyNC40NjksNS44ODIsMzguODItMS4zMTksNDcuMTQ5LTEwLjU1MgoJCWM4Ljc1Ny05LjcwOCw5LjI5Ni0yNC4yODEsMS41NDMtMzQuODA4Yy0xNy45My0yNC4zNDItMjguNTI2LTU0LjQyLTI4LjUyNi04Ni45NzNjMC03NS44MzMsNTcuNTAzLTEzOC4yMjYsMTMxLjI4MS0xNDUuOTgKCQljLTUuNjg5LTAuNjAxLTExLjQ2Ny0wLjg4NC0xNy4zMjMtMC44MDljLTgwLjE4MywxLjAzNi0xNDQuODY0LDY2LjM1OS0xNDQuODY0LDE0Ni43ODhjMCwzMi41NTMsMTAuNTk1LDYyLjYzLDI4LjUyNiw4Ni45NzMKCQlDMTkyLjc2NiwyNDQuMywxOTIuMjI2LDI1OC44NzMsMTgzLjQ3LDI2OC41ODJ6Ii8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojRkZCNjQxOyIgZD0iTTQ5LjUzOSwyNzkuNzk2YzIuMTM3LTE0LjMxNywxMS42MTgtMjUuOTQyLDI0LjI4Mi0zMS4yNDVjLTQuODY2LTIuMDIyLTEwLjA5MS0zLjExLTE1LjQxMi0zLjExCgkJbDAsMGMtMTkuOTQ3LDAtMzYuODMzLDE0LjYyOC0zOS43NzYsMzQuMzU3QzcuODg5LDM1MS44MTYsNi41Miw1MTIsMjA2Ljk2Niw1MTJoMzAuOTA1QzM3LjQyNSw1MTIsMzguNzk0LDM1MS44MTYsNDkuNTM5LDI3OS43OTZ6CgkJIi8+Cgk8cGF0aCBzdHlsZT0iZmlsbDojRkZCNjQxOyIgZD0iTTgwLjUxOCwzNDQuMzM2Yy04Ljc2Niw4LjY1Ni0xMC4yNzcsMjIuMjY4LTMuNTk4LDMyLjYxOQoJCWMxOS41MDQsMzAuMjI3LDY4LjM1MSw4Ni4yODMsMTYyLjM3Miw4Ni4yODNjNTcuMjU2LDAsMTE3Ljc5MS0zNS44MDksMTI5LjA2NC05NS4wOTdjOS4zMS00OC45NjYtMTkuMjQ2LTEwOC44MjEtNzUuMzMtMTA2LjI0NwoJCWMtNDEuMDk3LDEuODg3LTY1LjEzNSwzNy40MTUtOTkuODY1LDUzLjg0MWMtMjQuMzk4LDExLjU0LTUwLjg0NCwxOC42NTEtNzcuNjg3LDIxLjMwNwoJCUMxMDIuNjk4LDMzOC4zMDYsOTAuODA1LDMzNC4xNzgsODAuNTE4LDM0NC4zMzZ6Ii8+CjwvZz4KPHBhdGggc3R5bGU9ImZpbGw6IzM4NDg0QTsiIGQ9Ik0zODguMzk0LDExMC44MzNjLTMuNTAyLDAtNi42NzQtMi4zOTYtNy41MTMtNS45NTFsLTMuNzE1LTE1LjczCgljLTAuOTgxLTQuMTUzLDEuNTkxLTguMzE1LDUuNzQzLTkuMjk1YzQuMTUyLTAuOTc5LDguMzE1LDEuNTkxLDkuMjk1LDUuNzQzbDMuNzE1LDE1LjczYzAuOTgxLDQuMTUzLTEuNTkxLDguMzE1LTUuNzQzLDkuMjk1CglDMzg5LjU4LDExMC43NjUsMzg4Ljk4MiwxMTAuODMzLDM4OC4zOTQsMTEwLjgzM3oiLz4KPHBhdGggc3R5bGU9ImZpbGw6I0ZGQjY0MTsiIGQ9Ik00MjcuNjE4LDY4Ljk5NGMwLDAsMy4xOTgsNDUuODMyLTE4LjAzMyw2Ni41OTFjLTIxLjIzMSwyMC43NTksMTQuMTU0LDUzLjMxNCw1Ni4xNDUsMjIuNjQ2CgljNi4wMzItNC40MDUsMTIuMTQzLTcuMjA0LDE4LjE4NC04Ljc2OGM3Ljc3Ny0yLjAxMiwxMy4yNDMtOC45NjcsMTMuMjQzLTE2Ljk5OWwwLDBjMC03LjcyNC01LjAzMS0xNC41OTctMTIuNDM4LTE2Ljc4NgoJYy00LjkyNS0xLjQ1Ni0xMS4xOC0yLjMyNS0xOC41MTYtMS4zMjVjMCwwLDI1LjM5My0yMi4xMzgsMTkuMTE5LTQ3Ljc1M2MtMi4wMjctOC4yOC0xMS44NTYtMTEuNzI2LTE4LjgzNi02LjgzMgoJQzQ1Ny40NjEsNjYuMDk0LDQ0My40NTQsNzIuNzY0LDQyNy42MTgsNjguOTk0eiIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K">',
             ],
-            Cheats.workshop
+            Cheats.toy
         );
+        addMode("Flappy Blook", "https://media.blooket.com/image/upload/v1645222006/Blooks/yellowBird.svg", Cheats.flappy);
         addMode("Settings", null, Cheats.settings, true);
         
         dragElement(controls, guiWrapper);

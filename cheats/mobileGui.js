@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1731294329143;
+    const timeProcessed = 1732767854558;
     let latestProcess = -1;
     const cheat = (async () => {
         /* Anti-Suspend By CryptoDude3 */
@@ -595,7 +595,385 @@
                     },
                 },
             ],
-            voyage: [
+            gold: [
+                {
+                    name: "Always Triple",
+                    description: "Always get triple gold",
+                    type: "toggle",
+                    enabled: false,
+                    data: { type: "multiply", val: 3, text: "Triple Gold!", blook: "Unicorn" },
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode._choosePrize ||= stateNode.choosePrize;
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            stateNode.choosePrize = (i) => {
+                                stateNode.state.choices[i] = this.data;
+                                stateNode._choosePrize(i);
+                            };
+                        } else {
+                            this.enabled = false;
+                            if (stateNode._choosePrize) stateNode.choosePrize = stateNode._choosePrize;
+                        }
+                    },
+                },
+                {
+                    name: "Auto Choose",
+                    description: "Automatically picks the option that would give you the most gold",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(async () => {
+                                let stateNode = getStateNode();
+                                if (stateNode.state.stage == "prize") {
+                                    stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+                                        try {
+                                            if (players == null) return;
+                                            players = Object.entries(players);
+                                            let most = 0,
+                                                max = 0,
+                                                index = -1;
+                                            for (let i = 0; i < players.length; i++) if (players[i][0] != stateNode.props.client.name && players[i][1] > most) most = players[i][1];
+                                            for (let i = 0; i < stateNode.state.choices.length; i++) {
+                                                const choice = stateNode.state.choices[i];
+                                                let value = stateNode.state.gold;
+                                                if (choice.type == "gold") value = stateNode.state.gold + choice.val || stateNode.state.gold;
+                                                else if (choice.type == "multiply" || choice.type == "divide") value = Math.round(stateNode.state.gold * choice.val) || stateNode.state.gold;
+                                                else if (choice.type == "swap") value = most || stateNode.state.gold;
+                                                else if (choice.type == "take") value = stateNode.state.gold + most * choice.val || stateNode.state.gold;
+                                                if ((value || 0) <= max) continue;
+                                                max = value;
+                                                index = i + 1;
+                                            }
+                                            document.querySelector("div[class*='choice" + index + "']")?.click();
+                                        } catch {}
+                                    });
+                                }
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Chest ESP",
+                    description: "Shows what each chest will give you",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                getStateNode().state.choices.forEach(({ text }, index) => {
+                                    let chest = document.querySelector(`div[class*='choice${index + 1}']`);
+                                    if (!chest || chest.querySelector("div")) return;
+                                    let choice = document.createElement("div");
+                                    choice.style.color = "white";
+                                    choice.style.fontFamily = "Eczar";
+                                    choice.style.fontSize = "2em";
+                                    choice.style.display = "flex";
+                                    choice.style.justifyContent = "center";
+                                    choice.style.transform = "translateY(200px)";
+                                    choice.innerText = text;
+                                    chest.append(choice);
+                                });
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Reset Players Gold",
+                    description: "Sets a player's gold to 0",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.setVal({
+                            path: "c/" + stateNode.props.client.name + "/tat",
+                            val: prompt("Who's gold would you like to reset? (Case sensitive)") + ":swap:0",
+                        });
+                    },
+                },
+                {
+                    name: "Set Gold",
+                    description: "Sets amount of gold",
+                    run: function () {
+                        let gold = parseInt(prompt("How much gold would you like?")) || 0;
+                        let stateNode = getStateNode();
+                        stateNode.setState({ gold, gold2: gold });
+                        stateNode.props.liveGameController.setVal({
+                            path: "c/" + stateNode.props.client.name + "/g",
+                            val: gold,
+                        });
+                    },
+                },
+                {
+                    name: "Swap Gold",
+                    description: "Swaps gold with someone",
+                    run: function () {
+                        const player = prompt("Who's gold would you like to swap with? (Case sensitive)");
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+                            if (!players || players[player] == null) return;
+                            const gold = players[player].g || 0;
+                            stateNode.props.liveGameController.setVal({
+                                path: "c/" + stateNode.props.client.name,
+                                val: {
+                                    b: stateNode.props.client.blook,
+                                    tat: player + ":swap:" + (stateNode.state.gold || 0),
+                                    g: gold,
+                                },
+                            });
+                            stateNode.setState({ gold, gold2: gold });
+                        });
+                    },
+                },
+            ],
+            hack: [
+                {
+                    name: "Choice ESP",
+                    description: "Shows what each choice will give you",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                let chest = document.querySelector("[class*=feedbackContainer]");
+                                if (chest.children.length <= 4) {
+                                    let choice = document.createElement("div");
+                                    choice.style.color = "white";
+                                    choice.style.fontFamily = "Inconsolata,Helvetica,monospace,sans-serif";
+                                    choice.style.fontSize = "2em";
+                                    choice.style.display = "flex";
+                                    choice.style.justifyContent = "center";
+                                    choice.style.marginTop = "675px";
+                                    choice.innerText = getStateNode().state.choices[0].text;
+                                    chest.append(choice);
+                                }
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Password ESP",
+                    description: "Highlights the correct password",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                let { state } = getStateNode();
+                                if (state.stage == "hack")
+                                    for (const button of document.querySelector("div[class*=buttonContainer]").children) {
+                                        if (button.innerText == state.correctPassword) continue;
+                                        button.style.outlineColor = "rgba(255, 64, 64, 0.8)";
+                                        button.style.backgroundColor = "rgba(255, 64, 64, 0.8)";
+                                        button.style.textShadow = "0 0 1px #f33";
+                                    }
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Always Triple",
+                    description: "Always get triple crypto",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval((state) => getStateNode().setState(state), 25, { choices: [{ type: "mult", val: 3, rate: 0.075, blook: "Brainy Bot", text: "Triple Crypto" }] });
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Auto Guess",
+                    description: "Automatically guess the correct password",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                let { state } = getStateNode();
+                                if (state.stage == "hack") for (const button of document.querySelector("div[class*=buttonContainer]").children) button.innerText == state.correctPassword && button.click();
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Remove Hack",
+                    description: "Removes an attacking hack",
+                    run: function () {
+                        getStateNode().setState({ hack: "" });
+                    },
+                },
+                {
+                    name: "Set Crypto",
+                    description: "Sets crypto",
+                    run: function () {
+                        let amount = parseInt(prompt("How much crypto would you like?")) || 0;
+                        let stateNode = getStateNode();
+                        stateNode.setState({ crypto: amount, crypto2: amount });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/cr`,
+                            val: amount,
+                        });
+                    },
+                },
+                {
+                    name: "Set Password",
+                    description: "Sets hacking password",
+                    run: function () {
+                        let password = prompt("What do you want to set your password to?");
+                        let stateNode = getStateNode();
+                        stateNode.setState({ password });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/p`,
+                            val: password,
+                        });
+                    },
+                },
+                {
+                    name: "Steal Player's Crypto",
+                    description: "Steals all of someone's crypto",
+                    run: function () {
+                        let target = prompt("Who's crypto would you like to steal?");
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
+                            let player;
+                            if (players && (player = Object.entries(players).find((x) => x[0].toLowerCase() == target.toLowerCase()))) {
+                                const cr = player[1].cr;
+                                stateNode.setState({
+                                    crypto: stateNode.state.crypto + cr,
+                                    crypto2: stateNode.state.crypto + cr,
+                                });
+                                stateNode.props.liveGameController.setVal({
+                                    path: "c/" + stateNode.props.client.name,
+                                    val: {
+                                        b: stateNode.props.client.blook,
+                                        p: stateNode.state.password,
+                                        cr: stateNode.state.crypto + cr,
+                                        tat: player[0] + ":" + cr,
+                                    },
+                                });
+                            }
+                        });
+                    },
+                },
+            ],
+            fish: [
+                {
+                    name: "Remove Distractions",
+                    description: "Removes distractions",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
+                    run: function () {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                getStateNode().setState({ party: "" });
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Frenzy",
+                    description: "Sets everyone to frenzy mode",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: stateNode.state.weight,
+                                f: "Frenzy",
+                                s: true,
+                            },
+                        });
+                    },
+                },
+                {
+                    name: "Send Distraction",
+                    description: "Sends a distraction to everyone",
+                    data: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"],
+                    run: function () {
+                        let stateNode = getStateNode();
+                        const f = this.data[Math.floor(Math.random() * this.data.length)];
+                        stateNode.safe = true;
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: stateNode.state.weight,
+                                f,
+                                s: true,
+                            },
+                        });
+                        alert(`Sent a ${f} distraction`);
+                    },
+                },
+                {
+                    name: "Set Lure",
+                    description: "Sets fishing lure (range 1 - 5)",
+                    run: function () {
+                        getStateNode().setState({ lure: Math.max(Math.min((parseInt(prompt("What would you like to set your lure to? (1 - 5)")) || 1) - 1, 4), 0) });
+                    },
+                },
+                {
+                    name: "Set Weight",
+                    description: "Sets weight",
+                    run: function () {
+                        let weight = parseInt(prompt("How much weight would you like?")) || 0;
+                        let stateNode = getStateNode();
+                        stateNode.setState({ weight, weight2: weight });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}`,
+                            val: {
+                                b: stateNode.props.client.blook,
+                                w: weight,
+                                f: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"][Math.floor(Math.random() * 9)],
+                            },
+                        });
+                    },
+                },
+            ],
+            pirate: [
                 {
                     name: "Heist ESP",
                     description: "Shows you what's under each chest during a heist",
@@ -751,6 +1129,53 @@
                     },
                 },
             ],
+            defense2: [
+                {
+                    name: "Max Tower Stats",
+                    description: "Makes all placed towers overpowered",
+                    run: function () {
+                        getStateNode().state.towers.forEach((tower) => {
+                            tower.stats.dmg = 1e6;
+                            tower.stats.fireRate = 50;
+                            tower.stats.ghostDetect = true;
+                            tower.stats.maxTargets = 1e6;
+                            tower.stats.numProjectiles &&= 100;
+                            tower.stats.range = 100;
+                            if (tower.stats.auraBuffs) for (const buff in tower.stats.auraBuffs) tower.stats.auraBuffs[buff] *= 100;
+                        });
+                    },
+                },
+                {
+                    name: "Kill Enemies",
+                    description: "Kills all the enemies",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.game.current.config.sceneConfig.enemyQueue.length = 0;
+                        stateNode.game.current.config.sceneConfig.physics.world.bodies.entries.forEach((x) => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
+                    },
+                },
+                {
+                    name: "Set Coins",
+                    description: "Sets coins",
+                    run: function () {
+                        getStateNode().setState({ coins: parseInt(prompt("How many coins would you like?")) || 0 });
+                    },
+                },
+                {
+                    name: "Set Health",
+                    description: "Sets the amount of health you have",
+                    run: function () {
+                        getStateNode().setState({ health: parseInt(prompt("How much health would you like?")) || 0 });
+                    },
+                },
+                {
+                    name: "Set Round",
+                    description: "Sets the current round",
+                    run: function () {
+                        getStateNode().setState({ round: parseInt(prompt("What round do you want to set to?")) || 0 });
+                    },
+                },
+            ],
             brawl: [
                 {
                     name: "Double Enemy XP",
@@ -866,355 +1291,7 @@
                     },
                 },
             ],
-            cafe: [
-                {
-                    name: "Max Items",
-                    description: "Maxes out items in the shop (Only usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ items: Object.keys(stateNode.state.items).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
-                        }
-                    },
-                },
-                {
-                    name: "Remove Customers",
-                    description: "Skips the current customers (Not usable in the shop)",
-                    run: function () {
-                        const stateNode = getStateNode();
-                        stateNode.state.customers.forEach((customer, i) => window.setTimeout(() => customer.blook && stateNode.removeCustomer(i, true), i * 250));
-                    },
-                },
-                {
-                    name: "Reset Abilities",
-                    description: "Resets used abilities in shop (Only usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ abilities: Object.keys(stateNode.state.abilities).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
-                        }
-                    },
-                },
-                {
-                    name: "Set Cash",
-                    description: "Sets cafe cash",
-                    run: function () {
-                        let cafeCash = parseInt(prompt("How much cash would you like?")) || 0;
-                        let stateNode = getStateNode();
-                        stateNode.setState({ cafeCash });
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}/ca`,
-                            val: cafeCash,
-                        });
-                    },
-                },
-                {
-                    name: "Stock Food",
-                    description: "Stocks all food to 99 (Not usable in the shop)",
-                    run: function () {
-                        if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
-                        else {
-                            const stateNode = getStateNode();
-                            stateNode.setState({ foods: stateNode.state.foods.map((e) => ({ ...e, stock: 99, level: 5 })) });
-                        }
-                    },
-                },
-            ],
-            crypto: [
-                {
-                    name: "Choice ESP",
-                    description: "Shows what each choice will give you",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                let chest = document.querySelector("[class*=feedbackContainer]");
-                                if (chest.children.length <= 4) {
-                                    let choice = document.createElement("div");
-                                    choice.style.color = "white";
-                                    choice.style.fontFamily = "Inconsolata,Helvetica,monospace,sans-serif";
-                                    choice.style.fontSize = "2em";
-                                    choice.style.display = "flex";
-                                    choice.style.justifyContent = "center";
-                                    choice.style.marginTop = "675px";
-                                    choice.innerText = getStateNode().state.choices[0].text;
-                                    chest.append(choice);
-                                }
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Password ESP",
-                    description: "Highlights the correct password",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                let { state } = getStateNode();
-                                if (state.stage == "hack")
-                                    for (const button of document.querySelector("div[class*=buttonContainer]").children) {
-                                        if (button.innerText == state.correctPassword) continue;
-                                        button.style.outlineColor = "rgba(255, 64, 64, 0.8)";
-                                        button.style.backgroundColor = "rgba(255, 64, 64, 0.8)";
-                                        button.style.textShadow = "0 0 1px #f33";
-                                    }
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Always Triple",
-                    description: "Always get triple crypto",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval((state) => getStateNode().setState(state), 25, { choices: [{ type: "mult", val: 3, rate: 0.075, blook: "Brainy Bot", text: "Triple Crypto" }] });
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Auto Guess",
-                    description: "Automatically guess the correct password",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                let { state } = getStateNode();
-                                if (state.stage == "hack") for (const button of document.querySelector("div[class*=buttonContainer]").children) button.innerText == state.correctPassword && button.click();
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Remove Hack",
-                    description: "Removes an attacking hack",
-                    run: function () {
-                        getStateNode().setState({ hack: "" });
-                    },
-                },
-                {
-                    name: "Set Crypto",
-                    description: "Sets crypto",
-                    run: function () {
-                        let amount = parseInt(prompt("How much crypto would you like?")) || 0;
-                        let stateNode = getStateNode();
-                        stateNode.setState({ crypto: amount, crypto2: amount });
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}/cr`,
-                            val: amount,
-                        });
-                    },
-                },
-                {
-                    name: "Set Password",
-                    description: "Sets hacking password",
-                    run: function () {
-                        let password = prompt("What do you want to set your password to?");
-                        let stateNode = getStateNode();
-                        stateNode.setState({ password });
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}/p`,
-                            val: password,
-                        });
-                    },
-                },
-                {
-                    name: "Steal Player's Crypto",
-                    description: "Steals all of someone's crypto",
-                    run: function () {
-                        let target = prompt("Who's crypto would you like to steal?");
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
-                            let player;
-                            if (players && (player = Object.entries(players).find((x) => x[0].toLowerCase() == target.toLowerCase()))) {
-                                const cr = player[1].cr;
-                                stateNode.setState({
-                                    crypto: stateNode.state.crypto + cr,
-                                    crypto2: stateNode.state.crypto + cr,
-                                });
-                                stateNode.props.liveGameController.setVal({
-                                    path: "c/" + stateNode.props.client.name,
-                                    val: {
-                                        b: stateNode.props.client.blook,
-                                        p: stateNode.state.password,
-                                        cr: stateNode.state.crypto + cr,
-                                        tat: player[0] + ":" + cr,
-                                    },
-                                });
-                            }
-                        });
-                    },
-                },
-            ],
-            defense: [
-                {
-                    name: "Earthquake",
-                    description: "Shuffles around towers",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.setState(
-                            {
-                                eventName: "Earthquake",
-                                event: {
-                                    short: "e",
-                                    color: "#805500",
-                                    icon: "fas fa-mountain",
-                                    desc: "All of your towers get mixed up",
-                                    rate: 0.02,
-                                },
-                                buyTowerName: "",
-                                buyTower: {},
-                            },
-                            () => (stateNode.eventTimeout = setTimeout(() => stateNode.setState({ event: {}, eventName: "" }), 6e3))
-                        );
-                        stateNode.tiles.forEach((row) => row.forEach((col, i) => col == 3 && (row[i] = 0)));
-                        let tiles = [];
-                        for (let y = 0; y < stateNode.tiles.length; y++) for (let x = 0; x < stateNode.tiles[y].length; x++) if (stateNode.tiles[y][x] == 0) tiles.push({ x, y });
-                        tiles.sort(() => Math.random() - Math.random());
-                        stateNode.towers.forEach((tower) => {
-                            let { x, y } = tiles.pop();
-                            tower.move(x, y, stateNode.tileSize);
-                            stateNode.tiles[y][x] = 3;
-                        });
-                    },
-                },
-                {
-                    name: "Max Tower Stats",
-                    description: "Makes all placed towers overpowered",
-                    run: function () {
-                        getStateNode().towers.forEach((tower) => {
-                            tower.range = 100;
-                            tower.fullCd = tower.cd = 0;
-                            tower.damage = 1e6;
-                        });
-                    },
-                },
-                {
-                    name: "Remove Ducks",
-                    description: "Removes ducks",
-                    run: function () {
-                        let { ducks, tiles } = getStateNode();
-                        ducks.forEach((x) => (tiles[x.y][x.x] = 0));
-                        ducks.length = 0;
-                    },
-                },
-                {
-                    name: "Remove Enemies",
-                    description: "Removes all the enemies",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.enemies = stateNode.futureEnemies = [];
-                    },
-                },
-                {
-                    name: "Remove Obstacles",
-                    description: "Lets you place towers anywhere",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.tiles = stateNode.tiles.map((row) => row.fill(0));
-                    },
-                },
-                {
-                    name: "Set Damage",
-                    description: "Sets damage",
-                    run: function () {
-                        getStateNode().dmg = parseInt(prompt("How much dmg would you like?")) || 0;
-                    },
-                },
-                {
-                    name: "Set Round",
-                    description: "Sets the current round",
-                    run: function () {
-                        getStateNode().setState({ round: parseInt(prompt("What round do you want to set to?")) || 0 });
-                    },
-                },
-                {
-                    name: "Set Tokens",
-                    description: "Sets the amount of tokens you have",
-                    run: function () {
-                        getStateNode().setState({ tokens: parseInt(prompt("How many tokens would you like?")) || 0 });
-                    },
-                },
-            ],
-            defense2: [
-                {
-                    name: "Max Tower Stats",
-                    description: "Makes all placed towers overpowered",
-                    run: function () {
-                        getStateNode().state.towers.forEach((tower) => {
-                            tower.stats.dmg = 1e6;
-                            tower.stats.fireRate = 50;
-                            tower.stats.ghostDetect = true;
-                            tower.stats.maxTargets = 1e6;
-                            tower.stats.numProjectiles &&= 100;
-                            tower.stats.range = 100;
-                            if (tower.stats.auraBuffs) for (const buff in tower.stats.auraBuffs) tower.stats.auraBuffs[buff] *= 100;
-                        });
-                    },
-                },
-                {
-                    name: "Kill Enemies",
-                    description: "Kills all the enemies",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.game.current.config.sceneConfig.enemyQueue.length = 0;
-                        stateNode.game.current.config.sceneConfig.physics.world.bodies.entries.forEach((x) => x?.gameObject?.receiveDamage?.(x.gameObject.hp, 1));
-                    },
-                },
-                {
-                    name: "Set Coins",
-                    description: "Sets coins",
-                    run: function () {
-                        getStateNode().setState({ coins: parseInt(prompt("How many coins would you like?")) || 0 });
-                    },
-                },
-                {
-                    name: "Set Health",
-                    description: "Sets the amount of health you have",
-                    run: function () {
-                        getStateNode().setState({ health: parseInt(prompt("How much health would you like?")) || 0 });
-                    },
-                },
-                {
-                    name: "Set Round",
-                    description: "Sets the current round",
-                    run: function () {
-                        getStateNode().setState({ round: parseInt(prompt("What round do you want to set to?")) || 0 });
-                    },
-                },
-            ],
-            dinos: [
+            dino: [
                 {
                     name: "Auto Choose",
                     description: "Automatically choose the best fossil when excavating",
@@ -1429,83 +1506,179 @@
                     },
                 },
             ],
-            doom: [
+            royale: [
                 {
-                    name: "Fill Deck",
-                    description: "Fills your deck with every maxed out card and artifact (Only works on towers page)",
+                    name: "Auto Answer (Toggle)",
+                    description: "Toggles auto answer on",
+                    type: "toggle",
+                    enabled: false,
+                    data: null,
                     run: function () {
-                        if (window.location.pathname == "/tower/map") {
+                        if (!this.enabled) {
+                            this.enabled = true;
+                            this.data = setInterval(() => {
+                                let stateNode = getStateNode();
+                                stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
+                            }, 50);
+                        } else {
+                            this.enabled = false;
+                            clearInterval(this.data);
+                            this.data = null;
+                        }
+                    },
+                },
+                {
+                    name: "Auto Answer",
+                    description: "Chooses the correct answer for you",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
+                    },
+                },
+            ],
+            defense: [
+                {
+                    name: "Earthquake",
+                    description: "Shuffles around towers",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.setState(
+                            {
+                                eventName: "Earthquake",
+                                event: {
+                                    short: "e",
+                                    color: "#805500",
+                                    icon: "fas fa-mountain",
+                                    desc: "All of your towers get mixed up",
+                                    rate: 0.02,
+                                },
+                                buyTowerName: "",
+                                buyTower: {},
+                            },
+                            () => (stateNode.eventTimeout = setTimeout(() => stateNode.setState({ event: {}, eventName: "" }), 6e3))
+                        );
+                        stateNode.tiles.forEach((row) => row.forEach((col, i) => col == 3 && (row[i] = 0)));
+                        let tiles = [];
+                        for (let y = 0; y < stateNode.tiles.length; y++) for (let x = 0; x < stateNode.tiles[y].length; x++) if (stateNode.tiles[y][x] == 0) tiles.push({ x, y });
+                        tiles.sort(() => Math.random() - Math.random());
+                        stateNode.towers.forEach((tower) => {
+                            let { x, y } = tiles.pop();
+                            tower.move(x, y, stateNode.tileSize);
+                            stateNode.tiles[y][x] = 3;
+                        });
+                    },
+                },
+                {
+                    name: "Max Tower Stats",
+                    description: "Makes all placed towers overpowered",
+                    run: function () {
+                        getStateNode().towers.forEach((tower) => {
+                            tower.range = 100;
+                            tower.fullCd = tower.cd = 0;
+                            tower.damage = 1e6;
+                        });
+                    },
+                },
+                {
+                    name: "Remove Ducks",
+                    description: "Removes ducks",
+                    run: function () {
+                        let { ducks, tiles } = getStateNode();
+                        ducks.forEach((x) => (tiles[x.y][x.x] = 0));
+                        ducks.length = 0;
+                    },
+                },
+                {
+                    name: "Remove Enemies",
+                    description: "Removes all the enemies",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.enemies = stateNode.futureEnemies = [];
+                    },
+                },
+                {
+                    name: "Remove Obstacles",
+                    description: "Lets you place towers anywhere",
+                    run: function () {
+                        let stateNode = getStateNode();
+                        stateNode.tiles = stateNode.tiles.map((row) => row.fill(0));
+                    },
+                },
+                {
+                    name: "Set Damage",
+                    description: "Sets damage",
+                    run: function () {
+                        getStateNode().dmg = parseInt(prompt("How much dmg would you like?")) || 0;
+                    },
+                },
+                {
+                    name: "Set Round",
+                    description: "Sets the current round",
+                    run: function () {
+                        getStateNode().setState({ round: parseInt(prompt("What round do you want to set to?")) || 0 });
+                    },
+                },
+                {
+                    name: "Set Tokens",
+                    description: "Sets the amount of tokens you have",
+                    run: function () {
+                        getStateNode().setState({ tokens: parseInt(prompt("How many tokens would you like?")) || 0 });
+                    },
+                },
+            ],
+            cafe: [
+                {
+                    name: "Max Items",
+                    description: "Maxes out items in the shop (Only usable in the shop)",
+                    run: function () {
+                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
+                        else {
                             const stateNode = getStateNode();
-                            stateNode.props.tower.artifacts =
-                                "Medical Kit|Fury Relic|Survival Guide|Steel Socks|Piggy Bank|Lucky Feather|Coupon|Cheese|Tasty Egg|Training Weights|Mighty Shield|Toxic Waste|Lifeline Totem|Cursed Hourglass|Band-Aid|Elder Coins|Captain's Anchor|Chess Pieces|Pink Hippo|Anorak's Wizard Cap|Dave's Doggo|Anubis' Obelisk|Farm Tractor|Magic Seedling|Just A Bone|Cozy Igloo|King's Crown|Sacred Scroll".split(
-                                    "|"
-                                );
-                            stateNode.props.tower.cards =
-                                "Chick,🌽|Chicken,🌽|Cow,🌽|Goat,🌽|Horse,🌽|Pig,🌽|Sheep,🌽|Duck,🌽|Dog,🌽|Cat,🐾|Rabbit,🐾|Goldfish,🐾|Hamster,🐾|Turtle,🐾|Kitten,🐾|Puppy,🐾|Bear,🌲|Moose,🌲|Fox,🌲|Raccoon,🌲|Squirrel,🌲|Owl,🌲|Hedgehog,🌲|Baby Penguin,❄️|Penguin,❄️|Arctic Fox,❄️|Snowy Owl,❄️|Polar Bear,❄️|Arctic Hare,❄️|Seal,❄️|Walrus,❄️|Tiger,🌴|Panther,🌴|Cockatoo,🌴|Orangutan,🌴|Anaconda,🌴|Macaw,🌴|Jaguar,🌴|Capuchin,🌴|Toucan,🌴|Parrot,🌴|Elf,⚔️|Witch,⚔️|Wizard,⚔️|Fairy,⚔️|Slime Monster,⚔️|Jester,⚔️|Dragon,⚔️|Unicorn,⚔️|Queen,⚔️|King,⚔️|Snow Globe,☃️|Holiday Gift,☃️|Hot Chocolate,☃️|Gingerbread Man,☃️|Gingerbread House,☃️|Holiday Wreath,☃️|Snowman,☃️|Santa Claus,☃️|Two of Spades,🏰|Eat Me,🏰|Drink Me,🏰|Alice,🏰|Queen of Hearts,🏰|Dormouse,🏰|White Rabbit,🏰|Cheshire Cat,🏰|Caterpillar,🏰|Mad Hatter,🏰|King of Hearts,🏰"
-                                    .split("|")
-                                    .map((x) => {
-                                        const [blook, c] = x.split(",");
-                                        return { strength: 20, charisma: 20, wisdom: 20, class: c, blook };
-                                    });
-                            try {
-                                stateNode.props.addTowerNode();
-                            } catch {}
-                            stateNode.setState({ showDeck: false });
-                        } else alert("You need to be on the map to run this cheat!");
+                            stateNode.setState({ items: Object.keys(stateNode.state.items).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
+                        }
                     },
                 },
                 {
-                    name: "Max Cards",
-                    description: "Maxes out all the cards in your deck",
-                    run: function () {
-                        if (window.location.pathname == "/tower/map") {
-                            const stateNode = getStateNode();
-                            stateNode.props.tower.cards.forEach((card) => {
-                                card.strength = 20;
-                                card.charisma = 20;
-                                card.wisdom = 20;
-                            });
-                            try {
-                                stateNode.forceUpdate();
-                            } catch {}
-                        } else alert("You need to be on the map to run this cheat!");
-                    },
-                },
-                {
-                    name: "Max Health",
-                    description: "Fills the player's health",
-                    run: function () {
-                        if (window.location.pathname == "/tower/battle") getStateNode().setState({ myHealth: 100, myLife: 100 });
-                        else alert("You need to be in battle to run this cheat!");
-                    },
-                },
-                {
-                    name: "Max Card Stats",
-                    description: "Maxes out player's current card (Only works on attribute select page)",
+                    name: "Remove Customers",
+                    description: "Skips the current customers (Not usable in the shop)",
                     run: function () {
                         const stateNode = getStateNode();
-                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
-                        else stateNode.setState({ myCard: { ...stateNode.state.myCard, strength: 20, charisma: 20, wisdom: 20 } });
+                        stateNode.state.customers.forEach((customer, i) => window.setTimeout(() => customer.blook && stateNode.removeCustomer(i, true), i * 250));
                     },
                 },
                 {
-                    name: "Min Enemy Stats",
-                    description: "Makes the enemy card stats all 0 (Only works on attribute select page)",
+                    name: "Reset Abilities",
+                    description: "Resets used abilities in shop (Only usable in the shop)",
                     run: function () {
-                        const stateNode = getStateNode();
-                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
-                        else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
+                        if (window.location.pathname !== "/cafe/shop") alert("This can only be run in the shop");
+                        else {
+                            const stateNode = getStateNode();
+                            stateNode.setState({ abilities: Object.keys(stateNode.state.abilities).reduce((obj, item) => ((obj[item] = 5), obj), {}) });
+                        }
                     },
                 },
                 {
-                    name: "Set Coins",
-                    description: "Try's to set amount of tower coins you have",
+                    name: "Set Cash",
+                    description: "Sets cafe cash",
                     run: function () {
-                        if (window.location.pathname == "/tower/battle")
-                            try {
-                                getStateNode().props.setTowerCoins(parseInt(prompt("How many coins would you like?")) || 0);
-                            } catch {}
-                        else alert("You need to be in battle to run this cheat!");
+                        let cafeCash = parseInt(prompt("How much cash would you like?")) || 0;
+                        let stateNode = getStateNode();
+                        stateNode.setState({ cafeCash });
+                        stateNode.props.liveGameController.setVal({
+                            path: `c/${stateNode.props.client.name}/ca`,
+                            val: cafeCash,
+                        });
+                    },
+                },
+                {
+                    name: "Stock Food",
+                    description: "Stocks all food to 99 (Not usable in the shop)",
+                    run: function () {
+                        if (window.location.pathname !== "/cafe") alert("This can't be run in the shop");
+                        else {
+                            const stateNode = getStateNode();
+                            stateNode.setState({ foods: stateNode.state.foods.map((e) => ({ ...e, stock: 99, level: 5 })) });
+                        }
                     },
                 },
             ],
@@ -1690,250 +1863,138 @@
                     },
                 },
             ],
-            fishing: [
+            racing: [
                 {
-                    name: "Remove Distractions",
-                    description: "Removes distractions",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
+                    name: "Instant Win",
+                    description: "Instantly Wins the race",
                     run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                getStateNode().setState({ party: "" });
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Frenzy",
-                    description: "Sets everyone to frenzy mode",
-                    run: function () {
-                        let stateNode = getStateNode();
+                        const stateNode = getStateNode();
+                        stateNode.setState({ progress: stateNode.state.goalAmount });
                         stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: stateNode.state.weight,
-                                f: "Frenzy",
-                                s: true,
-                            },
+                            path: "c/" + stateNode.props.client.name + "/pr",
+                            val: stateNode.state.goalAmount,
                         });
                     },
                 },
                 {
-                    name: "Send Distraction",
-                    description: "Sends a distraction to everyone",
-                    data: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"],
+                    name: "Set Questions",
+                    description: "Sets the number of questions left",
                     run: function () {
                         let stateNode = getStateNode();
-                        const f = this.data[Math.floor(Math.random() * this.data.length)];
-                        stateNode.safe = true;
+                        let progress = stateNode.props.client.amount - (parseInt(prompt("How many questions left do you want?")) || 0);
+                        stateNode.setState({ progress });
                         stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: stateNode.state.weight,
-                                f,
-                                s: true,
-                            },
-                        });
-                        alert(`Sent a ${f} distraction`);
-                    },
-                },
-                {
-                    name: "Set Lure",
-                    description: "Sets fishing lure (range 1 - 5)",
-                    run: function () {
-                        getStateNode().setState({ lure: Math.max(Math.min((parseInt(prompt("What would you like to set your lure to? (1 - 5)")) || 1) - 1, 4), 0) });
-                    },
-                },
-                {
-                    name: "Set Weight",
-                    description: "Sets weight",
-                    run: function () {
-                        let weight = parseInt(prompt("How much weight would you like?")) || 0;
-                        let stateNode = getStateNode();
-                        stateNode.setState({ weight, weight2: weight });
-                        stateNode.props.liveGameController.setVal({
-                            path: `c/${stateNode.props.client.name}`,
-                            val: {
-                                b: stateNode.props.client.blook,
-                                w: weight,
-                                f: ["Crab", "Jellyfish", "Frog", "Pufferfish", "Octopus", "Narwhal", "Megalodon", "Blobfish", "Baby Shark"][Math.floor(Math.random() * 9)],
-                            },
+                            path: "c/" + stateNode.props.client.name + "/pr",
+                            val: progress,
                         });
                     },
                 },
             ],
-            flappy: [
+            rush: [
                 {
-                    name: "Toggle Ghost",
-                    description: "Lets you go through the pipes",
-                    type: "toggle",
-                    enabled: false,
+                    name: "Set Blooks",
+                    description: "Sets amount of blooks you or your team has",
                     run: function () {
-                        this.enabled = !this.enabled;
-                        for (const body of Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[0].current.config.sceneConfig.physics.world.bodies.entries) {
-                            if (!body.gameObject.frame.texture.key.startsWith("blook")) continue;
-                            body.checkCollision.none = this.enabled;
-                            body.gameObject.setAlpha(this.enabled ? 0.5 : 1);
-                            break;
-                        }
+                        const numBlooks = parseInt(prompt("How many blooks do you want?")) || 0;
+                        let stateNode = getStateNode();
+                        stateNode.setState({ numBlooks });
+                        stateNode.props.liveGameController.setVal({
+                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/bs",
+                            val: numBlooks,
+                        });
                     },
                 },
                 {
-                    name: "Set Score",
-                    description: "Sets flappy blook score",
+                    name: "Set Defense",
+                    description: "Sets amount of defense you or your team has (Max 4)",
                     run: function () {
-                        Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[1](parseInt(prompt("What do you want to set your score to?")) || 0);
+                        const numDefense = Math.min(parseInt(prompt("How much defense do you want? (Max 4)")) || 0, 4);
+                        let stateNode = getStateNode();
+                        stateNode.setState({ numDefense });
+                        stateNode.props.liveGameController.setVal({
+                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/d",
+                            val: numDefense,
+                        });
                     },
                 },
             ],
-            gold: [
+            tower: [
                 {
-                    name: "Always Triple",
-                    description: "Always get triple gold",
-                    type: "toggle",
-                    enabled: false,
-                    data: { type: "multiply", val: 3, text: "Triple Gold!", blook: "Unicorn" },
+                    name: "Fill Deck",
+                    description: "Fills your deck with every maxed out card and artifact (Only works on towers page)",
                     run: function () {
-                        let stateNode = getStateNode();
-                        stateNode._choosePrize ||= stateNode.choosePrize;
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            stateNode.choosePrize = (i) => {
-                                stateNode.state.choices[i] = this.data;
-                                stateNode._choosePrize(i);
-                            };
-                        } else {
-                            this.enabled = false;
-                            if (stateNode._choosePrize) stateNode.choosePrize = stateNode._choosePrize;
-                        }
-                    },
-                },
-                {
-                    name: "Auto Choose",
-                    description: "Automatically picks the option that would give you the most gold",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(async () => {
-                                let stateNode = getStateNode();
-                                if (stateNode.state.stage == "prize") {
-                                    stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
-                                        try {
-                                            if (players == null) return;
-                                            players = Object.entries(players);
-                                            let most = 0,
-                                                max = 0,
-                                                index = -1;
-                                            for (let i = 0; i < players.length; i++) if (players[i][0] != stateNode.props.client.name && players[i][1] > most) most = players[i][1];
-                                            for (let i = 0; i < stateNode.state.choices.length; i++) {
-                                                const choice = stateNode.state.choices[i];
-                                                let value = stateNode.state.gold;
-                                                if (choice.type == "gold") value = stateNode.state.gold + choice.val || stateNode.state.gold;
-                                                else if (choice.type == "multiply" || choice.type == "divide") value = Math.round(stateNode.state.gold * choice.val) || stateNode.state.gold;
-                                                else if (choice.type == "swap") value = most || stateNode.state.gold;
-                                                else if (choice.type == "take") value = stateNode.state.gold + most * choice.val || stateNode.state.gold;
-                                                if ((value || 0) <= max) continue;
-                                                max = value;
-                                                index = i + 1;
-                                            }
-                                            document.querySelector("div[class*='choice" + index + "']")?.click();
-                                        } catch {}
+                        if (window.location.pathname == "/tower/map") {
+                            const stateNode = getStateNode();
+                            stateNode.props.tower.artifacts =
+                                "Medical Kit|Fury Relic|Survival Guide|Steel Socks|Piggy Bank|Lucky Feather|Coupon|Cheese|Tasty Egg|Training Weights|Mighty Shield|Toxic Waste|Lifeline Totem|Cursed Hourglass|Band-Aid|Elder Coins|Captain's Anchor|Chess Pieces|Pink Hippo|Anorak's Wizard Cap|Dave's Doggo|Anubis' Obelisk|Farm Tractor|Magic Seedling|Just A Bone|Cozy Igloo|King's Crown|Sacred Scroll".split(
+                                    "|"
+                                );
+                            stateNode.props.tower.cards =
+                                "Chick,🌽|Chicken,🌽|Cow,🌽|Goat,🌽|Horse,🌽|Pig,🌽|Sheep,🌽|Duck,🌽|Dog,🌽|Cat,🐾|Rabbit,🐾|Goldfish,🐾|Hamster,🐾|Turtle,🐾|Kitten,🐾|Puppy,🐾|Bear,🌲|Moose,🌲|Fox,🌲|Raccoon,🌲|Squirrel,🌲|Owl,🌲|Hedgehog,🌲|Baby Penguin,❄️|Penguin,❄️|Arctic Fox,❄️|Snowy Owl,❄️|Polar Bear,❄️|Arctic Hare,❄️|Seal,❄️|Walrus,❄️|Tiger,🌴|Panther,🌴|Cockatoo,🌴|Orangutan,🌴|Anaconda,🌴|Macaw,🌴|Jaguar,🌴|Capuchin,🌴|Toucan,🌴|Parrot,🌴|Elf,⚔️|Witch,⚔️|Wizard,⚔️|Fairy,⚔️|Slime Monster,⚔️|Jester,⚔️|Dragon,⚔️|Unicorn,⚔️|Queen,⚔️|King,⚔️|Snow Globe,☃️|Holiday Gift,☃️|Hot Chocolate,☃️|Gingerbread Man,☃️|Gingerbread House,☃️|Holiday Wreath,☃️|Snowman,☃️|Santa Claus,☃️|Two of Spades,🏰|Eat Me,🏰|Drink Me,🏰|Alice,🏰|Queen of Hearts,🏰|Dormouse,🏰|White Rabbit,🏰|Cheshire Cat,🏰|Caterpillar,🏰|Mad Hatter,🏰|King of Hearts,🏰"
+                                    .split("|")
+                                    .map((x) => {
+                                        const [blook, c] = x.split(",");
+                                        return { strength: 20, charisma: 20, wisdom: 20, class: c, blook };
                                     });
-                                }
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
+                            try {
+                                stateNode.props.addTowerNode();
+                            } catch {}
+                            stateNode.setState({ showDeck: false });
+                        } else alert("You need to be on the map to run this cheat!");
                     },
                 },
                 {
-                    name: "Chest ESP",
-                    description: "Shows what each chest will give you",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
+                    name: "Max Cards",
+                    description: "Maxes out all the cards in your deck",
                     run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                getStateNode().state.choices.forEach(({ text }, index) => {
-                                    let chest = document.querySelector(`div[class*='choice${index + 1}']`);
-                                    if (!chest || chest.querySelector("div")) return;
-                                    let choice = document.createElement("div");
-                                    choice.style.color = "white";
-                                    choice.style.fontFamily = "Eczar";
-                                    choice.style.fontSize = "2em";
-                                    choice.style.display = "flex";
-                                    choice.style.justifyContent = "center";
-                                    choice.style.transform = "translateY(200px)";
-                                    choice.innerText = text;
-                                    chest.append(choice);
-                                });
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Reset Players Gold",
-                    description: "Sets a player's gold to 0",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/tat",
-                            val: prompt("Who's gold would you like to reset? (Case sensitive)") + ":swap:0",
-                        });
-                    },
-                },
-                {
-                    name: "Set Gold",
-                    description: "Sets amount of gold",
-                    run: function () {
-                        let gold = parseInt(prompt("How much gold would you like?")) || 0;
-                        let stateNode = getStateNode();
-                        stateNode.setState({ gold, gold2: gold });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/g",
-                            val: gold,
-                        });
-                    },
-                },
-                {
-                    name: "Swap Gold",
-                    description: "Swaps gold with someone",
-                    run: function () {
-                        const player = prompt("Who's gold would you like to swap with? (Case sensitive)");
-                        let stateNode = getStateNode();
-                        stateNode.props.liveGameController.getDatabaseVal("c", (players) => {
-                            if (!players || players[player] == null) return;
-                            const gold = players[player].g || 0;
-                            stateNode.props.liveGameController.setVal({
-                                path: "c/" + stateNode.props.client.name,
-                                val: {
-                                    b: stateNode.props.client.blook,
-                                    tat: player + ":swap:" + (stateNode.state.gold || 0),
-                                    g: gold,
-                                },
+                        if (window.location.pathname == "/tower/map") {
+                            const stateNode = getStateNode();
+                            stateNode.props.tower.cards.forEach((card) => {
+                                card.strength = 20;
+                                card.charisma = 20;
+                                card.wisdom = 20;
                             });
-                            stateNode.setState({ gold, gold2: gold });
-                        });
+                            try {
+                                stateNode.forceUpdate();
+                            } catch {}
+                        } else alert("You need to be on the map to run this cheat!");
+                    },
+                },
+                {
+                    name: "Max Health",
+                    description: "Fills the player's health",
+                    run: function () {
+                        if (window.location.pathname == "/tower/battle") getStateNode().setState({ myHealth: 100, myLife: 100 });
+                        else alert("You need to be in battle to run this cheat!");
+                    },
+                },
+                {
+                    name: "Max Card Stats",
+                    description: "Maxes out player's current card (Only works on attribute select page)",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
+                        else stateNode.setState({ myCard: { ...stateNode.state.myCard, strength: 20, charisma: 20, wisdom: 20 } });
+                    },
+                },
+                {
+                    name: "Min Enemy Stats",
+                    description: "Makes the enemy card stats all 0 (Only works on attribute select page)",
+                    run: function () {
+                        const stateNode = getStateNode();
+                        if (stateNode.state.phase !== "select") alert("You must be on the attribute selection page!");
+                        else stateNode.setState({ enemyCard: { ...stateNode.state.enemyCard, strength: 0, charisma: 0, wisdom: 0 } });
+                    },
+                },
+                {
+                    name: "Set Coins",
+                    description: "Try's to set amount of tower coins you have",
+                    run: function () {
+                        if (window.location.pathname == "/tower/battle")
+                            try {
+                                getStateNode().props.setTowerCoins(parseInt(prompt("How many coins would you like?")) || 0);
+                            } catch {}
+                        else alert("You need to be in battle to run this cheat!");
                     },
                 },
             ],
@@ -2015,92 +2076,7 @@
                     },
                 },
             ],
-            racing: [
-                {
-                    name: "Instant Win",
-                    description: "Instantly Wins the race",
-                    run: function () {
-                        const stateNode = getStateNode();
-                        stateNode.setState({ progress: stateNode.state.goalAmount });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/pr",
-                            val: stateNode.state.goalAmount,
-                        });
-                    },
-                },
-                {
-                    name: "Set Questions",
-                    description: "Sets the number of questions left",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        let progress = stateNode.props.client.amount - (parseInt(prompt("How many questions left do you want?")) || 0);
-                        stateNode.setState({ progress });
-                        stateNode.props.liveGameController.setVal({
-                            path: "c/" + stateNode.props.client.name + "/pr",
-                            val: progress,
-                        });
-                    },
-                },
-            ],
-            royale: [
-                {
-                    name: "Auto Answer (Toggle)",
-                    description: "Toggles auto answer on",
-                    type: "toggle",
-                    enabled: false,
-                    data: null,
-                    run: function () {
-                        if (!this.enabled) {
-                            this.enabled = true;
-                            this.data = setInterval(() => {
-                                let stateNode = getStateNode();
-                                stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
-                            }, 50);
-                        } else {
-                            this.enabled = false;
-                            clearInterval(this.data);
-                            this.data = null;
-                        }
-                    },
-                },
-                {
-                    name: "Auto Answer",
-                    description: "Chooses the correct answer for you",
-                    run: function () {
-                        let stateNode = getStateNode();
-                        stateNode?.onAnswer?.(true, stateNode.props.client.question.correctAnswers[0]);
-                    },
-                },
-            ],
-            rush: [
-                {
-                    name: "Set Blooks",
-                    description: "Sets amount of blooks you or your team has",
-                    run: function () {
-                        const numBlooks = parseInt(prompt("How many blooks do you want?")) || 0;
-                        let stateNode = getStateNode();
-                        stateNode.setState({ numBlooks });
-                        stateNode.props.liveGameController.setVal({
-                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/bs",
-                            val: numBlooks,
-                        });
-                    },
-                },
-                {
-                    name: "Set Defense",
-                    description: "Sets amount of defense you or your team has (Max 4)",
-                    run: function () {
-                        const numDefense = Math.min(parseInt(prompt("How much defense do you want? (Max 4)")) || 0, 4);
-                        let stateNode = getStateNode();
-                        stateNode.setState({ numDefense });
-                        stateNode.props.liveGameController.setVal({
-                            path: (stateNode.isTeam ? "a/" : "c/") + stateNode.props.client.name + "/d",
-                            val: numDefense,
-                        });
-                    },
-                },
-            ],
-            workshop: [
+            toy: [
                 {
                     name: "Remove Distractions",
                     description: "Removes all enemy distractions",
@@ -2163,6 +2139,30 @@
                                 () => setTimeout(() => stateNode.setState({ choosingPlayer: true }), 300)
                             );
                         });
+                    },
+                },
+            ],
+            flappy: [
+                {
+                    name: "Toggle Ghost",
+                    description: "Lets you go through the pipes",
+                    type: "toggle",
+                    enabled: false,
+                    run: function () {
+                        this.enabled = !this.enabled;
+                        for (const body of Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[0].current.config.sceneConfig.physics.world.bodies.entries) {
+                            if (!body.gameObject.frame.texture.key.startsWith("blook")) continue;
+                            body.checkCollision.none = this.enabled;
+                            body.gameObject.setAlpha(this.enabled ? 0.5 : 1);
+                            break;
+                        }
+                    },
+                },
+                {
+                    name: "Set Score",
+                    description: "Sets flappy blook score",
+                    run: function () {
+                        Object.values(document.querySelector("#phaser-bouncy"))[0].return.updateQueue.lastEffect.deps[1](parseInt(prompt("What do you want to set your score to?")) || 0);
                     },
                 },
             ],
@@ -2232,54 +2232,98 @@
         }
         function getSite(capitalize) {
             switch (window.location.pathname) {
-                case "/play/racing":
-                    return capitalize ? "Racing" : "racing";
+                case "/play/gold":
+                case "/play/gold/final":
+                case "/gold/play/landing":
+                    return capitalize ? "Gold Quest" : "gold";
+                case "/play/hack":
+                case "/play/hack/final":
+                case "/hack/play/landing":
+                    return capitalize ? "Crypto" : "hack";
+                case "/play/fishing":
+                case "/play/fishing/final":
+                case "/fish/play/landing":
+                    return capitalize ? "Fishing Frenzy" : "fish";
                 case "/play/pirate":
-                    return capitalize ? "Pirate's Voyage" : "voyage";
-                case "/play/factory":
-                    return capitalize ? "Factory" : "factory";
-                case "/play/classic/get-ready":
-                case "/play/classic/question":
-                case "/play/classic/answer/sent":
-                case "/play/classic/answer/result":
-                case "/play/classic/standings":
-                    return capitalize ? "Classic" : "classic";
+                case "/play/pirate/final":
+                case "/pirate/play/landing":
+                    return capitalize ? "Pirate's Voyage" : "pirate";
+                case "/play/defense2/load":
+                case "/play/defense2":
+                case "/play/defense2/final":
+                case "/defense2/play/landing":
+                    return capitalize ? "Tower Defense 2" : "defense2";
+                case "/play/brawl/start":
+                case "/play/brawl/settings":
+                case "/play/brawl":
+                case "/play/brawl/final":
+                case "/brawl/play/landing":
+                    return capitalize ? "Monster Brawl" : "brawl";
+                case "/play/dino":
+                case "/play/dino/final":
+                case "/dino/play/landing":
+                    return capitalize ? "Deceptive Dinos" : "dino";
                 case "/play/battle-royale/match/preview":
                 case "/play/battle-royale/question":
                 case "/play/battle-royale/answer/sent":
                 case "/play/battle-royale/answer/result":
                 case "/play/battle-royale/match/result":
+                case "/play/battle-royale/final":
+                case "/royale/play/landing":
                     return capitalize ? "Battle Royale" : "royale";
-                case "/play/toy":
-                    return capitalize ? "Santa's Workshop" : "workshop";
-                case "/play/gold":
-                    return capitalize ? "Gold Quest" : "gold";
-                case "/play/brawl":
-                    return capitalize ? "Monster Brawl" : "brawl";
-                case "/play/hack":
-                    return capitalize ? "Crypto Hack" : "hack";
-                case "/play/fishing":
-                    return capitalize ? "Fishing Frenzy" : "fishing";
+                case "/defense/load":
+                case "/defense":
+                case "/defense/final":
+                case "/defense/play/landing":
+                    return capitalize ? "Tower Defense" : "defense";
+                case "/cafe/load":
+                case "/cafe":
+                case "/cafe/shop":
+                case "/cafe/final":
+                case "/cafe/play/landing":
+                    return capitalize ? "Cafe" : "cafe";
+                case "/play/factory":
+                case "/play/factory/settings":
+                case "/play/factory/start":
+                case "/play/factory/final":
+                case "/factory/play/landing":
+                    return capitalize ? "Factory" : "factory";
+                case "/play/racing":
+                case "/play/racing/final":
+                case "/racing/play/landing":
+                    return "racing";
                 case "/play/rush":
+                case "/play/rush/final":
+                case "/rush/play/landing":
                     return capitalize ? "Blook Rush" : "rush";
-                case "/play/dino":
-                    return capitalize ? "Deceptive Dinos" : "dinos";
+                case "/play/classic/get-ready":
+                case "/play/classic/question":
+                case "/play/classic/answer/sent":
+                case "/play/classic/answer/result":
+                case "/play/classic/standings":
+                case "/play/classic/final":
+                case "/classic/play/landing":
+                    return capitalize ? "Classic" : "classic";
+                case "/tower/load":
+                case "/tower/start":
                 case "/tower/map":
                 case "/tower/battle":
                 case "/tower/rest":
                 case "/tower/risk":
                 case "/tower/shop":
                 case "/tower/victory":
-                    return capitalize ? "Tower of Doom" : "doom";
-                case "/cafe":
-                case "/cafe/shop":
-                    return capitalize ? "Cafe" : "cafe";
-                case "/defense":
-                    return capitalize ? "Tower Defense" : "defense";
-                case "/play/defense2":
-                    return capitalize ? "Tower Defense 2" : "defense2";
+                case "/tower/final":
+                case "/tower/play/landing":
+                    return capitalize ? "Tower of Doom" : "tower";
+                case "/kingdom/start":
                 case "/kingdom":
+                case "/kingdom/final":
+                case "/kingdom/play/landing":
                     return capitalize ? "Crazy Kingdom" : "kingdom";
+                case "/play/toy":
+                case "/play/toy/final":
+                case "/toy/play/landing":
+                    return capitalize ? "Santa's Workshop" : "toy";
                 case "/play/lobby":
                     return capitalize ? "Lobby" : "flappy";
                 default:

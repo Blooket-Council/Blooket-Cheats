@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732427537789;
+    const timeProcessed = 1732767858332;
     let latestProcess = -1;
     const cheat = (async () => {
         const versionName = "24.11.24v0";
@@ -362,7 +362,6 @@
             },
             setLeaderboard(standings) {
                 if (standings.length > 0) leaderboardPath.style.display = "flex";
-                console.table(standings);
                 leaderboardList.innerHTML = "";
                 let place = 1;
                 let blookInfo;
