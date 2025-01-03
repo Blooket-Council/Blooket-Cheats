@@ -59,7 +59,7 @@
                     },
                     {}
                 );
-                const box = prompt('Which box do you want to open? (ex: "Ice Monster")')
+                const box = prompt('Which box do you want to open? (ex: "Space")')
                     .split(" ")
                     .map((str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase())
                     .join(" ");
