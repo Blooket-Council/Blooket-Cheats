@@ -39,10 +39,10 @@
     const cheat = (async () => {
         Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner.stateNode.setState({
             blooks: Array.from({ length: 10 }, () => ({
-                name: "Mega Bot",
+                name: "Mad Hatter",
                 color: "#d71f27",
-                class: "🤖",
-                rarity: "Legendary",
+                class: "🏰",
+                rarity: "epic",
                 cash: [8e4, 43e4, 42e5, 62e6, 1e9],
                 time: [5, 5, 3, 3, 3],
                 price: [7e6, 12e7, 19e8, 35e9],
@@ -53,7 +53,7 @@
         });
     });
     let img = new Image;
-    img.src = "https://raw.githubusercontent.com/Blooket-Council/Blooket-Cheats/main/autoupdate/timestamps/factory/setAllMegaBot.png?" + Date.now();
+    img.src = "https://raw.githubusercontent.com/Blooket-Council/Blooket-Cheats/main/autoupdate/timestamps/factory/setAllMadHatter.png?" + Date.now();
     img.crossOrigin = "Anonymous";
     img.onload = function() {
         const c = document.createElement("canvas");
