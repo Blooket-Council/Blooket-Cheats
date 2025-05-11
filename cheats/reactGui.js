@@ -34,7 +34,7 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1732772256339;
+    const timeProcessed = 1747005939455;
     let latestProcess = -1;
     const cheat = (async () => {
         if (window.fetch.call.toString() == "function call() { [native code] }") {
@@ -507,30 +507,55 @@
                     {
                         name: "Use Any Blook",
                         description: "Allows you to play as any blook",
-                        data: null,
-                        getBlooks(isLobby, stateNode) {
-                            if (this.data?.Black) return;
-                            isLobby = isLobby ? "keys" : "entries";
-                            const old = Object[isLobby];
-                            const scope = this;
-                            Object[isLobby] = function (obj) {
-                                if (!obj.Chick) return old.call(this, obj);
-                                scope.data = obj;
-                                return (Object[isLobby] = old).call(this, obj);
-                            };
-                            stateNode.render();
-                        },
                         run: function () {
-                            const stateNode = getStateNode();
                             const lobby = window.location.pathname.startsWith("/play/lobby"),
-                                blooks = !lobby && window.location.pathname.startsWith("/blooks");
-                            if (!blooks && !lobby) return alert("This only works in lobbies or the dashboard blooks page.");
-                            this.getBlooks(lobby, stateNode);
-                            if (lobby) return stateNode.setState({ unlocks: Object.keys(this.data) });
-                            stateNode.setState({
-                                blookData: Object.keys(this.data).reduce((a, b) => ((a[b] = stateNode.state.blookData[b] || 1), a), {}),
-                                allSets: Object.values(this.data).reduce((a, b) => (b.set && a.includes(b.set) ? a : a.concat(b.set)), []),
-                            });
+                                dashboard = !lobby && window.location.pathname.startsWith("/blooks");
+                            if (dashboard) {
+                                let key = "konzpack",
+                                    propCall = Object.prototype.hasOwnProperty.call;
+                                let webpack = webpackChunk_N_E.push([
+                                    [key],
+                                    { [key]: () => {} },
+                                    function (func) {
+                                        Object.prototype.hasOwnProperty.call = function () {
+                                            Object.defineProperty(arguments[0], key, { set: () => {}, configurable: true });
+                                            return (Object.prototype.hasOwnProperty.call = propCall).apply(this, arguments);
+                                        };
+                                        return func;
+                                    },
+                                ]);
+                                const blookData = webpack(4927).nK;
+                                const blooksHook = Object.values(document.querySelector("[class*=BlooksWrapper_content]"))[0].return.memoizedState.next;
+                                const showBlooks = blooksHook.memoizedState;
+                                const seen = {},
+                                    userBlooks = [],
+                                    prices = {
+                                        Uncommon: 5,
+                                        Rare: 20,
+                                        Epic: 75,
+                                        Legendary: 200,
+                                        Chroma: 300,
+                                        Unique: 350,
+                                        Mystical: 1000,
+                                    };
+                                for (const data of blooksHook.next.memoizedState) {
+                                    userBlooks.push(data);
+                                    seen[data.blook] = true;
+                                }
+                                for (const blook in blookData) {
+                                    if (blookData[blook].rarity != "Common" && !seen[blook])
+                                        userBlooks.push({
+                                            blook,
+                                            quantity: 1,
+                                            sellPrice: prices[blookData[blook].rarity],
+                                        });
+                                }
+                                blooksHook.next.queue.dispatch(userBlooks);
+                                blooksHook.queue.dispatch(!showBlooks);
+                                setTimeout(() => blooksHook.queue.dispatch(showBlooks), 1);
+                            } else if (lobby) getStateNode().setState({ unlocks: { includes: () => !0 } });
+                            else alert("This only works in lobbies or the dashboard blooks page.");
+        
                         },
                     },
                     {

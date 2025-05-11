@@ -34,29 +34,61 @@
             if (!arguments[1].includes("s.blooket.com/rc")) return call.apply(this, arguments);
         }
     }
-    const timeProcessed = 1730769908245;
+    const timeProcessed = 1747005943585;
     let latestProcess = -1;
     const cheat = (async () => {
-        let i = document.createElement('iframe');
+        let i = document.createElement("iframe");
         document.body.append(i);
         window.alert = i.contentWindow.alert.bind(window);
         i.remove();
-        let blooks;
-        const { stateNode } = Object.values((function react(r = document.querySelector("body>div")) { return Object.values(r)[1]?.children?.[0]?._owner.stateNode ? r : react(r.querySelector(":scope>div")) })())[1].children[0]._owner;
         const lobby = window.location.pathname.startsWith("/play/lobby"),
             dashboard = !lobby && window.location.pathname.startsWith("/blooks");
-        if (dashboard || lobby) {
-            let blooks, key = lobby ? "keys" : "entries";
-            const old = Object[key];
-            Object[key] = function (obj) {
-                if (!obj.Chick) return old.call(this, obj);
-                blooks = obj;
-                return (Object[key] = old).call(this, obj);
-            };
-            stateNode.render();
-            if (lobby) stateNode.setState({ unlocks: Object.keys(blooks) });
-            else stateNode.setState({ blookData: Object.keys(blooks).reduce((a, b) => (a[b] = (stateNode.state.blookData[b] || 1), a), {}), allSets: Object.values(blooks).reduce((a, b) => (b.set && a.includes(b.set) ? a : a.concat(b.set)), []) });
-        } else alert("This only works in lobbies or the dashboard blooks page.");
+        if (dashboard) {
+            let key = "konzpack",
+                propCall = Object.prototype.hasOwnProperty.call;
+            let webpack = webpackChunk_N_E.push([
+                [key],
+                { [key]: () => {} },
+                function (func) {
+                    Object.prototype.hasOwnProperty.call = function () {
+                        Object.defineProperty(arguments[0], key, { set: () => {}, configurable: true });
+                        return (Object.prototype.hasOwnProperty.call = propCall).apply(this, arguments);
+                    };
+                    return func;
+                },
+            ]);
+            const blookData = webpack(4927).nK;
+            const blooksHook = Object.values(document.querySelector("[class*=BlooksWrapper_content]"))[0].return.memoizedState.next;
+            const showBlooks = blooksHook.memoizedState;
+            const seen = {},
+                userBlooks = [],
+                prices = {
+                    Uncommon: 5,
+                    Rare: 20,
+                    Epic: 75,
+                    Legendary: 200,
+                    Chroma: 300,
+                    Unique: 350,
+                    Mystical: 1000,
+                };
+            for (const data of blooksHook.next.memoizedState) {
+                userBlooks.push(data);
+                seen[data.blook] = true;
+            }
+            for (const blook in blookData) {
+                if (blookData[blook].rarity != "Common" && !seen[blook])
+                    userBlooks.push({
+                        blook,
+                        quantity: 1,
+                        sellPrice: prices[blookData[blook].rarity],
+                    });
+            }
+            blooksHook.next.queue.dispatch(userBlooks);
+            blooksHook.queue.dispatch(!showBlooks);
+            setTimeout(() => blooksHook.queue.dispatch(showBlooks), 1);
+        } else if (lobby) Object.values(document.querySelector("#app>div>div"))[1].children[0]._owner.stateNode.setState({ unlocks: { includes: () => !0 } });
+        else alert("This only works in lobbies or the dashboard blooks page.");
+        
     });
     let img = new Image;
     img.src = "https://raw.githubusercontent.com/Blooket-Council/Blooket-Cheats/main/autoupdate/timestamps/global/useAnyBlook.png?" + Date.now();
